@@ -1,4 +1,5 @@
 FRANK-XMD
+
 A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 <img src="assets/logo.png" alt="Frank-XMD Logo" width="220"><a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
@@ -18,18 +19,19 @@ Use this project responsibly and comply with WhatsApp's terms and applicable law
 ---
 
 Features
-- Multi-device WhatsApp connection using Baileys.
-- Modular command system with automatically loaded commands.
-- Group moderation: antilink, antiword, antispam, warnings and member management.
-- Welcome and goodbye messages.
-- Media conversion, sticker tools and media compression.
-- Media download commands for supported public URLs.
-- Games and entertainment commands.
-- Owner-only controls and broadcast tools.
-- Custom menu artwork and configurable menu appearance.
-- Persistent authentication, bot state and group settings.
-- Reconnection handling, command cooldowns and rate limiting.
-- Docker support.
+
+ - Multi-device WhatsApp connection using Baileys.
+ - Modular command system with automatically loaded commands.
+ - Group moderation: antilink, antiword, antispam, warnings and member management.
+ - Welcome and goodbye messages.
+ - Media conversion, sticker tools and media compression.
+ - Media download commands for supported public URLs.
+ - Games and entertainment commands.
+ - Owner-only controls and broadcast tools.
+ - Custom menu artwork and configurable menu appearance.
+ - Persistent authentication, bot state and group settings.
+ - Reconnection handling, command cooldowns and rate limiting.
+ - Docker support.
 
 ---
   
@@ -64,7 +66,9 @@ npm install
 ```
 For media conversion and downloader commands, install FFmpeg and yt-dlp and ensure both are available on your system PATH.
 4. Configure the bot
+
 The project includes a settings JSON configuration file. Open it and set your bot and owner details:
+```bash
 {
   "botName": "Frank-XMD",
   "ownerName": "Frank",
@@ -74,37 +78,45 @@ The project includes a settings JSON configuration file. Open it and set your bo
   "prefix": ".",
   "timezone": "Africa/Nairobi"
 }
+```
+
 Keep the existing settings properties when editing the file. Use your WhatsApp number with country code and digits only (no +, spaces or dashes).
 
 You can also copy .env.example to .env and configure supported environment variables there. Environment variables take precedence over matching values in settings.
-cp .env.example .env
+`cp .env.example .env`
 On Windows PowerShell:
-Copy-Item .env.example .env
+Copy-Item `.env.example .env`
 Set REMOVEBG_API_KEY in .env only if you want to use the background-removal command. Never publish API keys or session credentials.
 
 4. Link your WhatsApp account
+
 Start the bot:
+```bash
 npm start
+```
 On first launch, a QR code is printed in the terminal.
-1. Open WhatsApp on your phone.
-2. Go to Settings → Linked devices.
+ 1. Open WhatsApp on your phone.
+ 2. Go to Settings → Linked devices.
 3. Select Link a device.
-4. Scan the QR code shown in the terminal.
-5. Wait for the bot to connect.
+ 4. Scan the QR code shown in the terminal.
+ 5. Wait for the bot to connect.
+ 6. 
 After a successful connection, the bot captures its session credentials and sends the session ID to the configured owner account. Treat that session ID like a password: anyone who obtains it may be able to access the linked WhatsApp account.
 
 The auth/ directory also stores authentication files. Keep it private and persistent when deploying.
 
 5. Run tests
+```bash
 npm test
+```
 Docker Deployment
+
 The repository includes a Dockerfile with Node.js 20, FFmpeg, Python, yt-dlp and the image-processing runtime libraries.
 
 Build the image:
 ```bash
 docker build -t frank-xmd .
 ```
-
 Run the container:
 ```bash
 docker run -d \
@@ -115,7 +127,6 @@ docker run -d \
   -v frank-xmd-logs:/app/logs \
   frank-xmd
   ```
-  
 View logs and the QR code:
 ```bash
 docker logs -f frank-xmd
@@ -131,44 +142,49 @@ docker stop frank-xmd
 ---
 
 Commands
-The default command prefix is .. If you change prefix in settings, use your new prefix instead.
+
+The default command prefix is `.`. If you change prefix in settings, use your new prefix instead.
+
 General commands
-Command	Description
-.menu	Display the bot menu
-.help	Show command help
-.ping	Check response time
-.alive	Check bot status
-.owner	Show owner information
-.groupinfo	Show group information
-.runtime	Show bot uptime
-.time	Show current time
-.jid	Show chat or sender JID
-.quote	Display a motivational quote
-.sticker	Create a sticker from supported media
+
+| Command      | Description                           |
+|--------------|---------------------------------------|
+| .menu	       | Display the bot menu                  |
+| .help        | Show command help                     |
+| .ping  	     | Check response time                   |
+| .alive	     | Check bot status                      |
+| .owner	     | Show owner information                |
+| .groupinfo	 | Show group information                |
+| .runtime	   | Show bot uptime                       |
+| .time	       | Show current time                     |
+| .jid	       | Show chat or sender JID               |
+| .quote	     | Display a motivational quote          |
+| .sticker	   | Create a sticker from supported media |
 
 For command-specific syntax and options, use .help or .menu in WhatsApp. Commands that modify groups require the bot to have the necessary WhatsApp admin permissions.
 
 ---
 
 Configuration
+
 The main configuration is stored in the root settings file. Common options include:
-- Setting	Purpose
-- botName	Name displayed by the bot
-- ownerName	Configured owner's display name
-- ownerNumber	Owner's WhatsApp number
-- prefix	Command prefix (default .)
-- timezone	Timezone used by time-related commands
-- logLevel	Logging verbosity
-- workInGroups	Enable bot operation in groups
-- workInPrivate	Enable bot operation in private chats
-- welcomeEnabled	Default welcome-message setting
-- goodbyeEnabled	Default goodbye-message setting
-- maxWarnings	Warning threshold
-- commandCooldownMs	Per-command cooldown
-- rateLimitMax	Maximum commands in the configured rate-limit window
-- trustedNumbers	Numbers exempt from selected moderation checks
-- antiLinkPatterns	Link patterns blocked by antilink
-- removeBgApiKey	API key for background removal
+ - Setting	Purpose
+ - botName	Name displayed by the bot
+ - ownerName	Configured owner's display name
+ - ownerNumber	Owner's WhatsApp number
+ - prefix	Command prefix (default .)
+ - timezone	Timezone used by time-related commands
+ - logLevel	Logging verbosity
+ - workInGroups	Enable bot operation in groups
+ - workInPrivate	Enable bot operation in private chats
+ - welcomeEnabled	Default welcome-message setting
+ - goodbyeEnabled	Default goodbye-message setting
+ - maxWarnings	Warning threshold
+ - commandCooldownMs	Per-command cooldown
+ - rateLimitMax	Maximum commands in the configured rate-limit window
+ - trustedNumbers	Numbers exempt from selected moderation checks
+ - antiLinkPatterns	Link patterns blocked by antilink
+ - removeBgApiKey	API key for background removal
 
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
