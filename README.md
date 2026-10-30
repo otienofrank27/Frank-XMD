@@ -1,4 +1,3 @@
-<div align="center"><a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="Frank-XMD banner" width="100%"></a>
 FRANK-XMD
 A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 <img src="assets/logo.png" alt="Frank-XMD Logo" width="220"><a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
@@ -88,14 +87,18 @@ Docker Deployment
 The repository includes a Dockerfile with Node.js 20, FFmpeg, Python, yt-dlp and the image-processing runtime libraries.
 
 Build the image:
+``
 docker build -t frank-xmd .
+``
 Run the container:
+``
 docker run -d \
   --name frank-xmd \
   --restart unless-stopped \
   -v frank-xmd-auth:/app/auth \
   -v frank-xmd-data:/app/data \
   -v frank-xmd-logs:/app/logs \
+  ``
   frank-xmd
 View logs and the QR code:
 docker logs -f frank-xmd
@@ -144,7 +147,7 @@ The main configuration is stored in the root settings file. Common options inclu
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
 Project Structure
-``
+``bash
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
 ├── auth/                   # WhatsApp authentication files (private)
@@ -172,6 +175,7 @@ Frank-XMD/
 ├── index.js                # Application entry point
 ├── package.json
 └── settings                # Main JSON configuration
+`` 
 
 Testing
 Run the included automated test suite:
