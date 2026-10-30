@@ -16,8 +16,6 @@
 
 Developed and maintained by Frank.
 
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
 <h2 align="center"About Frank-XMD</h2>
 
  <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
