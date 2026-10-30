@@ -10,9 +10,9 @@
   <a href="https://github.com"><img src="https://shields.io" alt="Baileys"></a>
   <a href="#"><img src="https://shields.io" alt="Node.js"></a>
   <a href="#"><img src="https://shields.io" alt="MIT License"></a>
-  <img src="https://shields.io" alt="Repo Size">
-  <img src="https://shields.io" alt="Open Issues">
-  <img src="https://shields.io" alt="GitHub Stars">
+  <a href="https://github.com/stargazers"><img src="https://shields.io" alt="Stars"></a>
+  <a href="https://github.com/issues"><img src="https://shields.io" alt="Issues"></a>
+  <a href="#"><img src="https://shields.io" alt="Docker"></a>
 </p>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
