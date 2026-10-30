@@ -1,5 +1,6 @@
 <div align="center"><a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="Frank-XMD banner" width="100%"></a>
 FRANK-XMD
+  
 A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 <img src="assets/logo.png" alt="Frank-XMD Logo" width="220"><a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
@@ -27,20 +28,23 @@ Features
 - Persistent authentication, bot state and group settings.
 - Reconnection handling, command cooldowns and rate limiting.
 - Docker support.
+  
 Tech Stack
-Technology	Purpose
-Node.js 20+	JavaScript runtime
-Baileys 7.0.0-rc14	WhatsApp Web connection
-dotenv	Environment configuration
-Pino / pino-pretty	Logging
-QRCode	Terminal QR rendering
-Sharp	Image processing
-yt-dlp	Supported media downloads
-FFmpeg	Audio/video processing
-Docker	Container deployment
 
+| Technology	         | Purpose                       |
+|----------------------|-------------------------------|
+| Node.js 20+	         | JavaScript runtime            |
+| Baileys 7.0.0-rc14	 | WhatsApp Web connection       |
+| dotenv	             | Environment configuration     |
+| Pino / pino-pretty   | Logging                       |
+| QRCode	             | Terminal QR rendering         |
+| Sharp                | Image processing              |
+| yt-dlp	             | Supported media downloads     |
+| FFmpeg	             | Audio/video processing        |
+| Docker	             | Container deployment          |
 
-🚀 Getting Started
+Getting Started
+
 1. Fork or clone the repository
 git clone https://github.com/otienofrank27/Frank-XMD.git
 cd Frank-XMD
@@ -81,7 +85,7 @@ After a successful connection, the bot captures its session credentials and send
 The auth/ directory also stores authentication files. Keep it private and persistent when deploying.
 5. Run tests
 npm test
-🐳 Docker Deployment
+Docker Deployment
 The repository includes a Dockerfile with Node.js 20, FFmpeg, Python, yt-dlp and the image-processing runtime libraries.
 
 Build the image:
@@ -100,7 +104,7 @@ Scan the QR code from the container logs when pairing for the first time. Keep t
 
 To stop the container:
 docker stop frank-xmd
-📚 Commands
+Commands
 The default command prefix is .. If you change prefix in settings, use your new prefix instead.
 General commands
 Command	Description
@@ -116,110 +120,31 @@ Command	Description
 .quote	Display a motivational quote
 .sticker	Create a sticker from supported media
 
-
-Group administration
-These commands are intended for group admins or the configured bot owner, depending on the command.
-Command	Description
-.admins	Mention group administrators
-.add	Add a participant when WhatsApp permits it
-.kick	Remove a group participant
-.promote / .demote	Change a participant's admin role
-.tagall	Mention group participants
-.hidetag	Mention members without listing names visibly
-.antilink	Toggle link moderation
-.antiword	Configure blocked-word moderation
-.antispam	Toggle anti-spam protection
-.antidelete	Enable or disable deleted-message notices
-.warn / .warnings	Issue and view warnings
-.resetwarn	Reset a member's warnings
-.welcome / .goodbye	Toggle join and leave messages
-.closegroup / .opengroup	Restrict or reopen group messaging
-.mute / .unmute	Mute or unmute bot command processing
-.groupname	Change the group name
-.groupdesc	Change the group description
-.linkgroup / .revoke	Get or reset the group invite link
-.delete	Delete a quoted message when permitted
-
-
-Downloader commands
-Command	Description
-.ytmp3	Download audio from a supported URL
-.ytmp4	Download video from a supported URL
-.ig	Download supported public social media media
-.spotify	Attempt supported Spotify or SoundCloud audio downloads
-.google	Search the web
-.wiki	Look up a Wikipedia summary
-
-
-Downloader availability depends on the source website, network access and external tools such as yt-dlp. Some services may change or restrict access.
-Media commands
-Command	Description
-.compress	Compress replied image or video
-.removebg	Remove an image background (API key required)
-.toimg	Convert a sticker to an image
-.tomp3	Convert supported media to MP3
-.tovn	Convert supported media to a voice note
-
-
-Fun commands
-Command	Description
-.coinflip	Flip a coin
-.roll	Roll a dice
-.truth	Get a truth question
-.dare	Get a dare
-.quiz	Start a trivia question
-.mathgame	Play a quick maths game
-.tictactoe	Play tic-tac-toe
-.wordle	Play a Wordle-style game
-
-
-Owner commands
-Owner commands are restricted to the configured owner.
-Command	Description
-.setprefix	Change the command prefix
-.autoread	Toggle automatic read receipts
-.autoviewstatus	Toggle automatic status viewing
-.broadcast	Send a message to the bot's groups
-.join	Join a group using an invite link or code
-.leave	Leave the current group
-.block / .unblock	Block or unblock a WhatsApp user
-.lastseen	Manage or inspect last-seen privacy settings
-.restart	Exit so a process supervisor can restart the bot
-.shutdown	Stop the bot
-
-
-Status and view-once tools
-Command	Description
-.antiviewonce	Toggle view-once handling in a group
-.getvo	Extract quoted view-once media where available
-.savestatus	Save the latest viewed status media
-.sendstatus	Post supported quoted media as a status
-
-
 For command-specific syntax and options, use .help or .menu in WhatsApp. Commands that modify groups require the bot to have the necessary WhatsApp admin permissions.
-⚙️ Configuration
-The main configuration is stored in the root settings file. Common options include:
-Setting	Purpose
-botName	Name displayed by the bot
-ownerName	Configured owner's display name
-ownerNumber	Owner's WhatsApp number
-prefix	Command prefix (default .)
-timezone	Timezone used by time-related commands
-logLevel	Logging verbosity
-workInGroups	Enable bot operation in groups
-workInPrivate	Enable bot operation in private chats
-welcomeEnabled	Default welcome-message setting
-goodbyeEnabled	Default goodbye-message setting
-maxWarnings	Warning threshold
-commandCooldownMs	Per-command cooldown
-rateLimitMax	Maximum commands in the configured rate-limit window
-trustedNumbers	Numbers exempt from selected moderation checks
-antiLinkPatterns	Link patterns blocked by antilink
-removeBgApiKey	API key for background removal
 
+Configuration
+The main configuration is stored in the root settings file. Common options include:
+- Setting	Purpose
+- botName	Name displayed by the bot
+- ownerName	Configured owner's display name
+- ownerNumber	Owner's WhatsApp number
+- prefix	Command prefix (default .)
+- timezone	Timezone used by time-related commands
+- logLevel	Logging verbosity
+- workInGroups	Enable bot operation in groups
+- workInPrivate	Enable bot operation in private chats
+- welcomeEnabled	Default welcome-message setting
+- goodbyeEnabled	Default goodbye-message setting
+- maxWarnings	Warning threshold
+- commandCooldownMs	Per-command cooldown
+- rateLimitMax	Maximum commands in the configured rate-limit window
+- trustedNumbers	Numbers exempt from selected moderation checks
+- antiLinkPatterns	Link patterns blocked by antilink
+- removeBgApiKey	API key for background removal
 
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
-📁 Project Structure
+
+Project Structure
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
 ├── auth/                   # WhatsApp authentication files (private)
@@ -247,35 +172,40 @@ Frank-XMD/
 ├── index.js                # Application entry point
 ├── package.json
 └── settings                # Main JSON configuration
-🧪 Testing
+
+Testing
 Run the included automated test suite:
 npm test
 The tests cover command execution and handling, permissions and session utilities.
-🔐 Security Notes
+
+Security Notes
 - Never share your auth/ directory, session ID, .env file or private API keys.
 - Keep persistent storage enabled for auth/ and data/ when using Docker or a hosting provider.
 - Only give owner access to a WhatsApp number you control.
 - Review group moderation settings before enabling them in active groups.
 - Use broadcasts and automated messaging responsibly.
 - WhatsApp may restrict or suspend accounts that violate its terms or engage in abusive automation.
-⚠️ Disclaimer
+
+Disclaimer
 Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
 
 This software is provided for educational and personal automation purposes. Use it at your own risk. The project maintainer is not responsible for account restrictions, data loss, misuse, or damages resulting from the use of this software. You are responsible for complying with WhatsApp's terms and all applicable laws.
-🤝 Contributing
+
+Contributing
 Contributions, bug reports and feature suggestions are welcome.
 1. Fork the repository.
 2. Create a feature branch.
 3. Make and test your changes.
 4. Submit a pull request with a clear description.
 Please avoid committing credentials, session files, generated logs or personal data.
-📬 Connect
+
+Connect
 <div align="center"><a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Frank-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
 <a href="https://github.com/otienofrank27/Frank-XMD/issues"><img src="https://img.shields.io/badge/Report%20an%20Issue-Frank--XMD-red?style=for-the-badge&logo=github" alt="Report an issue"></a>
-</div>⭐ Support
+</div> Support
 If you find Frank-XMD useful, consider giving the repository a star ⭐. It helps the project reach more developers.
 <div align="center">
 <a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-FRANK-XMD — Built with Node.js and Baileys.
+FRANK-XMD — Built with Node.js, JavaScript and Baileys.
 </div>
