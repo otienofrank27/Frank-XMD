@@ -4,6 +4,8 @@ A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
 <a href="#"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
 
+---
+
 Developed and maintained by Frank.
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
@@ -12,6 +14,8 @@ Frank-XMD is a modular, multi-device WhatsApp bot built with Node.js and Baileys
 
 The project uses a command registry that loads commands by category, configurable group settings, permission checks, rate limiting, structured logging and automatic reconnection handling.
 Use this project responsibly and comply with WhatsApp's terms and applicable laws.
+
+---
 
 Features
 - Multi-device WhatsApp connection using Baileys.
@@ -26,6 +30,8 @@ Features
 - Persistent authentication, bot state and group settings.
 - Reconnection handling, command cooldowns and rate limiting.
 - Docker support.
+
+---
   
 Tech Stack
 
@@ -41,17 +47,23 @@ Tech Stack
 | FFmpeg	             | Audio/video processing        |
 | Docker	             | Container deployment          |
 
+---
+
 Getting Started
 
 1. Fork or clone the repository
+```bash
 git clone https://github.com/otienofrank27/Frank-XMD.git
 cd Frank-XMD
+```
 If your repository uses a different GitHub URL, replace the clone URL above with your repository URL.
-2. Install dependencies
+3. Install dependencies
 Requirements: Node.js 20 or newer and npm 10 or newer.
+```bash
 npm install
+```
 For media conversion and downloader commands, install FFmpeg and yt-dlp and ensure both are available on your system PATH.
-3. Configure the bot
+4. Configure the bot
 The project includes a settings JSON configuration file. Open it and set your bot and owner details:
 {
   "botName": "Frank-XMD",
@@ -69,6 +81,7 @@ cp .env.example .env
 On Windows PowerShell:
 Copy-Item .env.example .env
 Set REMOVEBG_API_KEY in .env only if you want to use the background-removal command. Never publish API keys or session credentials.
+
 4. Link your WhatsApp account
 Start the bot:
 npm start
@@ -81,18 +94,19 @@ On first launch, a QR code is printed in the terminal.
 After a successful connection, the bot captures its session credentials and sends the session ID to the configured owner account. Treat that session ID like a password: anyone who obtains it may be able to access the linked WhatsApp account.
 
 The auth/ directory also stores authentication files. Keep it private and persistent when deploying.
+
 5. Run tests
 npm test
 Docker Deployment
 The repository includes a Dockerfile with Node.js 20, FFmpeg, Python, yt-dlp and the image-processing runtime libraries.
 
 Build the image:
-``
+```bash
 docker build -t frank-xmd .
-``
+```
 
 Run the container:
-``
+```bash
 docker run -d \
   --name frank-xmd \
   --restart unless-stopped \
@@ -100,19 +114,21 @@ docker run -d \
   -v frank-xmd-data:/app/data \
   -v frank-xmd-logs:/app/logs \
   frank-xmd
-  ``
+  ```
   
 View logs and the QR code:
-``
+```bash
 docker logs -f frank-xmd
-``
+```
 
 Scan the QR code from the container logs when pairing for the first time. Keep the auth, data and logs volumes so authentication and bot settings persist when the container is restarted or recreated.
 
 To stop the container:
-``
+```bash
 docker stop frank-xmd
-``
+```
+
+---
 
 Commands
 The default command prefix is .. If you change prefix in settings, use your new prefix instead.
@@ -131,6 +147,8 @@ Command	Description
 .sticker	Create a sticker from supported media
 
 For command-specific syntax and options, use .help or .menu in WhatsApp. Commands that modify groups require the bot to have the necessary WhatsApp admin permissions.
+
+---
 
 Configuration
 The main configuration is stored in the root settings file. Common options include:
@@ -154,8 +172,10 @@ The main configuration is stored in the root settings file. Common options inclu
 
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
+---
+
 Project Structure
-``
+```bash
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
 ├── auth/                   # WhatsApp authentication files (private)
@@ -183,12 +203,18 @@ Frank-XMD/
 ├── index.js                # Application entry point
 ├── package.json
 └── settings                # Main JSON configuration
-`` 
+``` 
+
+---
 
 Testing
 Run the included automated test suite:
+```bash
 npm test
+```
 The tests cover command execution and handling, permissions and session utilities.
+
+---
 
 Security Notes
 - Never share your auth/ directory, session ID, .env file or private API keys.
@@ -198,10 +224,14 @@ Security Notes
 - Use broadcasts and automated messaging responsibly.
 - WhatsApp may restrict or suspend accounts that violate its terms or engage in abusive automation.
 
+---
+
 Disclaimer
 Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
 
 This software is provided for educational and personal automation purposes. Use it at your own risk. The project maintainer is not responsible for account restrictions, data loss, misuse, or damages resulting from the use of this software. You are responsible for complying with WhatsApp's terms and all applicable laws.
+
+---
 
 Contributing
 Contributions, bug reports and feature suggestions are welcome.
@@ -210,6 +240,8 @@ Contributions, bug reports and feature suggestions are welcome.
 3. Make and test your changes.
 4. Submit a pull request with a clear description.
 Please avoid committing credentials, session files, generated logs or personal data.
+
+---
 
 Connect
 <div align="center"><a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Frank-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
