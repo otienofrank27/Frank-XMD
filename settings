@@ -1,5 +1,5 @@
 {
-  "botName": "FrankBot",
+  "botName": "Frank-XMD",
   "ownerName": "Frank",
   "ownerNumber": "254748642275",
   "ownerCountry": "KE",
@@ -47,10 +47,10 @@
     "asshole"
   ],
   "removeBgApiKey": "",
-  "stickerPackName": "FrankBot",
+  "stickerPackName": "Frank-XMD",
   "stickerPackAuthor": "Frank",
   "menu": {
-    "tagline": "Secure WhatsApp Assistant",
+    "tagline": "Secure WhatsApp Bot",
     "accent": "#d4af37",
     "background": "#070b14",
     "panel": "#10182a",
