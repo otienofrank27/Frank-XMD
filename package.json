@@ -1,7 +1,7 @@
 {
   "name": "whatsapp-bot",
   "version": "1.0.0",
-  "description": "Secure modular WhatsApp bot built on Baileys v7.0.0-rc14",
+  "description": "Secure WhatsApp bot built on Baileys v7.0.0-rc14",
   "type": "module",
   "main": "index.js",
   "engines": {
