@@ -1,13 +1,7 @@
-
-
-
-
-
-
 FRANK-XMD
 
 A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
-<img src="assets/logo.png" alt="Frank-XMD Logo" width="220"><a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
+<a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
 <a href="#"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
 
