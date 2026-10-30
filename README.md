@@ -290,16 +290,22 @@ Please avoid committing credentials, session files, generated logs or personal d
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Connect With Me</h2>
-
 <p align="center">
-  <a href="https://github.com" target="_blank"><img src="https://shields.io" alt="GitHub"></a>
-  <a href="https://wa.me" target="_blank"><img src="https://shields.io" alt="WhatsApp"></a>
-  <a href="https://facebook.com" target="_blank"><img src="https://shields.io" alt="Facebook"></a>
-  <a href="https://instagram.com" target="_blank"><img src="https://shields.io" alt="Instagram"></a>
-  <a href="https://tiktok.com" target="_blank"><img src="https://shields.io" alt="TikTok"></a>
-  <a href="https://t.me" target="_blank"><img src="https://shields.io" alt="Telegram"></a>
-  <a href="https://youtube.com" target="_blank"><img src="https://shields.io" alt="YouTube"></a>
+  <a href="https://github.com/otienofrank27" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="https://wa.me/254748642275" target="_blank">
+    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+  </a>
+  <a href="https://instagram.com/frankmarvin_1" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
+  </a>
+  <a href="https://t.me/+254748470966" target="_blank">
+    <img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
+  </a>
+  <a href="https://www.youtube.com/@FrankM-12" target="_blank">
+    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+  </a>
 </p>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
