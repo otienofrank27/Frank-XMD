@@ -6,9 +6,14 @@
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
-<a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
-<a href="#"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
+<p align="center">
+  <a href="https://github.com"><img src="https://shields.io" alt="Baileys"></a>
+  <a href="#"><img src="https://shields.io" alt="Node.js"></a>
+  <a href="#"><img src="https://shields.io" alt="MIT License"></a>
+  <img src="https://shields.io" alt="Repo Size">
+  <img src="https://shields.io" alt="Open Issues">
+  <img src="https://shields.io" alt="GitHub Stars">
+</p>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
