@@ -1,7 +1,5 @@
 <h1 align="center">FRANK-XMD</h1>
 
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
 <p align="center">
   A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 </p>
@@ -16,7 +14,7 @@
 
 Developed and maintained by Frank.
 
-<h2 align="center"About Frank-XMD</h2>
+About Frank-XMD
 
  <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
  
