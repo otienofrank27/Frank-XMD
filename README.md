@@ -44,7 +44,7 @@ Use this project responsibly and comply with WhatsApp's terms and applicable law
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Features</h2>
+Features
 
  - Multi-device WhatsApp connection using Baileys.
  - Modular command system with automatically loaded commands.
@@ -61,7 +61,7 @@ Use this project responsibly and comply with WhatsApp's terms and applicable law
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
   
-<h2 align="center">Tech Stack</h2>
+Tech Stack
 
 | Technology	         | Purpose                       |
 |----------------------|-------------------------------|
@@ -77,7 +77,7 @@ Use this project responsibly and comply with WhatsApp's terms and applicable law
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Getting Started</h2>
+Getting Started
 
 1. Fork or clone the repository
 ```bash
@@ -167,7 +167,7 @@ docker stop frank-xmd
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Commands</h2>
+Commands
 
 The default command prefix is `.`. If you change prefix in settings, use your new prefix instead.
 
@@ -191,7 +191,7 @@ For command-specific syntax and options, use .help or .menu in WhatsApp. Command
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Configuration</h2>
+Configuration
 
 The main configuration is stored in the root settings file. Common options include:
  - Setting	Purpose
@@ -216,7 +216,7 @@ The .env.example file documents environment-based options. Do not commit real AP
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Project Structure</h2>
+Project Structure
 
 ```bash
 Frank-XMD/
@@ -250,7 +250,7 @@ Frank-XMD/
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Testing</h2>
+Testing
 
 Run the included automated test suite:
 ```bash
@@ -270,7 +270,7 @@ The tests cover command execution and handling, permissions and session utilitie
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Disclaimer</h2>
+Disclaimer
 
 Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
 
