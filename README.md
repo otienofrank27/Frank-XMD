@@ -7,12 +7,24 @@
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 <p align="center">
-  <a href="https://github.com"><img src="https://shields.io" alt="Baileys"></a>
-  <a href="#"><img src="https://shields.io" alt="Node.js"></a>
-  <a href="#"><img src="https://shields.io" alt="MIT License"></a>
-  <a href="https://github.com/stargazers"><img src="https://shields.io" alt="Stars"></a>
-  <a href="https://github.com/issues"><img src="https://shields.io" alt="Issues"></a>
-  <a href="#"><img src="https://shields.io" alt="Docker"></a>
+  <a href="https://github.com/WhiskeySockets/Baileys">
+    <img src="https://img.shields.io/badge/Baileys-v7.0.0--rc.14-blue?style=for-the-badge&logo=whatsapp" alt="Baileys">
+  </a>
+  <a href="https://nodejs.org">
+    <img src="https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js" alt="Node.js">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License">
+  </a>
+  <a href="https://github.com/frankmarvin/FRANK-XMD/stargazers">
+    <img src="https://img.shields.io/github/stars/frankmarvin/FRANK-XMD?style=for-the-badge&logo=github" alt="Stars">
+  </a>
+  <a href="https://github.com/frankmarvin/FRANK-XMD/issues">
+    <img src="https://img.shields.io/github/issues/frankmarvin/FRANK-XMD?style=for-the-badge&logo=github" alt="Issues">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Docker-Supported-2496ED?style=for-the-badge&logo=docker" alt="Docker">
+  </a>
 </p>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
