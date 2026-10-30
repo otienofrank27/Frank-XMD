@@ -1,6 +1,5 @@
 <div align="center"><a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="Frank-XMD banner" width="100%"></a>
 FRANK-XMD
-  
 A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
 <img src="assets/logo.png" alt="Frank-XMD Logo" width="220"><a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
@@ -145,6 +144,7 @@ The main configuration is stored in the root settings file. Common options inclu
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
 Project Structure
+``
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
 ├── auth/                   # WhatsApp authentication files (private)
