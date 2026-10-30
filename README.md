@@ -1,6 +1,13 @@
-FRANK-XMD
+<h1 align="center">FRANK-XMD</h1>h1
 
-A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+
+<p align="center">
+  A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
+</p>
+
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+
 <a href="https://github.com/"><img src="https://img.shields.io/badge/WhatsApp-Baileys%20v7.0.0--rc14-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
 <a href="#"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
 <a href="#"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
@@ -16,7 +23,7 @@ Frank-XMD is a modular, multi-device WhatsApp bot built with Node.js and Baileys
 The project uses a command registry that loads commands by category, configurable group settings, permission checks, rate limiting, structured logging and automatic reconnection handling.
 Use this project responsibly and comply with WhatsApp's terms and applicable laws.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Features
 
@@ -33,7 +40,7 @@ Features
  - Reconnection handling, command cooldowns and rate limiting.
  - Docker support.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
   
 Tech Stack
 
@@ -49,7 +56,7 @@ Tech Stack
 | FFmpeg	             | Audio/video processing        |
 | Docker	             | Container deployment          |
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Getting Started
 
@@ -139,7 +146,7 @@ To stop the container:
 docker stop frank-xmd
 ```
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Commands
 
@@ -163,7 +170,7 @@ General commands
 
 For command-specific syntax and options, use .help or .menu in WhatsApp. Commands that modify groups require the bot to have the necessary WhatsApp admin permissions.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Configuration
 
@@ -188,7 +195,7 @@ The main configuration is stored in the root settings file. Common options inclu
 
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Project Structure
 ```bash
@@ -221,7 +228,7 @@ Frank-XMD/
 └── settings                # Main JSON configuration
 ``` 
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Testing
 Run the included automated test suite:
@@ -230,7 +237,7 @@ npm test
 ```
 The tests cover command execution and handling, permissions and session utilities.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Security Notes
 - Never share your auth/ directory, session ID, .env file or private API keys.
@@ -240,16 +247,18 @@ Security Notes
 - Use broadcasts and automated messaging responsibly.
 - WhatsApp may restrict or suspend accounts that violate its terms or engage in abusive automation.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Disclaimer
+
 Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
 
 This software is provided for educational and personal automation purposes. Use it at your own risk. The project maintainer is not responsible for account restrictions, data loss, misuse, or damages resulting from the use of this software. You are responsible for complying with WhatsApp's terms and all applicable laws.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Contributing
+
 Contributions, bug reports and feature suggestions are welcome.
 1. Fork the repository.
 2. Create a feature branch.
@@ -257,7 +266,7 @@ Contributions, bug reports and feature suggestions are welcome.
 4. Submit a pull request with a clear description.
 Please avoid committing credentials, session files, generated logs or personal data.
 
----
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
 Connect
 <div align="center"><a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Frank-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
