@@ -1,0 +1,209 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { Boom } from '@hapi/boom';
+import makeWASocket, {
+  Browsers,
+  DisconnectReason,
+  fetchLatestBaileysVersion,
+  makeCacheableSignalKeyStore,
+  useMultiFileAuthState
+} from '@whiskeysockets/baileys';
+import qrcode from 'qrcode';
+import { updateSettings } from '../config/config.js';
+import { logger } from '../utils/logger.js';
+import { registerMessageHandler } from '../handlers/messageHandler.js';
+import { registerGroupEvents } from '../events/groupEvents.js';
+import { captureSessionId, restoreSession, sendSessionIdToOwner } from '../utils/session.js';
+
+const RECONNECT_BASE_MS = 2000;
+const RECONNECT_MAX_MS = 30000;
+const RECONNECT_MAX_ATTEMPTS = 12;
+
+const NO_RECONNECT = new Set([
+  DisconnectReason.loggedOut,
+  DisconnectReason.badSession,
+  DisconnectReason.multideviceMismatch,
+  DisconnectReason.forbidden,
+  DisconnectReason.connectionReplaced
+]);
+
+function statusFromError(error) {
+  if (error instanceof Boom) {
+    return error.output?.statusCode;
+  }
+  return error?.output?.statusCode || error?.status || error?.statusCode;
+}
+
+export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter }) {
+  let loginNotified = false;
+  let sock = null;
+  let connecting = false;
+  let reconnectAttempts = 0;
+  let stopped = false;
+  let generation = 0;
+  let reconnectTimer = null;
+
+  function scheduleReconnect(currentGeneration) {
+    if (stopped || currentGeneration !== generation) {
+      return;
+    }
+    if (reconnectTimer) {
+      return;
+    }
+    if (reconnectAttempts >= RECONNECT_MAX_ATTEMPTS) {
+      logger.error({ reconnectAttempts }, 'Max reconnect attempts reached');
+      stopped = true;
+      return;
+    }
+
+    reconnectAttempts += 1;
+    const wait = Math.min(RECONNECT_BASE_MS * 2 ** (reconnectAttempts - 1), RECONNECT_MAX_MS);
+    logger.info({ wait, reconnectAttempts }, 'Reconnecting');
+    reconnectTimer = setTimeout(() => {
+      reconnectTimer = null;
+      start().catch((error) => {
+        logger.error({ err: error.message }, 'Reconnect failed');
+      });
+    }, wait);
+  }
+
+  async function start() {
+    if (stopped) {
+      return null;
+    }
+    if (connecting) {
+      logger.warn('Connection attempt already in progress');
+      return sock;
+    }
+
+    connecting = true;
+    const currentGeneration = ++generation;
+    if (reconnectTimer) {
+      clearTimeout(reconnectTimer);
+      reconnectTimer = null;
+    }
+
+    try {
+      if (!existsSync(join(config.authDir, 'creds.json'))) {
+        restoreSession(config);
+      }
+      const { state, saveCreds } = await useMultiFileAuthState(config.authDir);
+      const { version, isLatest } = await fetchLatestBaileysVersion();
+      logger.info({ version: version.join('.'), isLatest }, 'Using WhatsApp Web version');
+
+      const baileysLogger = logger.child({ module: 'baileys' });
+      baileysLogger.level = config.logLevel === 'debug' ? 'debug' : 'silent';
+
+      const socket = makeWASocket({
+        version,
+        logger: baileysLogger,
+        auth: {
+          creds: state.creds,
+          keys: makeCacheableSignalKeyStore(state.keys, baileysLogger)
+        },
+        browser: Browsers.ubuntu(config.botName),
+        markOnlineOnConnect: config.markOnlineOnConnect,
+        syncFullHistory: false,
+        generateHighQualityLinkPreview: false,
+        getMessage: async () => undefined
+      });
+
+      sock = socket;
+
+      socket.ev.on('creds.update', saveCreds);
+
+      socket.ev.on('connection.update', async (update) => {
+        if (currentGeneration !== generation) {
+          return;
+        }
+
+        const { connection, lastDisconnect, qr } = update;
+
+        if (qr) {
+          logger.info('Scan this QR code with WhatsApp > Linked Devices');
+          try {
+            const qrText = await qrcode.toString(qr, { type: 'terminal', small: true });
+            console.log(qrText);
+          } catch (error) {
+            logger.warn({ err: error.message }, 'Failed to render QR in terminal; pairing string follows');
+            logger.info({ qrLength: qr.length }, 'QR payload received');
+          }
+        }
+
+        if (connection === 'open') {
+          reconnectAttempts = 0;
+          logger.info({ bot: config.botName, jid: socket.user?.id }, 'WhatsApp connection opened');
+          if (!loginNotified) {
+            loginNotified = true;
+            try {
+              const sessionId = captureSessionId(config);
+              if (sessionId) {
+                if (sessionId !== config.sessionId) {
+                  updateSettings({ sessionId });
+                  config.sessionId = sessionId;
+                }
+                await sendSessionIdToOwner(socket, config, sessionId);
+                logger.info({ ownerJid: config.ownerJid }, 'Sent session ID to owner');
+              }
+            } catch (error) {
+              logger.warn({ err: error.message }, 'Failed to send session ID to owner');
+            }
+          }
+        }
+
+        if (connection === 'close') {
+          const status = statusFromError(lastDisconnect?.error);
+          const reasonName = Object.entries(DisconnectReason).find(([, value]) => value === status)?.[0] || 'unknown';
+          logger.warn({ status, reasonName }, 'Connection closed');
+
+          if (stopped || currentGeneration !== generation) {
+            return;
+          }
+
+          if (status === DisconnectReason.loggedOut || status === DisconnectReason.badSession) {
+            logger.error('Session is invalid or logged out. Delete auth/ and pair again.');
+            stopped = true;
+            return;
+          }
+
+          if (NO_RECONNECT.has(status)) {
+            logger.error({ status, reasonName }, 'Not reconnecting due to terminal disconnect reason');
+            stopped = true;
+            return;
+          }
+
+          scheduleReconnect(currentGeneration);
+        }
+      });
+
+      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter });
+      registerGroupEvents(socket, { config, settings });
+
+      return socket;
+    } catch (error) {
+      logger.error({ err: error.message }, 'Failed to start WhatsApp connection');
+      throw error;
+    } finally {
+      connecting = false;
+    }
+  }
+
+  async function stop() {
+    stopped = true;
+    generation += 1;
+    if (reconnectTimer) {
+      clearTimeout(reconnectTimer);
+      reconnectTimer = null;
+    }
+    try {
+      sock?.end?.(undefined);
+    } catch (error) {
+      logger.warn({ err: error.message }, 'Error while stopping socket');
+    }
+    sock = null;
+  }
+
+  return { start, stop, getSocket: () => sock };
+}
+
+export default createConnectionManager;
