@@ -90,6 +90,7 @@ Build the image:
 ``
 docker build -t frank-xmd .
 ``
+
 Run the container:
 ``
 docker run -d \
@@ -98,14 +99,21 @@ docker run -d \
   -v frank-xmd-auth:/app/auth \
   -v frank-xmd-data:/app/data \
   -v frank-xmd-logs:/app/logs \
-  ``
   frank-xmd
+  ``
+  
 View logs and the QR code:
+``
 docker logs -f frank-xmd
+``
+
 Scan the QR code from the container logs when pairing for the first time. Keep the auth, data and logs volumes so authentication and bot settings persist when the container is restarted or recreated.
 
 To stop the container:
+``
 docker stop frank-xmd
+``
+
 Commands
 The default command prefix is .. If you change prefix in settings, use your new prefix instead.
 General commands
@@ -147,7 +155,7 @@ The main configuration is stored in the root settings file. Common options inclu
 The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
 
 Project Structure
-``bash
+``
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
 ├── auth/                   # WhatsApp authentication files (private)
