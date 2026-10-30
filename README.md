@@ -260,7 +260,8 @@ The tests cover command execution and handling, permissions and session utilitie
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Security Notes</h2>
+Security Notes
+
 - Never share your auth/ directory, session ID, .env file or private API keys.
 - Keep persistent storage enabled for auth/ and data/ when using Docker or a hosting provider.
 - Only give owner access to a WhatsApp number you control.
@@ -289,10 +290,17 @@ Please avoid committing credentials, session files, generated logs or personal d
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-<h2 align="center">Connect</h2>
-<div align="center"><a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Frank-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
-<a href="https://github.com/otienofrank27/Frank-XMD/issues"><img src="https://img.shields.io/badge/Report%20an%20Issue-Frank--XMD-red?style=for-the-badge&logo=github" alt="Report an issue"></a>
-</div> 
+<h2 align="center">Connect With Me</h2>
+
+<p align="center">
+  <a href="https://github.com" target="_blank"><img src="https://shields.io" alt="GitHub"></a>
+  <a href="https://wa.me" target="_blank"><img src="https://shields.io" alt="WhatsApp"></a>
+  <a href="https://facebook.com" target="_blank"><img src="https://shields.io" alt="Facebook"></a>
+  <a href="https://instagram.com" target="_blank"><img src="https://shields.io" alt="Instagram"></a>
+  <a href="https://tiktok.com" target="_blank"><img src="https://shields.io" alt="TikTok"></a>
+  <a href="https://t.me" target="_blank"><img src="https://shields.io" alt="Telegram"></a>
+  <a href="https://youtube.com" target="_blank"><img src="https://shields.io" alt="YouTube"></a>
+</p>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
