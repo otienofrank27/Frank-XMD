@@ -1,4 +1,4 @@
-<h1 align="center">FRANK-XMD</h1>h1
+<h1 align="center">FRANK-XMD</h1>
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
@@ -17,7 +17,11 @@
 Developed and maintained by Frank.
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-</div> About Frank-XMD
+
+<h2 align="center"About Frank-XMD</h2>
+
+ <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+ 
 Frank-XMD is a modular, multi-device WhatsApp bot built with Node.js and Baileys v7.0.0-rc14. It includes general utilities, group administration, media tools, downloaders, games, owner controls and status utilities.
 
 The project uses a command registry that loads commands by category, configurable group settings, permission checks, rate limiting, structured logging and automatic reconnection handling.
@@ -25,7 +29,7 @@ Use this project responsibly and comply with WhatsApp's terms and applicable law
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Features
+<h2 align="center">Features</h2>
 
  - Multi-device WhatsApp connection using Baileys.
  - Modular command system with automatically loaded commands.
@@ -42,7 +46,7 @@ Features
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
   
-Tech Stack
+<h2 align="center">Tech Stack</h2>
 
 | Technology	         | Purpose                       |
 |----------------------|-------------------------------|
@@ -58,7 +62,7 @@ Tech Stack
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Getting Started
+<h2 align="center">Getting Started</h2>
 
 1. Fork or clone the repository
 ```bash
@@ -148,7 +152,7 @@ docker stop frank-xmd
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Commands
+<h2 align="center">Commands</h2>
 
 The default command prefix is `.`. If you change prefix in settings, use your new prefix instead.
 
@@ -172,7 +176,7 @@ For command-specific syntax and options, use .help or .menu in WhatsApp. Command
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Configuration
+<h2 align="center">Configuration</h2>
 
 The main configuration is stored in the root settings file. Common options include:
  - Setting	Purpose
@@ -197,7 +201,8 @@ The .env.example file documents environment-based options. Do not commit real AP
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Project Structure
+<h2 align="center">Project Structure</h2>
+
 ```bash
 Frank-XMD/
 ├── assets/                 # Logo, menu artwork and fonts
@@ -230,7 +235,8 @@ Frank-XMD/
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Testing
+<h2 align="center">Testing</h2>
+
 Run the included automated test suite:
 ```bash
 npm test
@@ -239,7 +245,7 @@ The tests cover command execution and handling, permissions and session utilitie
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Security Notes
+<h2 align="center">Security Notes</h2>
 - Never share your auth/ directory, session ID, .env file or private API keys.
 - Keep persistent storage enabled for auth/ and data/ when using Docker or a hosting provider.
 - Only give owner access to a WhatsApp number you control.
@@ -249,7 +255,7 @@ Security Notes
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Disclaimer
+<h2 align="center">Disclaimer</h2>
 
 Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
 
@@ -257,7 +263,7 @@ This software is provided for educational and personal automation purposes. Use 
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Contributing
+<h2 align="center">Contributing</h2>
 
 Contributions, bug reports and feature suggestions are welcome.
 1. Fork the repository.
@@ -268,10 +274,14 @@ Please avoid committing credentials, session files, generated logs or personal d
 
 <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
 
-Connect
+<h2 align="center">Connect</h2>
 <div align="center"><a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Frank-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
 <a href="https://github.com/otienofrank27/Frank-XMD/issues"><img src="https://img.shields.io/badge/Report%20an%20Issue-Frank--XMD-red?style=for-the-badge&logo=github" alt="Report an issue"></a>
-</div> Support
+</div> 
+
+<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+
+<h2 align="center">Support</h2>
 If you find Frank-XMD useful, consider giving the repository a star ⭐. It helps the project reach more developers.
 <div align="center">
 <a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
