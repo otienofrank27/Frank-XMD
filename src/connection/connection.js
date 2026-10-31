@@ -104,11 +104,6 @@ export function createConnectionManager({ config, settings, botState, commandReg
       sock = socket;
 
       socket.ev.on('creds.update', saveCreds);
-      if (config.pairingNumber && !state.creds.registered) {
-        const pairingCode = await socket.requestPairingCode(config.pairingNumber);
-        onPairingCode(pairingCode);
-      }
-
       socket.ev.on('connection.update', async (update) => {
         if (currentGeneration !== generation) {
           return;
@@ -152,6 +147,12 @@ export function createConnectionManager({ config, settings, botState, commandReg
           scheduleReconnect(currentGeneration);
         }
       });
+
+      if (config.pairingNumber && !state.creds.registered) {
+        setTimeout(() => socket.requestPairingCode(config.pairingNumber)
+          .then(onPairingCode)
+          .catch((error) => logger.warn({ err: error.message }, 'Phone pairing code request failed')), 1200);
+      }
 
       registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter });
       registerGroupEvents(socket, { config, settings });
