@@ -30,7 +30,7 @@ function statusFromError(error) {
   return error?.output?.statusCode || error?.status || error?.statusCode;
 }
 
-export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
+export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
   let sock = null;
   let connecting = false;
   let reconnectAttempts = 0;
@@ -159,7 +159,7 @@ export function createConnectionManager({ config, settings, botState, commandReg
         }, 1200);
       }
 
-      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore });
+      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl });
       registerGroupEvents(socket, { config, settings });
 
       return socket;
