@@ -2,12 +2,15 @@ export default {
   name: 'restart',
   aliases: [],
   category: 'owner',
-  description: 'Reconnect this linked WhatsApp session.',
+  description: 'Restart only this linked WhatsApp session.',
   usage: '.restart',
   ownerOnly: true,
-  async execute({ sock, ctx }) {
+  async execute({ sock, ctx, sessionControl }) {
     await sock.sendMessage(ctx.chatJid, {
-      text: 'This command is disabled on the shared FRANK-XMD service. Disconnect and reconnect this session from your dashboard.'
+      text: 'Restarting your FRANK-XMD session. Other users will remain connected.'
     }, { quoted: ctx.msg });
+    if (sessionControl?.restart) {
+      await sessionControl.restart();
+    }
   }
 };
