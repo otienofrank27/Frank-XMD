@@ -1,5 +1,3 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { Boom } from '@hapi/boom';
 import makeWASocket, {
   Browsers,
@@ -8,12 +6,10 @@ import makeWASocket, {
   makeCacheableSignalKeyStore,
   useMultiFileAuthState
 } from '@whiskeysockets/baileys';
-import qrcode from 'qrcode';
-import { updateSettings } from '../config/config.js';
 import { logger } from '../utils/logger.js';
 import { registerMessageHandler } from '../handlers/messageHandler.js';
 import { registerGroupEvents } from '../events/groupEvents.js';
-import { captureSessionId, restoreSession, sendSessionIdToOwner } from '../utils/session.js';
+
 
 const RECONNECT_BASE_MS = 2000;
 const RECONNECT_MAX_MS = 30000;
@@ -34,8 +30,7 @@ function statusFromError(error) {
   return error?.output?.statusCode || error?.status || error?.statusCode;
 }
 
-export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter }) {
-  let loginNotified = false;
+export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
   let sock = null;
   let connecting = false;
   let reconnectAttempts = 0;
@@ -84,9 +79,7 @@ export function createConnectionManager({ config, settings, botState, commandReg
     }
 
     try {
-      if (!existsSync(join(config.authDir, 'creds.json'))) {
-        restoreSession(config);
-      }
+      // Each managed session has its own private authDir. Never import or copy credentials between users.
       const { state, saveCreds } = await useMultiFileAuthState(config.authDir);
       const { version, isLatest } = await fetchLatestBaileysVersion();
       logger.info({ version: version.join('.'), isLatest }, 'Using WhatsApp Web version');
@@ -111,7 +104,6 @@ export function createConnectionManager({ config, settings, botState, commandReg
       sock = socket;
 
       socket.ev.on('creds.update', saveCreds);
-
       socket.ev.on('connection.update', async (update) => {
         if (currentGeneration !== generation) {
           return;
@@ -120,41 +112,21 @@ export function createConnectionManager({ config, settings, botState, commandReg
         const { connection, lastDisconnect, qr } = update;
 
         if (qr) {
-          logger.info('Scan this QR code with WhatsApp > Linked Devices');
-          try {
-            const qrText = await qrcode.toString(qr, { type: 'terminal', small: true });
-            console.log(qrText);
-          } catch (error) {
-            logger.warn({ err: error.message }, 'Failed to render QR in terminal; pairing string follows');
-            logger.info({ qrLength: qr.length }, 'QR payload received');
-          }
+          onQr(qr);
+          logger.info({ session: config.sessionLabel || 'private' }, 'A WhatsApp linking QR is ready');
         }
 
         if (connection === 'open') {
           reconnectAttempts = 0;
-          logger.info({ bot: config.botName, jid: socket.user?.id }, 'WhatsApp connection opened');
-          if (!loginNotified) {
-            loginNotified = true;
-            try {
-              const sessionId = captureSessionId(config);
-              if (sessionId) {
-                if (sessionId !== config.sessionId) {
-                  updateSettings({ sessionId });
-                  config.sessionId = sessionId;
-                }
-                await sendSessionIdToOwner(socket, config, sessionId);
-                logger.info({ ownerJid: config.ownerJid }, 'Sent session ID to owner');
-              }
-            } catch (error) {
-              logger.warn({ err: error.message }, 'Failed to send session ID to owner');
-            }
-          }
+          logger.info({ bot: config.botName, jid: socket.user?.id, session: config.sessionLabel || 'private' }, 'WhatsApp connection opened');
+          onStatus({ status: 'connected', jid: socket.user?.id || null, lid: socket.user?.lid || null });
         }
 
         if (connection === 'close') {
           const status = statusFromError(lastDisconnect?.error);
           const reasonName = Object.entries(DisconnectReason).find(([, value]) => value === status)?.[0] || 'unknown';
-          logger.warn({ status, reasonName }, 'Connection closed');
+          logger.warn({ status, reasonName, session: config.sessionLabel || 'private' }, 'Connection closed');
+          onStatus({ status: 'disconnected', reason: reasonName });
 
           if (stopped || currentGeneration !== generation) {
             return;
@@ -176,7 +148,13 @@ export function createConnectionManager({ config, settings, botState, commandReg
         }
       });
 
-      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter });
+      if (config.pairingNumber && !state.creds.registered) {
+        setTimeout(() => socket.requestPairingCode(config.pairingNumber)
+          .then(onPairingCode)
+          .catch((error) => logger.warn({ err: error.message }, 'Phone pairing code request failed')), 1200);
+      }
+
+      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore });
       registerGroupEvents(socket, { config, settings });
 
       return socket;

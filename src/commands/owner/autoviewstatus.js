@@ -14,12 +14,6 @@ export default {
       return;
     }
     botState.setFlag('autoviewstatus', arg === 'on');
-    try {
-      const { updateSettings } = await import('../../config/config.js');
-      updateSettings({ autoviewstatus: arg === 'on' });
-    } catch {
-      // runtime flag still applies
-    }
     await sock.sendMessage(ctx.chatJid, { text: `Auto view status is now ${arg}.` }, { quoted: ctx.msg });
   }
 };

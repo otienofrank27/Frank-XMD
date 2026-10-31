@@ -3,24 +3,16 @@ import assert from 'node:assert/strict';
 import { decodeSession, encodeSession } from '../src/utils/session.js';
 import { loadConfig } from '../src/config/config.js';
 
-describe('session id', () => {
-  it('round-trips WhatsApp creds through sessionId', () => {
-    const creds = { me: { id: '254748642275:1@s.whatsapp.net' }, registered: true };
-    const sessionId = encodeSession(creds);
-    assert.ok(sessionId.length > 10);
-    assert.equal(sessionId.includes('+'), false);
-    assert.deepEqual(decodeSession(sessionId), creds);
+describe('WhatsApp credential safety', () => {
+  it('does not export credentials as shareable session IDs', () => {
+    assert.throws(() => encodeSession({ registered: true }), /disabled/i);
   });
-
-  it('rejects empty or invalid sessionId', () => {
-    assert.equal(decodeSession(''), null);
-    assert.equal(decodeSession('not-valid'), null);
+  it('does not restore credentials from legacy session IDs', () => {
+    assert.equal(decodeSession('eyJyZWdpc3RlcmVkIjp0cnVlfQ'), null);
   });
-
-  it('exposes ownerNumber and sessionId from the settings file', () => {
+  it('allows dashboard mode without a global WhatsApp owner number', () => {
     const config = loadConfig();
-    assert.equal(config.ownerNumber, '254748642275');
-    assert.match(config.settingsFile, /\/settings$/);
+    assert.equal(typeof config.ownerNumber, 'string');
     assert.equal(typeof config.sessionId, 'string');
   });
 });

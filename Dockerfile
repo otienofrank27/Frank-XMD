@@ -27,6 +27,6 @@ RUN mkdir -p auth data logs \
 
 USER node
 
-VOLUME ["/app/auth", "/app/data", "/app/logs"]
+EXPOSE 3000\n\nVOLUME ["/app/auth", "/app/data", "/app/logs", "/app/sessions"]
 
 CMD ["node", "index.js"]

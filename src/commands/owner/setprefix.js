@@ -15,12 +15,6 @@ export default {
     }
     botState.set({ prefix: next });
     config.prefix = next;
-    try {
-      const { updateSettings } = await import('../../config/config.js');
-      updateSettings({ prefix: next });
-    } catch {
-      // runtime prefix still applies even if the settings file cannot be written
-    }
     await sock.sendMessage(ctx.chatJid, { text: `Prefix updated to ${next}` }, { quoted: ctx.msg });
   }
 };

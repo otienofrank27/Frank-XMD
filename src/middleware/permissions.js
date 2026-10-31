@@ -74,7 +74,7 @@ export function isBotAdmin(metadata, sock) {
 }
 
 export function canUseAdminCommands(ctx, metadata, config) {
-  if (isOwner(ctx.senderJid, config)) {
+  if (ctx.fromMe || isOwner(ctx.senderJid, config)) {
     return true;
   }
   if (!ctx.isGroup) {

@@ -1,4 +1,3 @@
-import { latestStatus } from '../../database/statusStore.js';
 import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import { logger } from '../../utils/logger.js';
 
@@ -8,8 +7,8 @@ export default {
   category: 'tools',
   description: 'Save the latest viewed status media. Enable .autoviewstatus first.',
   usage: '.savestatus',
-  async execute({ sock, ctx }) {
-    const status = latestStatus();
+  async execute({ sock, ctx, statusStore }) {
+    const status = statusStore?.latestStatus?.();
     if (!status?.message) {
       await sock.sendMessage(ctx.chatJid, {
         text: 'No recent status cached. Enable .autoviewstatus and wait for a status update.'

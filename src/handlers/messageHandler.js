@@ -66,7 +66,7 @@ function isSpamming(senderJid, config, now = Date.now()) {
 }
 
 async function exemptModeration(sock, ctx, metadata, config, settings) {
-  if (isOwner(ctx.senderJid, config) || isTrustedNumber(ctx.senderJid, config) || settings.isTrusted(ctx.chatJid, ctx.senderJid)) {
+  if (ctx.fromMe || isOwner(ctx.senderJid, config) || isTrustedNumber(ctx.senderJid, config) || settings.isTrusted(ctx.chatJid, ctx.senderJid)) {
     return true;
   }
   return isGroupAdmin(metadata, ctx.senderJid);
@@ -183,7 +183,8 @@ async function maybeHandleViewOnce(sock, ctx, settings) {
   }
 }
 
-export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter }) {
+export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter, statusStore }) {
+  const sessionKey = config.sessionLabel || sock.user?.id || 'default';
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
     if (!Array.isArray(messages) || !messages.length) {
       return;
@@ -192,16 +193,17 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
     for (const msg of messages) {
       try {
         const id = msg?.key?.id;
-        if (alreadyProcessed(id)) {
+        const scopedId = id ? `${sessionKey}:${id}` : id;
+        if (alreadyProcessed(scopedId)) {
           continue;
         }
-        remember(id);
+        remember(scopedId);
 
         const chatJid = msg.key?.remoteJid || '';
         const state = botState?.get?.() || {};
 
         if (isStatusBroadcast(chatJid)) {
-          rememberStatus(msg);
+          (statusStore?.rememberStatus || rememberStatus)(msg);
           if (state.autoviewstatus && msg.key) {
             await sock.readMessages([msg.key]).catch(() => {});
           }
@@ -330,7 +332,7 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
         }
 
         logger.info({ command: command.name, chatJid: ctx.chatJid, sender: ctx.senderJid }, 'Executing command');
-        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry });
+        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry, statusStore });
       } catch (error) {
         const fallbackCtx = {
           chatJid: msg?.key?.remoteJid,
