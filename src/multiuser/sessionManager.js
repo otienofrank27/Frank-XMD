@@ -86,8 +86,12 @@ export async function createSessionManager() {
     };
     const update = (patch) => Object.assign(state, patch, { updatedAt: Date.now() });
 
+    const sessionControl = {
+      restart: () => restart(userId, id),
+      stop: () => stop(userId, id, false)
+    };
     const connection = createConnectionManager({
-      config, settings, botState, commandRegistry, rateLimiter, statusStore,
+      config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl,
       onQr: async (qr) => {
         const qrcode = (await import('qrcode')).default;
         update({ status: 'waiting_for_scan', qr: await qrcode.toDataURL(qr), pairingCode: null });
