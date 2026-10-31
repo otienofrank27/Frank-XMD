@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: frank-xmd
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: TIMEZONE
+        value: Africa/Nairobi
+      - key: PREFIX
+        value: .
+      - key: LOG_LEVEL
+        value: info
+    disk:
+      name: frank-xmd-data
+      mountPath: /app/data
+      sizeGB: 1
+    # Add a second persistent disk for /app/sessions in the Render dashboard,
+    # or use a VPS/Docker Compose deployment with both persistent paths.
