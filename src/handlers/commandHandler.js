@@ -40,7 +40,7 @@ export function createCommandRegistry() {
   return { register, get, list, parse };
 }
 
-export async function loadCommands(registry) {
+export async function loadCommands(registry, cacheKey = '') {
   const baseDir = join(dirname(fileURLToPath(import.meta.url)), '../commands');
   const categories = ['general', 'admin', 'media', 'downloader', 'owner', 'fun', 'tools'];
 
@@ -56,7 +56,8 @@ export async function loadCommands(registry) {
 
     for (const file of files) {
       const fullPath = join(dir, file);
-      const mod = await import(pathToFileURL(fullPath).href);
+      const moduleUrl = pathToFileURL(fullPath).href + (cacheKey ? `?session=${encodeURIComponent(cacheKey)}` : '');
+      const mod = await import(moduleUrl);
       const command = mod.default || mod.command;
       if (!command) {
         logger.warn({ file: fullPath }, 'Command file has no default export');
