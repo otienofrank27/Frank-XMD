@@ -1,319 +1,142 @@
-<h1 align="center">FRANK-XMD</h1>
+# FRANK-XMD
 
-<p align="center">
-  A Feature-Rich Multi-Device WhatsApp Bot Built with Baileys
-</p>
+**Universal multi-user WhatsApp assistant** built with Node.js and Baileys v7.0.0-rc14.
 
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+FRANK-XMD now runs as a shared service with an authenticated web dashboard. Each dashboard user can connect up to three WhatsApp accounts independently using either a QR code or a phone-number pairing code.
 
-<p align="center">
-  <a href="https://github.com/WhiskeySockets/Baileys">
-    <img src="https://img.shields.io/badge/Baileys-v7.0.0--rc.14-blue?style=for-the-badge&logo=whatsapp" alt="Baileys">
-  </a>
-  <a href="https://nodejs.org">
-    <img src="https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js" alt="Node.js">
-  </a>
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License">
-  </a>
-  <a href="https://github.com/frankmarvin/FRANK-XMD/stargazers">
-    <img src="https://img.shields.io/github/stars/frankmarvin/FRANK-XMD?style=for-the-badge&logo=github" alt="Stars">
-  </a>
-  <a href="https://github.com/frankmarvin/FRANK-XMD/issues">
-    <img src="https://img.shields.io/github/issues/frankmarvin/FRANK-XMD?style=for-the-badge&logo=github" alt="Issues">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/Docker-Supported-2496ED?style=for-the-badge&logo=docker" alt="Docker">
-  </a>
-</p>
+> Every WhatsApp account must be deliberately linked by its owner (or an authorized user) through WhatsApp Linked Devices. FRANK-XMD does not create WhatsApp accounts, bypass WhatsApp authorization, or link an account without its approval.
 
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+## Features
 
-Developed and maintained by Frank.
+- Multi-user dashboard with email/password registration and login.
+- QR-code linking and phone-number pairing-code linking.
+- Independent credentials, sockets, reconnection lifecycle, group settings, bot settings, rate limits and status cache for each linked account.
+- Restore linked accounts after a service restart when persistent storage is available.
+- Up to three WhatsApp accounts per dashboard user.
+- Existing modular command registry, group moderation, media tools, games and owner commands.
+- Per-session command ownership: owner commands apply to the WhatsApp account linked to that session.
+- No export, automatic forwarding or logging of WhatsApp session credentials.
+- Docker support and automated Node.js tests.
 
----
+## Requirements
 
-About Frank-XMD
+- Node.js 20.9+ (Node 20 LTS recommended)
+- npm 10+
+- Persistent writable storage for `data/` and `sessions/`
+- FFmpeg and yt-dlp for commands that use media conversion or supported downloads
 
- <a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
- 
-Frank-XMD is a modular, multi-device WhatsApp bot built with Node.js and Baileys v7.0.0-rc14. It includes general utilities, group administration, media tools, downloaders, games, owner controls and status utilities.
+## Run locally
 
-The project uses a command registry that loads commands by category, configurable group settings, permission checks, rate limiting, structured logging and automatic reconnection handling.
-Use this project responsibly and comply with WhatsApp's terms and applicable laws.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Features
-
- - Multi-device WhatsApp connection using Baileys.
- - Modular command system with automatically loaded commands.
- - Group moderation: antilink, antiword, antispam, warnings and member management.
- - Welcome and goodbye messages.
- - Media conversion, sticker tools and media compression.
- - Media download commands for supported public URLs.
- - Games and entertainment commands.
- - Owner-only controls and broadcast tools.
- - Custom menu artwork and configurable menu appearance.
- - Persistent authentication, bot state and group settings.
- - Reconnection handling, command cooldowns and rate limiting.
- - Docker support.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-  
-Tech Stack
-
-| Technology	         | Purpose                       |
-|----------------------|-------------------------------|
-| Node.js 20+	         | JavaScript runtime            |
-| Baileys 7.0.0-rc14	 | WhatsApp Web connection       |
-| dotenv	             | Environment configuration     |
-| Pino / pino-pretty   | Logging                       |
-| QRCode	             | Terminal QR rendering         |
-| Sharp                | Image processing              |
-| yt-dlp	             | Supported media downloads     |
-| FFmpeg	             | Audio/video processing        |
-| Docker	             | Container deployment          |
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Getting Started
-
-1. Fork or clone the repository
 ```bash
 git clone https://github.com/otienofrank27/Frank-XMD.git
 cd Frank-XMD
-```
-If your repository uses a different GitHub URL, replace the clone URL above with your repository URL.
-3. Install dependencies
-Requirements: Node.js 20 or newer and npm 10 or newer.
-```bash
 npm install
 ```
-For media conversion and downloader commands, install FFmpeg and yt-dlp and ensure both are available on your system PATH.
-4. Configure the bot
 
-The project includes a settings JSON configuration file. Open it and set your bot and owner details:
-```bash
-{
-  "botName": "Frank-XMD",
-  "ownerName": "Frank",
-  "ownerNumber": "YOUR_WHATSAPP_NUMBER",
-  "ownerCountry": "KE",
-  "sessionId": "",
-  "prefix": ".",
-  "timezone": "Africa/Nairobi"
-}
+Copy `.env.example` to `.env` if you need to customize the service:
+
+**PowerShell**
+```powershell
+Copy-Item .env.example .env
 ```
 
-Keep the existing settings properties when editing the file. Use your WhatsApp number with country code and digits only (no +, spaces or dashes).
+Start the service:
 
-You can also copy .env.example to .env and configure supported environment variables there. Environment variables take precedence over matching values in settings.
-`cp .env.example .env`
-On Windows PowerShell:
-Copy-Item `.env.example .env`
-Set REMOVEBG_API_KEY in .env only if you want to use the background-removal command. Never publish API keys or session credentials.
-
-4. Link your WhatsApp account
-
-Start the bot:
 ```bash
 npm start
 ```
-On first launch, a QR code is printed in the terminal.
- 1. Open WhatsApp on your phone.
- 2. Go to Settings → Linked devices.
-3. Select Link a device.
- 4. Scan the QR code shown in the terminal.
- 5. Wait for the bot to connect.
- 6. 
-After a successful connection, the bot captures its session credentials and sends the session ID to the configured owner account. Treat that session ID like a password: anyone who obtains it may be able to access the linked WhatsApp account.
 
-The auth/ directory also stores authentication files. Keep it private and persistent when deploying.
+Open [http://localhost:3000](http://localhost:3000), create a dashboard account, then choose one of the linking methods.
 
-5. Run tests
+### QR code linking
+
+1. Sign in to the FRANK-XMD dashboard.
+2. Choose **QR code** and create a session.
+3. On the WhatsApp account you want to connect, open **Settings → Linked devices → Link a device**.
+4. Scan the QR shown in your dashboard.
+5. Wait until the session status changes to **connected**.
+
+### Phone-number pairing
+
+1. Sign in to the dashboard.
+2. Choose **Pairing code**.
+3. Enter the WhatsApp phone number with its country code, digits only (for example, `2547XXXXXXXX`).
+4. On that phone, open **Settings → Linked devices → Link a device → Link with phone number instead**.
+5. Enter the code displayed in the dashboard and approve linking.
+
+The phone number is used only to request a WhatsApp pairing code. The phone owner must still approve the linked device.
+
+## Multi-user isolation
+
+Each dashboard user receives a private directory below `sessions/`. Each linked account has its own hashed session directory containing:
+
+- `auth/`: Baileys authentication credentials and signal keys.
+- `data/group-settings.json`: that account's group moderation settings.
+- `data/bot-state.json`: that account's bot preferences and command prefix.
+
+The dashboard registry is stored at `data/multiuser/registry.json`. Passwords are stored as salted scrypt hashes. Dashboard cookies are HTTP-only and SameSite=Strict.
+
+Never copy an `auth/` folder between users or publish the `sessions/` or `data/multiuser/` directories. Use HTTPS whenever the dashboard is reachable over a network. Set `NODE_ENV=production` behind HTTPS so the session cookie receives the Secure attribute.
+
+The old shareable `sessionId` export/import flow is disabled. A session ID is not a safe way to distribute WhatsApp credentials.
+
+## Configuration
+
+The root `settings` file and `.env` contain service defaults such as:
+
+| Variable | Purpose |
+|---|---|
+| `BOT_NAME` | WhatsApp client display name |
+| `PREFIX` | Default command prefix |
+| `TIMEZONE` | Timezone for time commands |
+| `PORT` | Dashboard port (default `3000`) |
+| `HOST` | Dashboard bind address (default `0.0.0.0`) |
+| `LOG_LEVEL` | Logging level |
+| `REMOVEBG_API_KEY` | Optional background-removal API key |
+
+`OWNER_NUMBER` is retained for compatibility with the original settings format; in multi-user mode, owner permission is assigned to each WhatsApp identity only after that identity links successfully. Do not use one global number to represent all connected users.
+
+## Commands
+
+The default prefix is `.`. Use `.menu` or `.help` in WhatsApp for the live command list. Existing group-management commands require the linked account to have the appropriate WhatsApp group-admin privileges. Owner-only commands apply only to the WhatsApp account connected in that session.
+
+The `.restart` and `.shutdown` commands do not terminate the shared service; use the dashboard to remove a session without affecting other users.
+
+## Tests
+
 ```bash
 npm test
 ```
-Docker Deployment
 
-The repository includes a Dockerfile with Node.js 20, FFmpeg, Python, yt-dlp and the image-processing runtime libraries.
+The automated tests cover command parsing/registration/execution, permissions, rate limiting and credential-export safeguards. They do not replace live WhatsApp authorization tests or verify WhatsApp-side group-admin actions.
 
-Build the image:
+## Docker
+
+Build:
+
 ```bash
 docker build -t frank-xmd .
 ```
-Run the container:
+
+Run with persistent volumes:
+
 ```bash
-docker run -d \
-  --name frank-xmd \
-  --restart unless-stopped \
-  -v frank-xmd-auth:/app/auth \
+docker run -d --name frank-xmd --restart unless-stopped \
+  -p 3000:3000 \
   -v frank-xmd-data:/app/data \
+  -v frank-xmd-sessions:/app/sessions \
   -v frank-xmd-logs:/app/logs \
   frank-xmd
-  ```
-View logs and the QR code:
-```bash
-docker logs -f frank-xmd
 ```
 
-Scan the QR code from the container logs when pairing for the first time. Keep the auth, data and logs volumes so authentication and bot settings persist when the container is restarted or recreated.
+Open `http://localhost:3000` (or your server's HTTPS URL when deployed). Keep the data and sessions volumes persistent: losing them means losing dashboard accounts or linked-device credentials.
 
-To stop the container:
-```bash
-docker stop frank-xmd
-```
+## Security and responsible use
 
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
+- Only link WhatsApp accounts you own or are authorized to administer.
+- Never share QR codes, pairing codes, session folders, cookies or dashboard passwords.
+- Use HTTPS for remote access and restrict dashboard exposure with a firewall or reverse proxy.
+- Keep the server and dependencies updated; back up `data/` and `sessions/` securely.
+- Respect WhatsApp terms, privacy and local laws. Automated messaging can lead to account restrictions if misused.
 
-Commands
-
-The default command prefix is `.`. If you change prefix in settings, use your new prefix instead.
-
-General commands
-
-| Command      | Description                           |
-|--------------|---------------------------------------|
-| .menu	       | Display the bot menu                  |
-| .help        | Show command help                     |
-| .ping  	     | Check response time                   |
-| .alive	     | Check bot status                      |
-| .owner	     | Show owner information                |
-| .groupinfo	 | Show group information                |
-| .runtime	   | Show bot uptime                       |
-| .time	       | Show current time                     |
-| .jid	       | Show chat or sender JID               |
-| .quote	     | Display a motivational quote          |
-| .sticker	   | Create a sticker from supported media |
-
-For command-specific syntax and options, use .help or .menu in WhatsApp. Commands that modify groups require the bot to have the necessary WhatsApp admin permissions.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Configuration
-
-The main configuration is stored in the root settings file. Common options include:
- - Setting	Purpose
- - botName	Name displayed by the bot
- - ownerName	Configured owner's display name
- - ownerNumber	Owner's WhatsApp number
- - prefix	Command prefix (default .)
- - timezone	Timezone used by time-related commands
- - logLevel	Logging verbosity
- - workInGroups	Enable bot operation in groups
- - workInPrivate	Enable bot operation in private chats
- - welcomeEnabled	Default welcome-message setting
- - goodbyeEnabled	Default goodbye-message setting
- - maxWarnings	Warning threshold
- - commandCooldownMs	Per-command cooldown
- - rateLimitMax	Maximum commands in the configured rate-limit window
- - trustedNumbers	Numbers exempt from selected moderation checks
- - antiLinkPatterns	Link patterns blocked by antilink
- - removeBgApiKey	API key for background removal
-
-The .env.example file documents environment-based options. Do not commit real API keys, private session IDs or personal credentials.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Project Structure
-
-```bash
-Frank-XMD/
-├── assets/                 # Logo, menu artwork and fonts
-├── auth/                   # WhatsApp authentication files (private)
-├── data/                   # Persistent bot and group data
-├── logs/                   # Runtime logs
-├── src/
-│   ├── commands/
-│   │   ├── admin/          # Group administration commands
-│   │   ├── downloader/     # Search and download commands
-│   │   ├── fun/             # Games and entertainment
-│   │   ├── general/         # General utility commands
-│   │   ├── media/           # Media conversion tools
-│   │   ├── owner/           # Owner-only commands
-│   │   └── tools/           # Status and view-once tools
-│   ├── config/             # Configuration loader
-│   ├── connection/         # Baileys connection manager
-│   ├── database/           # Persistent state stores
-│   ├── events/             # Group event handlers
-│   ├── handlers/           # Command and message handlers
-│   ├── middleware/         # Permissions, errors and rate limiting
-│   └── utils/              # Shared helpers
-├── tests/                  # Automated tests
-├── .env.example            # Environment variable template
-├── Dockerfile              # Docker image definition
-├── index.js                # Application entry point
-├── package.json
-└── settings                # Main JSON configuration
-``` 
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Testing
-
-Run the included automated test suite:
-```bash
-npm test
-```
-The tests cover command execution and handling, permissions and session utilities.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Security Notes
-
-- Never share your auth/ directory, session ID, .env file or private API keys.
-- Keep persistent storage enabled for auth/ and data/ when using Docker or a hosting provider.
-- Only give owner access to a WhatsApp number you control.
-- Review group moderation settings before enabling them in active groups.
-- Use broadcasts and automated messaging responsibly.
-- WhatsApp may restrict or suspend accounts that violate its terms or engage in abusive automation.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-Disclaimer
-
-Frank-XMD is an independent, community-developed project and is not affiliated with, endorsed by, or officially connected to WhatsApp or Meta.
-
-This software is provided for educational and personal automation purposes. Use it at your own risk. The project maintainer is not responsible for account restrictions, data loss, misuse, or damages resulting from the use of this software. You are responsible for complying with WhatsApp's terms and all applicable laws.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-<h2 align="center">Contributing</h2>
-
-Contributions, bug reports and feature suggestions are welcome.
-1. Fork the repository.
-2. Create a feature branch.
-3. Make and test your changes.
-4. Submit a pull request with a clear description.
-Please avoid committing credentials, session files, generated logs or personal data.
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-<p align="center">
-  <a href="https://github.com/otienofrank27" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-  </a>
-  <a href="https://wa.me/254748642275" target="_blank">
-    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
-  </a>
-  <a href="https://instagram.com/frankmarvin_1" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
-  </a>
-  <a href="https://t.me/+254748470966" target="_blank">
-    <img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
-  </a>
-  <a href="https://www.youtube.com/@FrankM-12" target="_blank">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
-  </a>
-</p>
-
-<a href="https://i.imgur.com/LyHic3i.gif"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-<h2 align="center">Support</h2>
-If you find Frank-XMD useful, consider giving the repository a star ⭐. It helps the project reach more developers.
-<div align="center">
-<a href="#"><img src="https://i.imgur.com/LyHic3i.gif" alt="separator" width="100%"></a>
-
-FRANK-XMD — Built with Node.js, JavaScript and Baileys.
-</div>
+FRANK-XMD is an independent project and is not affiliated with WhatsApp or Meta.
