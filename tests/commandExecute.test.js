@@ -84,7 +84,7 @@ function ctxFor(commandName, extra = {}) {
   };
 }
 
-const SKIP_EXECUTE = new Set(['restart', 'shutdown']);
+const SKIP_EXECUTE = new Set();
 
 describe('settings and menu image', () => {
     it('loads owner identity from the settings file', () => {
