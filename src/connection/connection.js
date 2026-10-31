@@ -30,7 +30,7 @@ function statusFromError(error) {
   return error?.output?.statusCode || error?.status || error?.statusCode;
 }
 
-export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
+export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
   let sock = null;
   let connecting = false;
   let reconnectAttempts = 0;
@@ -154,7 +154,7 @@ export function createConnectionManager({ config, settings, botState, commandReg
           .catch((error) => logger.warn({ err: error.message }, 'Phone pairing code request failed')), 1200);
       }
 
-      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter });
+      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore });
       registerGroupEvents(socket, { config, settings });
 
       return socket;
