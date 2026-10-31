@@ -11,7 +11,7 @@ async function main(){
  const dashboard=createDashboardServer({sessionManager:sessions});
  await dashboard.listen();
  logger.info({port:process.env.PORT||3000,host:process.env.HOST||'0.0.0.0'},'FRANK-XMD dashboard is listening');
- const shutdown=async(signal)=>{logger.info({signal},'Shutting down');await dashboard.close();process.exit(0)};
+ const shutdown=async(signal)=>{logger.info({signal},'Shutting down');await dashboard.close();await sessions.shutdownAll();process.exit(0)};
  process.on('SIGINT',()=>shutdown('SIGINT'));
  process.on('SIGTERM',()=>shutdown('SIGTERM'));
  process.on('unhandledRejection',reason=>logger.error({err:reason instanceof Error?reason.message:String(reason)},'Unhandled rejection'));
