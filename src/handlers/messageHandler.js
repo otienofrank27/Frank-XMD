@@ -138,7 +138,7 @@ async function maybeHandleAntispam(sock, ctx, { config, settings, metadata }) {
   if (await exemptModeration(sock, ctx, metadata, config, settings)) {
     return false;
   }
-  if (!isSpamming(ctx.senderJid, config)) {
+  if (!isSpamming(`${sessionKey}:${ctx.senderJid}`, config)) {
     return false;
   }
   try {
@@ -326,7 +326,7 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
           continue;
         }
 
-        if (command.ownerOnly && !ownerSender && !isOwner(ctx.senderJid, config)) {
+        if (command.ownerOnly && !ownerSender) {
           await sendText(sock, ctx.chatJid, 'Only the configured owner can use this command.', { quoted: msg });
           continue;
         }
