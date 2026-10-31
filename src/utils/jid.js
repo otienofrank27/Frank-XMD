@@ -53,6 +53,9 @@ export function numberToJid(input = '') {
 }
 
 export function sameUser(a = '', b = '') {
+  const leftJid = stripJidDevice(a);
+  const rightJid = stripJidDevice(b);
+  if (leftJid && rightJid && leftJid === rightJid) return true;
   const left = jidToNumber(a);
   const right = jidToNumber(b);
   return Boolean(left && right && left === right);
