@@ -68,9 +68,7 @@ function csv(value) {
 export function loadConfig() {
   const file = readSettingsFile();
   const ownerNumber = String(pick(file.ownerNumber, 'OWNER_NUMBER', '')).replace(/\D/g, '');
-  if (!ownerNumber) {
-    throw new Error('ownerNumber must be set in the settings file');
-  }
+  // Dashboard mode assigns owner permissions to each account only after it links its own WhatsApp device.
 
   const prefix = String(pick(file.prefix, 'PREFIX', '.'));
   if (prefix.length > 3) {
