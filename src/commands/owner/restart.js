@@ -2,13 +2,12 @@ export default {
   name: 'restart',
   aliases: [],
   category: 'owner',
-  description: 'Exit the process so a supervisor can restart the bot.',
+  description: 'Reconnect this linked WhatsApp session.',
   usage: '.restart',
   ownerOnly: true,
   async execute({ sock, ctx }) {
     await sock.sendMessage(ctx.chatJid, {
-      text: 'Restarting. If no process manager is running, start the bot again with npm start.'
+      text: 'This command is disabled on the shared FRANK-XMD service. Disconnect and reconnect this session from your dashboard.'
     }, { quoted: ctx.msg });
-    setTimeout(() => process.exit(0), 500);
   }
 };
