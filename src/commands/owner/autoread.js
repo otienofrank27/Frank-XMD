@@ -14,12 +14,6 @@ export default {
       return;
     }
     botState.setFlag('autoread', arg === 'on');
-    try {
-      const { updateSettings } = await import('../../config/config.js');
-      updateSettings({ autoread: arg === 'on' });
-    } catch {
-      // runtime flag still applies
-    }
     await sock.sendMessage(ctx.chatJid, { text: `Autoread is now ${arg}.` }, { quoted: ctx.msg });
   }
 };
