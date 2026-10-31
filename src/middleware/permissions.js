@@ -3,7 +3,11 @@ import { jidToNumber, sameUser, stripJidDevice } from '../utils/jid.js';
 const ADMIN_ROLES = new Set(['admin', 'superadmin']);
 
 export function isOwner(senderJid, config) {
-  return sameUser(senderJid, config.ownerJid) || jidToNumber(senderJid) === config.ownerNumber;
+  if (!senderJid || !config) return false;
+  if (config.ownerJid && sameUser(senderJid, config.ownerJid)) return true;
+  const senderNumber = jidToNumber(senderJid);
+  const ownerNumber = String(config.ownerNumber || '').replace(/\D/g, '');
+  return Boolean(senderNumber && ownerNumber && senderNumber === ownerNumber);
 }
 
 export function isTrustedNumber(senderJid, config) {

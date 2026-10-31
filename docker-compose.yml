@@ -1,0 +1,40 @@
+services:
+  frank-xmd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: frank-xmd:latest
+    container_name: frank-xmd
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATA_DIR: /app/data
+      SESSIONS_DIR: /app/sessions
+      TIMEZONE: ${TIMEZONE:-Africa/Nairobi}
+      PREFIX: ${PREFIX:-.}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      REMOVEBG_API_KEY: ${REMOVEBG_API_KEY:-}
+    volumes:
+      - frank_xmd_data:/app/data
+      - frank_xmd_sessions:/app/sessions
+      - frank_xmd_logs:/app/logs
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  frank_xmd_data:
+  frank_xmd_sessions:
+  frank_xmd_logs:

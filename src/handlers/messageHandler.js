@@ -127,7 +127,7 @@ async function maybeHandleAntiword(sock, ctx, { config, settings, metadata }) {
   return true;
 }
 
-async function maybeHandleAntispam(sock, ctx, { config, settings, metadata }) {
+async function maybeHandleAntispam(sock, ctx, { config, settings, metadata, sessionKey }) {
   const group = settings.getGroup(ctx.chatJid);
   if (!group.antispam) {
     return false;
@@ -138,7 +138,7 @@ async function maybeHandleAntispam(sock, ctx, { config, settings, metadata }) {
   if (await exemptModeration(sock, ctx, metadata, config, settings)) {
     return false;
   }
-  if (!isSpamming(ctx.senderJid, config)) {
+  if (!isSpamming(`${sessionKey}:${ctx.senderJid}`, config)) {
     return false;
   }
   try {
@@ -183,7 +183,7 @@ async function maybeHandleViewOnce(sock, ctx, settings) {
   }
 }
 
-export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter, statusStore }) {
+export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl }) {
   const sessionKey = config.sessionLabel || sock.user?.id || 'default';
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
     if (!Array.isArray(messages) || !messages.length) {
@@ -272,7 +272,7 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
           await maybeHandleViewOnce(sock, ctx, settings);
           if (await maybeHandleAntilink(sock, ctx, { config, settings, metadata })) continue;
           if (await maybeHandleAntiword(sock, ctx, { config, settings, metadata })) continue;
-          if (await maybeHandleAntispam(sock, ctx, { config, settings, metadata })) continue;
+          if (await maybeHandleAntispam(sock, ctx, { config, settings, metadata, sessionKey })) continue;
         }
 
         const prefix = state.prefix || config.prefix;
@@ -326,13 +326,13 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
           continue;
         }
 
-        if (command.ownerOnly && !ownerSender && !isOwner(ctx.senderJid, config)) {
+        if (command.ownerOnly && !ownerSender) {
           await sendText(sock, ctx.chatJid, 'Only the configured owner can use this command.', { quoted: msg });
           continue;
         }
 
         logger.info({ command: command.name, chatJid: ctx.chatJid, sender: ctx.senderJid }, 'Executing command');
-        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry, statusStore });
+        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry, statusStore, sessionControl });
       } catch (error) {
         const fallbackCtx = {
           chatJid: msg?.key?.remoteJid,

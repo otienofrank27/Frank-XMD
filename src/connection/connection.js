@@ -30,13 +30,14 @@ function statusFromError(error) {
   return error?.output?.statusCode || error?.status || error?.statusCode;
 }
 
-export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
+export function createConnectionManager({ config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl, onQr = () => {}, onStatus = () => {}, onPairingCode = () => {} }) {
   let sock = null;
   let connecting = false;
   let reconnectAttempts = 0;
   let stopped = false;
   let generation = 0;
   let reconnectTimer = null;
+  let pairingTimer = null;
 
   function scheduleReconnect(currentGeneration) {
     if (stopped || currentGeneration !== generation) {
@@ -149,12 +150,16 @@ export function createConnectionManager({ config, settings, botState, commandReg
       });
 
       if (config.pairingNumber && !state.creds.registered) {
-        setTimeout(() => socket.requestPairingCode(config.pairingNumber)
-          .then(onPairingCode)
-          .catch((error) => logger.warn({ err: error.message }, 'Phone pairing code request failed')), 1200);
+        pairingTimer = setTimeout(() => {
+          pairingTimer = null;
+          if (stopped || currentGeneration !== generation) return;
+          socket.requestPairingCode(config.pairingNumber)
+            .then(onPairingCode)
+            .catch((error) => logger.warn({ err: error.message }, 'Phone pairing code request failed'));
+        }, 1200);
       }
 
-      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore });
+      registerMessageHandler(socket, { config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl });
       registerGroupEvents(socket, { config, settings });
 
       return socket;
@@ -172,6 +177,10 @@ export function createConnectionManager({ config, settings, botState, commandReg
     if (reconnectTimer) {
       clearTimeout(reconnectTimer);
       reconnectTimer = null;
+    }
+    if (pairingTimer) {
+      clearTimeout(pairingTimer);
+      pairingTimer = null;
     }
     try {
       sock?.end?.(undefined);

@@ -110,6 +110,7 @@ auth/*
 !auth/.gitkeep
 data/*
 !data/.gitkeep
+sessions/
 qr.png
 session/
 baileys_store.json
