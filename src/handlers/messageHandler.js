@@ -66,7 +66,7 @@ function isSpamming(senderJid, config, now = Date.now()) {
 }
 
 async function exemptModeration(sock, ctx, metadata, config, settings) {
-  if (isOwner(ctx.senderJid, config) || isTrustedNumber(ctx.senderJid, config) || settings.isTrusted(ctx.chatJid, ctx.senderJid)) {
+  if (ctx.fromMe || isOwner(ctx.senderJid, config) || isTrustedNumber(ctx.senderJid, config) || settings.isTrusted(ctx.chatJid, ctx.senderJid)) {
     return true;
   }
   return isGroupAdmin(metadata, ctx.senderJid);
