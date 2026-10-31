@@ -1,5 +1,3 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { Boom } from '@hapi/boom';
 import makeWASocket, {
   Browsers,
@@ -8,8 +6,6 @@ import makeWASocket, {
   makeCacheableSignalKeyStore,
   useMultiFileAuthState
 } from '@whiskeysockets/baileys';
-import qrcode from 'qrcode';
-import { updateSettings } from '../config/config.js';
 import { logger } from '../utils/logger.js';
 import { registerMessageHandler } from '../handlers/messageHandler.js';
 import { registerGroupEvents } from '../events/groupEvents.js';
@@ -123,13 +119,6 @@ export function createConnectionManager({ config, settings, botState, commandReg
         if (qr) {
           onQr(qr);
           logger.info({ session: config.sessionLabel || 'private' }, 'A WhatsApp linking QR is ready');
-          try {
-            const qrText = await qrcode.toString(qr, { type: 'terminal', small: true });
-            console.log(qrText);
-          } catch (error) {
-            logger.warn({ err: error.message }, 'Failed to render QR in terminal; pairing string follows');
-            logger.info({ qrLength: qr.length }, 'QR payload received');
-          }
         }
 
         if (connection === 'open') {
