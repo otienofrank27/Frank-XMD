@@ -124,7 +124,7 @@ export function createConnectionManager({ config, settings, botState, commandReg
         if (connection === 'open') {
           reconnectAttempts = 0;
           logger.info({ bot: config.botName, jid: socket.user?.id, session: config.sessionLabel || 'private' }, 'WhatsApp connection opened');
-          onStatus({ status: 'connected', jid: socket.user?.id || null });
+          onStatus({ status: 'connected', jid: socket.user?.id || null, lid: socket.user?.lid || null });
         }
 
         if (connection === 'close') {
