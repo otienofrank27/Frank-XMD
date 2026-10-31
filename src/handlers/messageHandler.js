@@ -127,7 +127,7 @@ async function maybeHandleAntiword(sock, ctx, { config, settings, metadata }) {
   return true;
 }
 
-async function maybeHandleAntispam(sock, ctx, { config, settings, metadata }) {
+async function maybeHandleAntispam(sock, ctx, { config, settings, metadata, sessionKey }) {
   const group = settings.getGroup(ctx.chatJid);
   if (!group.antispam) {
     return false;
@@ -272,7 +272,7 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
           await maybeHandleViewOnce(sock, ctx, settings);
           if (await maybeHandleAntilink(sock, ctx, { config, settings, metadata })) continue;
           if (await maybeHandleAntiword(sock, ctx, { config, settings, metadata })) continue;
-          if (await maybeHandleAntispam(sock, ctx, { config, settings, metadata })) continue;
+          if (await maybeHandleAntispam(sock, ctx, { config, settings, metadata, sessionKey })) continue;
         }
 
         const prefix = state.prefix || config.prefix;
