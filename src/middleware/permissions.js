@@ -6,7 +6,7 @@ export function isOwner(senderJid, config) {
   if (!senderJid || !config) return false;
   if (config.ownerJid && sameUser(senderJid, config.ownerJid)) return true;
   const senderNumber = jidToNumber(senderJid);
-  const ownerNumber = String(config.ownerNumber || '').replace(/\\D/g, '');
+  const ownerNumber = String(config.ownerNumber || '').replace(/\D/g, '');
   return Boolean(senderNumber && ownerNumber && senderNumber === ownerNumber);
 }
 
