@@ -183,7 +183,7 @@ async function maybeHandleViewOnce(sock, ctx, settings) {
   }
 }
 
-export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter, statusStore }) {
+export function registerMessageHandler(sock, { config, settings, botState, commandRegistry, rateLimiter, statusStore, sessionControl }) {
   const sessionKey = config.sessionLabel || sock.user?.id || 'default';
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
     if (!Array.isArray(messages) || !messages.length) {
@@ -332,7 +332,7 @@ export function registerMessageHandler(sock, { config, settings, botState, comma
         }
 
         logger.info({ command: command.name, chatJid: ctx.chatJid, sender: ctx.senderJid }, 'Executing command');
-        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry, statusStore });
+        await command.execute({ sock, ctx, config, settings, botState, metadata, registry: commandRegistry, statusStore, sessionControl });
       } catch (error) {
         const fallbackCtx = {
           chatJid: msg?.key?.remoteJid,
