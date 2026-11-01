@@ -64,6 +64,11 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
       return reply(` FrankXMD uptime: ${d}d ${h}h ${m}m ${s}s`);
     }
     case 'pollhelp': return reply('Create a WhatsApp poll with: .poll Question | Option 1 | Option 2');
+    case 'support':
+      return reply('FrankXMD Support\\nRepository: https://github.com/otienofrank27/Frank-XMD\\nWhatsApp Channel: https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D\\nOwner: Marvin Frank');
+    case 'feedback':
+    case 'report':
+      return reply('To send feedback or report a bug, include the command used, what you expected, and the error received.\\nGitHub: https://github.com/otienofrank27/Frank-XMD/issues\\nOwner WhatsApp: +254748642275');
 
     case 'info': case 'botinfo': case 'about': case 'version': case 'script': case 'repo': case 'status': {
       const settings = require('../settings');
