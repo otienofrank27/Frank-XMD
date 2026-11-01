@@ -11,16 +11,16 @@ async function helpCommand(sock, chatId, message) {
     const prefix = '.';
 
     const sections = [
-        { title: '📌 BOT OVERVIEW', overview: true },
-        { title: '📌 GENERAL & BOT', commands: ['help', 'menu', 'bot', 'list', 'ping', 'alive', 'owner', 'info', 'botinfo', 'about', 'version', 'status', 'speed', 'runtime', 'uptime', 'time', 'date', 'jid', 'github', 'git', 'sc', 'script', 'repo', 'support', 'feedback', 'report'] },
-        { title: '🤖 AI & IMAGE GENERATION', commands: ['ai', 'gpt', 'gemini', 'ask', 'aichat', 'chatgpt', 'deepseek', 'claude', 'aiexplain', 'aicode', 'aiprompt', 'aifast', 'imagine', 'flux', 'dalle', 'sora'] },
-        { title: '👥 GROUP MANAGEMENT', commands: ['groupinfo', 'infogp', 'infogrupo', 'staff', 'admins', 'listadmin', 'members', 'groupmembers', 'membercount', 'groupcount', 'topmembers', 'kick', 'ban', 'unban', 'promote', 'demote', 'mute', 'unmute', 'warn', 'warnings', 'clear', 'delete', 'del', 'tag', 'tagall', 'tagnotadmin', 'hidetag', 'resetlink', 'revoke', 'setgname', 'setgdesc', 'setgpp', 'groupstatus', 'togstatus', 'swgc', 'gstatus', 'gs'] },
-        { title: '🛡️ SECURITY & AUTOMATION', commands: ['antilink', 'antitag', 'antibot', 'nobot', 'antibadword', 'welcome', 'goodbye', 'chatbot', 'mention', 'setmention', 'automation', 'autolist', 'autoreply', 'schedule'] },
-        { title: '📥 DOWNLOADS & MEDIA', commands: ['play', 'mp3', 'ytmp3', 'song', 'music', 'video', 'ytmp4', 'ytv', 'ytvid', 'spotify', 'tiktok', 'tt', 'instagram', 'insta', 'ig', 'igs', 'igsc', 'facebook', 'fb', 'twitter', 'x', 'xdl', 'twdl', 'ss', 'ssweb', 'screenshot', 'tourl', 'url'] },
-        { title: '🖼️ STICKERS & EFFECTS', commands: ['sticker', 's', 'cimage', 'take', 'steal', 'attp', 'emojimix', 'emix', 'tg', 'tgsticker', 'stickeertegram', 'telesticker', 'gif', 'meme', 'blur', 'metallic', 'ice', 'snow', 'impressive', 'matrix', 'light', 'neon', 'devil', 'purple', 'thunder', 'leaves', '1917', 'arena', 'hacker', 'sand', 'blackpink', 'glitch', 'fire', 'removebg', 'remini', 'crop'] },
-        { title: '🎮 FUN & GAMES', commands: ['joke', 'quote', 'fact', 'weather', 'news', 'lyrics', '8ball', 'truth', 'dare', 'trivia', 'answer', 'hangman', 'guess', 'ttt', 'tictactoe', 'move', 'surrender', 'compliment', 'insult', 'flirt', 'ship', 'simp', 'stupid', 'itssostupid', 'iss', 'character', 'waifu', 'goodnight', 'lovenight', 'gn', 'shayari', 'shayri', 'roseday', 'animu', 'nom', 'poke', 'cry', 'kiss', 'pat', 'hug', 'wink', 'facepalm', 'face-palm', 'animuquote', 'kill', 'heart', 'horny', 'circle', 'lgbt', 'police', 'simpcard', 'tonikawa', 'its-so-stupid', 'namecard', 'oogway', 'oogway2', 'tweet', 'ytcomment', 'comrade', 'gay', 'glass', 'jail', 'passed', 'triggered'] },
-        { title: '🛠️ UTILITIES', commands: ['tts', 'translate', 'trt', 'calc', 'calculate', 'qr', 'qrcode', 'b64e', 'base64encode', 'b64d', 'base64decode', 'reverse', 'upper', 'lower', 'poll', 'pollhelp', 'grouplink', 'link', 'getpp', 'profilepic', 'define', 'dictionary', 'wikipedia', 'google', 'search', 'currency', 'country', 'ip', 'unit', 'vv', 'sandvv', 'vv2'] },
-        { title: '⚙️ SETTINGS & OWNER', commands: ['mode', 'settings', 'update', 'clearsession', 'clearcache', 'cleartmp', 'antidelete', 'autoread', 'autoreact', 'autoreaction', 'areact', 'autotyping', 'autostatus', 'statusview', 'viewstatus', 'savestatus', 'savesm', 'savest', 'anticall', 'pmblocker', 'setpp', 'sudo', 'pair'] }
+        { title: ' BOT OVERVIEW', overview: true },
+        { title: ' GENERAL & BOT', commands: ['help', 'menu', 'bot', 'list', 'ping', 'alive', 'owner', 'info', 'botinfo', 'about', 'version', 'status', 'speed', 'runtime', 'uptime', 'time', 'date', 'jid', 'github', 'git', 'sc', 'script', 'repo', 'support', 'feedback', 'report'] },
+        { title: ' AI & IMAGE GENERATION', commands: ['ai', 'gpt', 'gemini', 'ask', 'aichat', 'chatgpt', 'deepseek', 'claude', 'aiexplain', 'aicode', 'aiprompt', 'aifast', 'imagine', 'flux', 'dalle', 'sora'] },
+        { title: ' GROUP MANAGEMENT', commands: ['groupinfo', 'infogp', 'infogrupo', 'staff', 'admins', 'listadmin', 'members', 'groupmembers', 'membercount', 'groupcount', 'topmembers', 'kick', 'ban', 'unban', 'promote', 'demote', 'mute', 'unmute', 'warn', 'warnings', 'clear', 'delete', 'del', 'tag', 'tagall', 'tagnotadmin', 'hidetag', 'resetlink', 'revoke', 'setgname', 'setgdesc', 'setgpp', 'groupstatus', 'togstatus', 'swgc', 'gstatus', 'gs'] },
+        { title: ' SECURITY & AUTOMATION', commands: ['antilink', 'antitag', 'antibot', 'nobot', 'antibadword', 'welcome', 'goodbye', 'chatbot', 'mention', 'setmention', 'automation', 'autolist', 'autoreply', 'schedule'] },
+        { title: ' DOWNLOADS & MEDIA', commands: ['play', 'mp3', 'ytmp3', 'song', 'music', 'video', 'ytmp4', 'ytv', 'ytvid', 'spotify', 'tiktok', 'tt', 'instagram', 'insta', 'ig', 'igs', 'igsc', 'facebook', 'fb', 'twitter', 'x', 'xdl', 'twdl', 'ss', 'ssweb', 'screenshot', 'tourl', 'url'] },
+        { title: ' STICKERS & EFFECTS', commands: ['sticker', 's', 'cimage', 'take', 'steal', 'attp', 'emojimix', 'emix', 'tg', 'tgsticker', 'stickeertegram', 'telesticker', 'gif', 'meme', 'blur', 'metallic', 'ice', 'snow', 'impressive', 'matrix', 'light', 'neon', 'devil', 'purple', 'thunder', 'leaves', '1917', 'arena', 'hacker', 'sand', 'blackpink', 'glitch', 'fire', 'removebg', 'remini', 'crop'] },
+        { title: ' FUN & GAMES', commands: ['joke', 'quote', 'fact', 'weather', 'news', 'lyrics', '8ball', 'truth', 'dare', 'trivia', 'answer', 'hangman', 'guess', 'ttt', 'tictactoe', 'move', 'surrender', 'compliment', 'insult', 'flirt', 'ship', 'simp', 'stupid', 'itssostupid', 'iss', 'character', 'waifu', 'goodnight', 'lovenight', 'gn', 'shayari', 'shayri', 'roseday', 'animu', 'nom', 'poke', 'cry', 'kiss', 'pat', 'hug', 'wink', 'facepalm', 'face-palm', 'animuquote', 'kill', 'heart', 'horny', 'circle', 'lgbt', 'police', 'simpcard', 'tonikawa', 'its-so-stupid', 'namecard', 'oogway', 'oogway2', 'tweet', 'ytcomment', 'comrade', 'gay', 'glass', 'jail', 'passed', 'triggered'] },
+        { title: ' UTILITIES', commands: ['tts', 'translate', 'trt', 'calc', 'calculate', 'qr', 'qrcode', 'b64e', 'base64encode', 'b64d', 'base64decode', 'reverse', 'upper', 'lower', 'poll', 'pollhelp', 'grouplink', 'link', 'getpp', 'profilepic', 'define', 'dictionary', 'wikipedia', 'google', 'search', 'currency', 'country', 'ip', 'unit', 'vv', 'sandvv', 'vv2'] },
+        { title: ' SETTINGS & OWNER', commands: ['mode', 'settings', 'update', 'clearsession', 'clearcache', 'cleartmp', 'antidelete', 'autoread', 'autoreact', 'autoreaction', 'areact', 'autotyping', 'autostatus', 'statusview', 'viewstatus', 'savestatus', 'savesm', 'savest', 'anticall', 'pmblocker', 'setpp', 'sudo', 'pair'] }
     ];
 
     const esc = (value) => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -48,17 +48,17 @@ async function helpCommand(sock, chatId, message) {
         textLines.push({ text: '│      ' + botName.toUpperCase() + ' BOT      │', type: 'brand' });
         textLines.push({ text: '╰─────────────────────────╯', type: 'masthead' });
         textLines.push({ text: '', type: 'gap' });
-        textLines.push({ text: '🤖 BOT OVERVIEW', type: 'section' });
-        textLines.push({ text: '⚙️ Version: ' + version, type: 'normal' });
-        textLines.push({ text: '👤 Owner: ' + owner, type: 'normal' });
-        textLines.push({ text: '🌐 Mode: ' + mode, type: 'normal' });
-        textLines.push({ text: '🔑 Prefix: ' + prefix, type: 'normal' });
+        textLines.push({ text: ' BOT OVERVIEW', type: 'section' });
+        textLines.push({ text: ' Version: ' + version, type: 'normal' });
+        textLines.push({ text: ' Owner: ' + owner, type: 'normal' });
+        textLines.push({ text: ' Mode: ' + mode, type: 'normal' });
+        textLines.push({ text: ' Prefix: ' + prefix, type: 'normal' });
         textLines.push({ text: '────────────────────────────────────────', type: 'separator' });
 
         for (const section of sections.slice(1)) {
             textLines.push({ text: section.title, type: 'section' });
             for (const command of section.commands) {
-                textLines.push({ text: '▫️ ' + prefix + command, type: 'normal' });
+                textLines.push({ text: ' ' + prefix + command, type: 'normal' });
             }
             textLines.push({ text: '────────────────────────────────────────', type: 'separator' });
         }
@@ -78,7 +78,7 @@ async function helpCommand(sock, chatId, message) {
             if (isSection) {
                 svgParts.push('<rect x="38" y="' + (y - 31) + '" width="' + (width - 76) + '" height="48" rx="10" fill="#172536"/>');
             }
-            svgParts.push('<text x="' + padding + '" y="' + y + '" fill="' + color + '" font-family="Noto Color Emoji, DejaVu Sans, sans-serif" font-size="' + size + '" font-weight="' + weight + '">' + esc(item.text) + '</text>');
+            svgParts.push('<text x="' + padding + '" y="' + y + '" fill="' + color + '" font-family="DejaVu Sans, sans-serif" font-size="' + size + '" font-weight="' + weight + '">' + esc(item.text) + '</text>');
             y += item.type === 'separator' ? 24 : lineHeight;
         }
 
