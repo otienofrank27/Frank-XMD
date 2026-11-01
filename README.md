@@ -1,243 +1,155 @@
 # 🤖 FrankXMD
 
-This is a WhatsApp bot built using the Baileys library for group management, including features like tagging all members, muting/unmuting, and many more. It's designed to help admins efficiently manage WhatsApp groups.
+FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provides group administration, automation, media tools, games, stickers, and other utilities.
 
-<div align="center"> 
-  <a href="https://git.io/typing-svg"> 
-    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=FrankXMD;Multi+Device+Whatsapp+Bot;Coded+By+Professor" alt="Typing SVG" />
-  </a> 
-</div> 
-
-<div align="center"> 
-  <a href="https://youtube.com/@mr_unique_hacker"> 
-    <img src="https://github.com/mruniquehacker/Knightbot-MD/blob/main/assets/bot_image.jpg" alt="FrankXMD" height="300"> 
-  </a> 
+<div align="center">
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=FrankXMD;Multi+Device+WhatsApp+Bot;Maintained+By+Marvin+Frank" alt="FrankXMD typing banner" />
+  </a>
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/github/followers/mruniquehacker?style=for-the-badge&label=Followers" alt="Followers"/>
-  <img src="https://img.shields.io/github/stars/mruniquehacker/Knightbot-MD?style=for-the-badge&label=Stars" alt="Stars"/>
-  <img src="https://img.shields.io/github/forks/mruniquehacker/Knightbot-MD?style=for-the-badge&label=Forks" alt="Forks"/>
-  <img src="https://img.shields.io/github/watchers/mruniquehacker/Knightbot-MD?style=for-the-badge&label=Watchers" alt="Watchers"/>
+  <img src="https://raw.githubusercontent.com/otienofrank27/Frank-XMD/main/assets/bot_image.jpg" alt="FrankXMD" height="300">
 </div>
-
----
-<div>
-  <a href="https://www.rapidproxy.io/?ref=Knightbot" target="_blank">
-    <img src="assets/rapid.jpg" alt="RapidProxy" width="100%" />
-  </a>
-</div>
-
-<br>
-
-<div align="left">
-  <a href="https://www.rapidproxy.io/?ref=Knightbot" target="_blank"><b>RapidProxy</b></a> delivers fast, reliable proxy infrastructure for large-scale data operations. With high concurrency, non-expiring traffic, and AI-powered CAPTCHA bypass, it ensures efficient, uninterrupted data collection—trusted by developers worldwide.<br><br>
-  90M+ Residential IPs • Smart Rotation • High Success Rate • Built for Scale<br><br>
-  <b>Special Offer:</b> <a href="https://www.rapidproxy.io/?ref=Knightbot" target="_blank">Try it free</a> — Pricing from $0.65/GB with non-expiring traffic. Use code <b>RAPID10</b> for 10% off.
-</div>
-
-<br>
-
-<div align="left">
-  <a href="https://www.rapidproxy.io/?ref=Knightbot" target="_blank">
-    <img src="https://img.shields.io/badge/Try now-28a745?style=for-the-badge" alt="Try now"/>
-  </a>
-</div>
-
-
-## 🚀 Steps to Deploy Bot
-
-### Step 1: Fork the Repository
-
-Click the button below to fork the FrankXMD repository to your GitHub account:
 
 <div align="center">
-  <a href="https://github.com/mruniquehacker/Knightbot-MD/fork">
-    <img src="https://img.shields.io/badge/Fork-Repository-blue?style=for-the-badge" alt="Fork the repository"/>
-  </a>
+  <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-otienofrank27-181717?style=for-the-badge&logo=github" alt="GitHub profile"/></a>
+  <a href="https://www.youtube.com/@FrankM-12"><img src="https://img.shields.io/badge/YouTube-FrankM--12-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"/></a>
+  <a href="https://www.instagram.com/frankmarvin_1/"><img src="https://img.shields.io/badge/Instagram-frankmarvin__1-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
+  <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Contact-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/></a>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/github/followers/otienofrank27?style=for-the-badge&label=Followers" alt="GitHub followers"/>
+  <img src="https://img.shields.io/github/stars/otienofrank27/Frank-XMD?style=for-the-badge&label=Stars" alt="GitHub stars"/>
+  <img src="https://img.shields.io/github/forks/otienofrank27/Frank-XMD?style=for-the-badge&label=Forks" alt="GitHub forks"/>
+  <img src="https://img.shields.io/github/watchers/otienofrank27/Frank-XMD?style=for-the-badge&label=Watchers" alt="GitHub watchers"/>
 </div>
 
 ---
 
-### Step 2: Get Pair Code
+## 🚀 Deploy FrankXMD
 
-Deploy the bot and easily connect it to your WhatsApp account by pair code. Click the button below to deploy the bot on Replit.
+### Step 1: Fork the repository
 
 <div align="center">
-  <a href="https://knight-bot-paircode.onrender.com" target="_blank">
-    <img src="https://img.shields.io/badge/GET%20PAIR%20CODE-Easy%20Method-ff4d4d?style=for-the-badge" alt="Generate Pair Code"/>
+  <a href="https://github.com/otienofrank27/Frank-XMD/fork">
+    <img src="https://img.shields.io/badge/Fork-FrankXMD-blue?style=for-the-badge&logo=github" alt="Fork FrankXMD"/>
   </a>
 </div>
 
+### Step 2: Get your WhatsApp session
 
-### After getting creds.json file, upload it to session folder
+Start the bot using the setup instructions below and follow the authentication method configured by the project. Keep your WhatsApp session credentials private. Never upload your personal session files to a public repository.
 
----
+The existing pair-code service is external to this repository. If you operate your own pair-code server, replace the external service URL with your own deployment URL.
 
-### Step 3: Deploy Now
+### Step 3: Deploy
 
-For further customization and setup guidance, click the button below:
+You can deploy FrankXMD on a VPS or supported Node.js hosting panel.
 
 <div align="center">
-  <a href="https://youtu.be/-oz_u1iMgf8">
-    <img src="https://img.shields.io/badge/Deploy Tutorial-dc3545?style=for-the-badge&logo=youtube" alt="YouTube Link"/>
-  </a>
   <a href="https://bot-hosting.net/?aff=1068419752923508776">
-    <img src="https://img.shields.io/badge/Deploy on Panel-28a745?style=for-the-badge" alt="Deploy on Panel"/>
+    <img src="https://img.shields.io/badge/Deploy%20on-Hosting%20Panel-28a745?style=for-the-badge" alt="Deploy on hosting panel"/>
+  </a>
+  <a href="https://client.petrosky.io/aff.php?aff=394" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Deploy%20on-VPS-0078E7?style=for-the-badge" alt="Deploy on VPS"/>
+  </a>
+  <a href="https://dashboard.katabump.com/auth/login" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Deploy%20on-Katabump-D6B7D6?style=for-the-badge&logo=server&logoColor=black" alt="Katabump"/>
   </a>
 </div>
 
-### Deploy on VPS
-
-<div align="center">
-  <a href="https://client.petrosky.io/aff.php?aff=394" target="_blank">
-    <img src="https://img.shields.io/badge/petrosky vps-0078E7?style=for-the-badge" alt="petrosky vps"/>
-  </a>
-</div>
-
-### Deploy on Below Panel
-<div align="center">
-<a href="https://dashboard.katabump.com/auth/login#d6b7d6" target="_blank">
-  <img src="https://img.shields.io/badge/Katabump-D6B7D6?style=for-the-badge&logo=server&logoColor=black" alt="Katabump"/>
-</a>
-</div>
-
-### Join Us
-
-<div align="center">
-  <a href="https://t.me/+3QhFUZHx-nhhZmY1">
-    <img src="https://img.shields.io/badge/Join%20Telegram-0078E7?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram"/>
-  </a>
-  <a href="https://whatsapp.com/channel/0029Va90zAnIHphOuO8Msp3A">
-    <img src="https://img.shields.io/badge/Join%20WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Join WhatsApp"/>
-  </a>
-</div>
+For a deployment walkthrough, see the existing [YouTube tutorial](https://youtu.be/-oz_u1iMgf8).
 
 ---
 
 ## ⚙️ Features
 
-- **Tag all group members** with the `.tagall` command
-- **Admin restricted usage** (Only group admins can use certain commands)
-- **Games** like Tic-Tac-Toe for interactive group engagement
-- **Text-to-Speech** with `.tts`
-- **Sticker creation** with `.sticker`
-- **Anti-link detection** for group safety
-- **Warn and manage group members** with admin control
+- **Group administration:** group information, tagging, moderation, and member management.
+- **Group protection:** anti-link and other moderation tools.
+- **Automation:** configurable automated responses and status-related tools.
+- **Media tools:** stickers, image utilities, and supported media commands.
+- **Entertainment:** games, jokes, and interactive commands.
+- **Utilities:** text-to-speech, translation, and other helper commands.
 
----
-
-## 📖 About
-
-The Knight WhatsApp Bot assists group admins by providing them with tools to efficiently manage large WhatsApp groups. The bot uses the Baileys library to interact with the WhatsApp Web API and supports multi-device features.
-
-It is lightweight and can be easily customized to add more commands as per your requirements. The bot runs in a Node.js environment and provides QR code-based authentication to link your WhatsApp account.
-
----
+Command availability depends on the configured APIs and permissions. Use the bot's help/menu command to view the commands available in your build.
 
 ## 🛠️ Setup & Installation
 
-### Prerequisites
+### Requirements
 
-- Node.js installed on your system
-- Git installed (for cloning the repository)
+- Node.js 18 or later
+- Git
+- FFmpeg (required by some media features)
 
-### Step-by-Step Setup
+### Install
 
-1. **Clone the repository:**
+1. Clone your repository:
 
-    ```bash
-    git clone https://github.com/mruniquehacker/Knightbot-MD.git
-    cd Knightbot-MD
-    ```
+   ```bash
+   git clone https://github.com/otienofrank27/Frank-XMD.git
+   cd Frank-XMD
+   ```
 
-2. **Install the dependencies:**
+2. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
-3. **Run the bot:**
+3. Start the bot:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   npm start
+   ```
 
-4. **Scan the QR code:**
+4. Follow the authentication prompt in the terminal and link the WhatsApp account you intend to use.
 
-    Once the bot starts, a QR code will appear in the terminal. Scan this QR code using the Linked Devices feature in WhatsApp to connect your WhatsApp account with the bot.
+Do not share QR codes, pairing codes, `creds.json`, or session folders. Anyone with access to valid session credentials may be able to control the linked WhatsApp account.
 
----
-
-## ☕ Support Me
-
-<div align="center">
-
-<a href="https://buymeacoffee.com/mruniquehacker" target="_blank">
-  <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20Developer-FF813F?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white" alt="Buy Me a Coffee">
-</a>
-
-</div>
-
-If you find this project helpful and want to support the developer, consider buying me a coffee! Your support helps maintain and improve this open-source project.
+## 🤝 Connect with the developer
 
 <div align="center">
-
-<img src="assets/bmc_qr.png" alt="Buy Me a Coffee QR Code" width="200">
-
+  <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github" alt="GitHub"/></a>
+  <a href="https://www.youtube.com/@FrankM-12"><img src="https://img.shields.io/badge/YouTube-Subscribe-FF0000?style=for-the-badge&logo=youtube" alt="YouTube"/></a>
+  <a href="https://www.instagram.com/frankmarvin_1/"><img src="https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram" alt="Instagram"/></a>
+  <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Message-25D366?style=for-the-badge&logo=whatsapp" alt="WhatsApp"/></a>
 </div>
+
+## 💚 Support FrankXMD via M-Pesa
+
+If you would like to support development, you can send support through **Pochi La Biashara**:
+
+<div align="center">
+  <img src="https://img.shields.io/badge/POCHI%20LA%20BIASHARA-254748642275-00A650?style=for-the-badge&logo=safaricom&logoColor=white" alt="Pochi La Biashara M-Pesa"/>
+  <p><strong>M-Pesa Pochi La Biashara: +254 748 642 275</strong></p>
+</div>
+
+To show a scan-to-pay image here, add your official Pochi La Biashara QR image to the repository at `assets/mpesa_qr.png`. The old Buy Me a Coffee QR image has not been relabelled as an M-Pesa QR.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](https://github.com/mruniquehacker/Knightbot-MD/blob/main/LICENSE) file for details.
-
----
+This repository retains the original project's licensing and attribution requirements. See the source project's license terms and preserve all applicable copyright notices when redistributing or modifying the code.
 
 ## 🙌 Contributions
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/mruniquehacker/Knightbot-MD/issues).
-
----
-
-## 🌟 Show your support
-
-If you like this project, please give it a [⭐️ star on GitHub](https://github.com/mruniquehacker/Knightbot)!
-
+Contributions, bug reports, and feature requests are welcome. Please open an issue or submit a pull request in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
 
 ## Credits
 
-- [Professor](https://github.com/mruniquehacker)
-- [Baileys](https://github.com/adiwajshing/Baileys)
-- [TechGod143](https://github.com/TechGod143) for pair code
-- [Dgxeon](https://github.com/Dgxeon) for pair code
+FrankXMD is maintained by [Marvin Frank](https://github.com/otienofrank27).
+
+This project builds on work and contributions from the original authors and open-source projects, including Professor, Baileys, TechGod143, and Dgxeon. Please retain the original copyright and license notices.
+
+## ⚠️ Important warning
+
+This is an unofficial WhatsApp automation project and is not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta. Use it responsibly and in accordance with applicable laws and WhatsApp's terms. Automated activity may result in account restrictions or bans. Do not use the bot for spam, harassment, or unlawful activity.
 
 ---
 
-## ⚠️ Important Warning
-
-**Note:** This bot is created for educational purposes only. This is NOT an official WhatsApp bot. Using this bot may lead to your WhatsApp account being banned. Use it at your own risk. The developers will not be responsible for any consequences or account bans that may occur while using this bot.
-
-## 📝 Legal
-
-- This project is not affiliated with, authorized, maintained, sponsored or endorsed by WhatsApp or any of its affiliates or subsidiaries.
-- This is an independent and unofficial software. Use at your own risk.
-- Do not spam people with this bot.
-- Do not use this bot to send bulk messages or for illegal purposes.
-- The developers assume no liability and are not responsible for any misuse or damage caused by this program.
-
-### License
-This project is licensed under the MIT License. However, you must:
-- Use this software in compliance with all applicable laws and regulations
-- Include original license and copyright notices
-- Credit original authors
-- Not use for spam or malicious purposes
-
-## 📜 Copyright Notice
-
-Copyright (c) 2024 Professor. All rights reserved.
-
-This project contains code from various open source projects:
-- Baileys (MIT License)
-- Other libraries as listed in package.json
+<div align="center">
+  <strong>FrankXMD — Built and maintained by Marvin Frank.</strong>
+</div>
