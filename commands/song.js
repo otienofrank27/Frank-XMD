@@ -93,7 +93,7 @@ async function songCommand(sock, chatId, message) {
       message.message?.conversation ||
       message.message?.extendedTextMessage?.text ||
       '';
-    const text = raw.replace(/^\.(?:play|song|mp3|ytmp3)\s*/i, '').trim();
+    const text = raw.replace(/^\.(?:play|song|music|mp3|ytmp3)\s*/i, '').trim();
 
     if (!text) {
       await sock.sendMessage(chatId, { text: 'Usage: .song <song name or YouTube link>' }, { quoted: message });
