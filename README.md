@@ -30,11 +30,9 @@
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-About FrankXMD
+# About FrankXMD
 
 **FrankXMD** is a WhatsApp Multi-Device bot built with the [Baileys](https://github.com/WhiskeySockets/Baileys) library and Node.js. It brings together practical automation, group administration, media utilities, entertainment, and productivity tools in one WhatsApp-connected assistant.
-
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a> 
 
 The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)** and builds on the work of its upstream authors and open-source contributors.
 
@@ -46,7 +44,7 @@ The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)*
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Requirements
+# Requirements
 
 Before installing, make sure your environment has:
 
@@ -66,16 +64,16 @@ git --version
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Installation
+# Installation
 
-# 1. Clone the repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/otienofrank27/Frank-XMD.git
 cd Frank-XMD
 ```
 
-# 2. Install dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
@@ -87,7 +85,7 @@ If your hosting environment requires legacy peer dependency resolution, the proj
 npm run install:panel
 ```
 
-# 3. Configure environment variables
+### 3. Configure environment variables
 
 Create a local `.env` file from the supplied template:
 
@@ -115,7 +113,7 @@ Leave a value empty if you do not use that integration. Never commit your real `
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Configuration & WhatsApp pairing
+# Configuration & WhatsApp pairing
 
 1. Start FrankXMD using the command below.
 2. Follow the authentication instructions printed in your terminal.
@@ -126,7 +124,7 @@ The pairing-code service referenced by the project is external to this repositor
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Start FrankXMD
+# Start FrankXMD
 
 Start the bot:
 
@@ -136,7 +134,7 @@ npm start
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Other available package scripts:
+# Other available package scripts:
 
 | Command | Purpose |
 |---|---|
@@ -153,7 +151,7 @@ Other available package scripts:
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Deployment
+# Deployment
 
 You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choose a host that supports persistent Node.js processes, outbound network access, and storage for the WhatsApp session.
 
@@ -173,7 +171,7 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-General hosting steps
+# General hosting steps
 
 1. Create a Node.js application or upload/clone the repository on your host.
 2. Select **Node.js 18 or later**.
@@ -187,7 +185,7 @@ For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://yout
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Security & session safety
+# Security & session safety
 
 Your WhatsApp session is sensitive. Treat it like a password.
 
@@ -203,7 +201,7 @@ Anyone who obtains valid WhatsApp session credentials may be able to access and 
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Support and contact
+# Support and contact
 
 <div align="center">
 
@@ -220,7 +218,7 @@ For bugs, questions, or feature requests, open an issue in the [FrankXMD reposit
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Support the project
+# Support the project
 
 If FrankXMD is useful to you and you would like to support its continued development, you can contribute through **Pochi La Biashara**:
 
@@ -231,7 +229,7 @@ If FrankXMD is useful to you and you would like to support its continued develop
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Contributing
+# Contributing
 
 Contributions, bug reports, and feature requests are welcome.
 
@@ -244,7 +242,7 @@ Please preserve existing attribution and licensing notices.
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Credits
+# Credits
 
 FrankXMD is maintained by **[Marvin Frank](https://github.com/otienofrank27)**.
 
@@ -252,7 +250,7 @@ This project builds on work and contributions from the original authors and open
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-Disclaimer
+# Disclaimer
 
 FrankXMD is an unofficial WhatsApp automation project. It is **not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta**.
 
@@ -267,5 +265,3 @@ Use this software responsibly and in accordance with applicable laws and WhatsAp
   <a href="https://github.com/otienofrank27/Frank-XMD">Explore the repository</a>
 
 </div>
-
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
