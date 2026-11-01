@@ -6,7 +6,7 @@ const settings = {
   botName: "FrankXMD",
   botOwner: 'Marvin Frank',
   ownerNumber: '254748642275',
-  giphyApiKey: 'qnl7ssQChTdPjsKta2Ax2LMaGXz303tq',
+  giphyApiKey: process.env.GIPHY_API_KEY || '',
   commandMode: "public",
   maxStoreMessages: 20,
   storeWriteInterval: 10000,
