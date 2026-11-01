@@ -2,7 +2,12 @@ const axios = require('axios');
 const settings = require('../settings'); // Assuming the API key is stored here
 
 async function gifCommand(sock, chatId, query) {
-    const apiKey = settings.giphyApiKey; // Replace with your Giphy API Key
+    const apiKey = process.env.GIPHY_API_KEY || settings.giphyApiKey;
+
+    if (!apiKey) {
+        await sock.sendMessage(chatId, { text: 'GIF search is not configured. Set GIPHY_API_KEY in your hosting environment.' });
+        return;
+    }
 
     if (!query) {
         await sock.sendMessage(chatId, { text: 'Please provide a search term for the GIF.' });
