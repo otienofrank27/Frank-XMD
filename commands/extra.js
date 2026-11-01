@@ -149,6 +149,28 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       else return reply('Those units cannot be converted by this command.');
       return reply(`📐 ${n} ${from} = ${Number(result.toFixed(6))} ${to}`);
     }
+
+    case 'membercount': case 'groupcount': {
+      if (!isGroup) return reply('This command only works in groups.');
+      const meta = await sock.groupMetadata(chatId);
+      const members = meta.participants || [];
+      const admins = members.filter(p => p.admin === 'admin' || p.admin === 'superadmin').length;
+      return reply(`👥 *Group member count*\\nGroup: ${meta.subject || 'Group'}\\nTotal members: ${members.length}\\nAdmins: ${admins}\\nRegular members: ${members.length - admins}`);
+    }
+    case 'members': case 'groupmembers': {
+      if (!isGroup) return reply('This command only works in groups.');
+      const meta = await sock.groupMetadata(chatId);
+      const members = meta.participants || [];
+      if (!members.length) return reply('No group members were found.');
+      const lines = members.slice(0, 80).map((p, i) => {
+        const jid = p.id || p.phoneNumber || p.lid || '';
+        const role = p.admin === 'superadmin' ? ' (owner)' : p.admin === 'admin' ? ' (admin)' : '';
+        return `${i + 1}. @${jid.split('@')[0].split(':')[0]}${role}`;
+      }).filter(Boolean);
+      const extra = members.length > 80 ? `\\n\\nShowing 80 of ${members.length} members.` : '';
+      return sock.sendMessage(chatId, { text: `👥 *${meta.subject || 'Group'} — Members*\\n\\n${lines.join('\\n')}${extra}`, mentions: members.slice(0, 80).map(p => p.id || p.phoneNumber).filter(Boolean) }, { quoted: message });
+    }
+
     case 'support': return reply('For support, contact the bot owner or open an issue: https://github.com/otienofrank27/Frank-XMD/issues');
     case 'feedback': case 'report': {
       if (!args) return reply(`Usage: .${command} <message>`);
