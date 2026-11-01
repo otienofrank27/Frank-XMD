@@ -1008,7 +1008,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case userMessage.startsWith('.imagine') || userMessage.startsWith('.flux') || userMessage.startsWith('.dalle'): await imagineCommand(sock, chatId, message);
                 break;
-            case /^\.(calc|calculate|qr|qrcode|b64e|base64encode|b64d|base64decode|reverse|upper|lower|poll|pollhelp|grouplink|link|getpp|profilepic|runtime|uptime)(?:\s|$)/.test(userMessage): {
+            case /^\.(calc|calculate|qr|qrcode|b64e|base64encode|b64d|base64decode|reverse|upper|lower|poll|pollhelp|grouplink|link|getpp|profilepic|runtime|uptime|info|botinfo|about|version|script|repo|status|speed|time|date|define|dictionary|wikipedia|google|search|currency|country|ip|unit|support|feedback|report)(?:\s|$)/.test(userMessage): {
                 const [extraName] = userMessage.slice(1).split(/\s+/);
                 const rawParts = rawText.trim().slice(1).split(/\s+/);
                 await extraCommand(sock, chatId, message, extraName, rawParts.slice(1).join(' '), isGroup);
