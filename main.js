@@ -566,7 +566,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 const replyMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage || null;
                 await tagCommand(sock, chatId, senderId, messageText, replyMessage, message);
                 break;
-            case userMessage.startsWith('.antibot') || userMessage.startsWith('.nobot'):
+            case userMessage.startsWith('.antibot') || userMessage.startsWith('.nobot') || userMessage.startsWith('.nebot'): 
                 await antibotCommand(sock, chatId, message, senderId);
                 break;
             case userMessage.startsWith('.antilink'):
@@ -634,11 +634,13 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await tictactoeCommand(sock, chatId, senderId, tttText);
                 break;
             case userMessage.startsWith('.move'):
-                const position = parseInt(userMessage.split(' ')[1]);
-                if (isNaN(position)) {
-                    await sock.sendMessage(chatId, { text: 'Please provide a valid position number for Tic-Tac-Toe move.', ...channelInfo }, { quoted: message });
-                } else {
-                    tictactoeMove(sock, chatId, senderId, position);
+                {
+                    const position = userMessage.split(/\s+/)[1];
+                    if (!/^[1-9]$/.test(position || '')) {
+                        await sock.sendMessage(chatId, { text: 'Please provide a position from 1 to 9. Example: .move 5', ...channelInfo }, { quoted: message });
+                    } else {
+                        await handleTicTacToeMove(sock, chatId, senderId, position);
+                    }
                 }
                 break;
             case userMessage === '.topmembers':
@@ -856,7 +858,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.emojimix') || userMessage.startsWith('.emix'):
                 await emojimixCommand(sock, chatId, message);
                 break;
-            case userMessage.startsWith('.tg') || userMessage.startsWith('.stickertelegram') || userMessage.startsWith('.tgsticker') || userMessage.startsWith('.telesticker'):
+            case userMessage.startsWith('.tg') || userMessage.startsWith('.stickertelegram') || userMessage.startsWith('.stickeertegram') || userMessage.startsWith('.tgsticker') || userMessage.startsWith('.telesticker'):
                 await stickerTelegramCommand(sock, chatId, message);
                 break;
 
@@ -993,10 +995,10 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.spotify'):
                 await spotifyCommand(sock, chatId, message);
                 break;
-            case userMessage.startsWith('.play') || userMessage.startsWith('.mp3') || userMessage.startsWith('.ytmp3') || userMessage.startsWith('.song'):
+            case userMessage.startsWith('.play') || userMessage.startsWith('.mp3') || userMessage.startsWith('.ytmp3') || userMessage.startsWith('.ymp3') || userMessage.startsWith('.song'):
                 await songCommand(sock, chatId, message);
                 break;
-            case userMessage.startsWith('.video') || userMessage.startsWith('.ytmp4') || userMessage.startsWith('.ytv') || userMessage.startsWith('.ytvid'):
+            case userMessage.startsWith('.video') || userMessage.startsWith('.ytmp4') || userMessage.startsWith('.ymp4') || userMessage.startsWith('.ytv') || userMessage.startsWith('.ytvid'):
                 await videoCommand(sock, chatId, message);
                 break;
             case userMessage.startsWith('.tiktok') || userMessage.startsWith('.tt'):
@@ -1074,7 +1076,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                     await miscCommand(sock, chatId, message, args);
                 }
                 break;
-            case userMessage.startsWith('.lolice'):
+            case userMessage.startsWith('.lolice') || userMessage.startsWith('.police'):
                 {
                     const parts = userMessage.trim().split(/\s+/);
                     const args = ['lolice', ...parts.slice(1)];
