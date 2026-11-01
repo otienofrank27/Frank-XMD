@@ -158,21 +158,8 @@ const { extraCommand } = require('./commands/extra');
 // Global settings
 global.packname = settings.packname;
 global.author = settings.author;
-global.channelLink = "https://whatsapp.com/channel/0029Va90zAnIHphOuO8Msp3A";
-global.ytch = "Mr Unique Hacker";
+global.ytch = "FrankM-12";
 
-// Add this near the top of main.js with other global configurations
-const channelInfo = {
-    contextInfo: {
-        forwardingScore: 1,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363161513685998@newsletter',
-            newsletterName: 'FrankXMD',
-            serverMessageId: -1
-        }
-    }
-};
 
 async function handleMessages(sock, messageUpdate, printLog) {
     try {
