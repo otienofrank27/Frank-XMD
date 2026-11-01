@@ -4,13 +4,13 @@ const settings = {
   packname: 'FrankXMD',
   author: '‎',
   botName: "FrankXMD",
-  botOwner: 'Professor', // Your name
-  ownerNumber: '254748642275', //Set your number here without + symbol, just add country code & number without any space
+  botOwner: 'Marvin Frank',
+  ownerNumber: '254748642275',
   giphyApiKey: 'qnl7ssQChTdPjsKta2Ax2LMaGXz303tq',
   commandMode: "public",
-  maxStoreMessages: 20, 
+  maxStoreMessages: 20,
   storeWriteInterval: 10000,
-  description: "This is a bot for managing group commands and automating tasks.",
+  description: "FrankXMD WhatsApp multi-device bot maintained by Marvin Frank.",
   version: "3.0.8",
   // Set UPDATE_ZIP_URL to your own FrankXMD repository ZIP before using .update.
   updateZipUrl: process.env.UPDATE_ZIP_URL || "",
