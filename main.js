@@ -161,6 +161,9 @@ global.author = settings.author;
 global.ytch = "FrankM-12";
 global.channelLink = "https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D";
 
+// In-memory per-user command cooldown tracking.
+const commandCooldowns = new Map();
+
 
 async function handleMessages(sock, messageUpdate, printLog) {
     try {
@@ -319,6 +322,28 @@ async function handleMessages(sock, messageUpdate, printLog) {
         // In private mode, only owner/sudo can run commands
         if (!isPublic && !isOwnerOrSudoCheck) {
             return;
+        }
+
+        // Per-sender command cooldown to reduce spam and protect WhatsApp sessions.
+        const cooldownMs = Math.max(0, Number(settings.commandCooldownMs) || 0);
+        if (cooldownMs > 0) {
+            const now = Date.now();
+            const cooldownKey = senderId;
+            const previousCommandAt = commandCooldowns.get(cooldownKey) || 0;
+            const remainingMs = cooldownMs - (now - previousCommandAt);
+            if (remainingMs > 0) {
+                const remainingSeconds = Math.ceil(remainingMs / 1000);
+                await sock.sendMessage(chatId, {
+                    text: `Please wait ${remainingSeconds} second(s) before using another command.`
+                }, { quoted: message });
+                return;
+            }
+            commandCooldowns.set(cooldownKey, now);
+            if (commandCooldowns.size > 5000) {
+                for (const [key, timestamp] of commandCooldowns) {
+                    if (now - timestamp > cooldownMs * 10) commandCooldowns.delete(key);
+                }
+            }
         }
 
         // List of admin commands
