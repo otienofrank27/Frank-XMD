@@ -36,41 +36,9 @@ The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)*
   </a>
 </div>
 
-## Contents
-
-- [Features](#-features)
-- [Requirements](#-requirements)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Start FrankXMD](#-start-frankxmd)
-- [Deployment](#-deployment)
-- [Security](#-security--session-safety)
-- [Support and Contact](#-support-and-contact)
-- [Support the Project](#-support-the-project)
-- [Contributing](#-contributing)
-- [Credits](#-credits)
-- [Disclaimer](#-disclaimer)
-
 ---
 
-## ✨ Features
-
-FrankXMD brings multiple WhatsApp tools together. Feature availability can depend on permissions, external services, and API configuration.
-
-| Category | What it offers |
-|---|---|
-| **Group administration** | Group information, member tools, tagging, and moderation |
-| **Group protection** | Anti-link and other configurable group protections |
-| **AI assistance** | AI-powered chat and assistant commands through the configured backend |
-| **Media tools** | Supported audio/video downloads, stickers, GIFs, and image utilities |
-| **Automation** | Automated responses and status-related tools |
-| **Entertainment** | Games, jokes, and interactive commands |
-| **Utilities** | Translation, text-to-speech, search, and helper commands |
-| **WhatsApp tools** | Additional tools for everyday WhatsApp use |
-
-> **Tip:** Use the bot's menu/help command in WhatsApp to view the commands available in your current build.
-
-## ⚙️ Requirements
+## Requirements
 
 Before installing, make sure your environment has:
 
@@ -88,7 +56,7 @@ npm --version
 git --version
 ```
 
-## 🚀 Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -135,7 +103,7 @@ GIPHY_API_KEY=
 
 Leave a value empty if you do not use that integration. Never commit your real `.env` file or publish API credentials.
 
-## 🔐 Configuration & WhatsApp pairing
+## Configuration & WhatsApp pairing
 
 1. Start FrankXMD using the command below.
 2. Follow the authentication instructions printed in your terminal.
@@ -144,7 +112,7 @@ Leave a value empty if you do not use that integration. Never commit your real `
 
 The pairing-code service referenced by the project is external to this repository. If you operate your own pairing service, configure the project to use your own trusted endpoint.
 
-## ▶️ Start FrankXMD
+## Start FrankXMD
 
 Start the bot:
 
@@ -167,7 +135,7 @@ Other available package scripts:
 
 **Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
 
-## ☁️ Deployment
+## Deployment
 
 You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choose a host that supports persistent Node.js processes, outbound network access, and storage for the WhatsApp session.
 
@@ -197,7 +165,7 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://youtu.be/-oz_u1iMgf8).
 
-## 🛡️ Security & session safety
+## Security & session safety
 
 Your WhatsApp session is sensitive. Treat it like a password.
 
@@ -211,7 +179,7 @@ Your WhatsApp session is sensitive. Treat it like a password.
 
 Anyone who obtains valid WhatsApp session credentials may be able to access and control the linked account.
 
-## 💬 Support and contact
+## Support and contact
 
 <div align="center">
 
@@ -226,7 +194,7 @@ Anyone who obtains valid WhatsApp session credentials may be able to access and 
 
 For bugs, questions, or feature requests, open an issue in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
 
-## 💚 Support the project
+## Support the project
 
 If FrankXMD is useful to you and you would like to support its continued development, you can contribute through **Pochi La Biashara**:
 
@@ -237,7 +205,7 @@ If FrankXMD is useful to you and you would like to support its continued develop
 
 To display a scan-to-pay image, add your official Pochi La Biashara QR image to the repository at `assets/mpesa_qr.png`. The previous Buy Me a Coffee QR image has not been relabelled as an M-Pesa QR.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, bug reports, and feature requests are welcome.
 
@@ -248,13 +216,13 @@ Contributions, bug reports, and feature requests are welcome.
 
 Please preserve existing attribution and licensing notices.
 
-## 🙌 Credits
+## Credits
 
 FrankXMD is maintained by **[Marvin Frank](https://github.com/otienofrank27)**.
 
 This project builds on work and contributions from the original authors and open-source projects, including **Professor, Baileys, TechGod143, and Dgxeon**. All applicable original copyright notices and license requirements must be retained.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 FrankXMD is an unofficial WhatsApp automation project. It is **not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta**.
 
