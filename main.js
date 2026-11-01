@@ -164,6 +164,78 @@ global.channelLink = "https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D";
 // In-memory per-user command cooldown tracking.
 const commandCooldowns = new Map();
 
+const alwaysOnlineStatePath = path.join(__dirname, 'data', 'alwaysonline.json');
+let alwaysOnlineTimer = null;
+let alwaysOnlineSocket = null;
+
+function readAlwaysOnlineState() {
+    try {
+        return JSON.parse(fs.readFileSync(alwaysOnlineStatePath, 'utf8')).enabled === true;
+    } catch {
+        return false;
+    }
+}
+
+function writeAlwaysOnlineState(enabled) {
+    const dataDir = path.dirname(alwaysOnlineStatePath);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    fs.writeFileSync(alwaysOnlineStatePath, JSON.stringify({ enabled, updatedAt: new Date().toISOString() }, null, 2));
+}
+
+function stopAlwaysOnline(sock = alwaysOnlineSocket) {
+    if (alwaysOnlineTimer) clearInterval(alwaysOnlineTimer);
+    alwaysOnlineTimer = null;
+    if (sock && typeof sock.sendPresenceUpdate === 'function') {
+        sock.sendPresenceUpdate('unavailable').catch(() => {});
+    }
+}
+
+function startAlwaysOnline(sock) {
+    if (!sock || typeof sock.sendPresenceUpdate !== 'function') return;
+    if (alwaysOnlineTimer) clearInterval(alwaysOnlineTimer);
+    alwaysOnlineSocket = sock;
+    const updatePresence = () => sock.sendPresenceUpdate('available').catch(err => {
+        console.error('[alwaysonline] Presence update failed:', err?.message || err);
+    });
+    updatePresence();
+    alwaysOnlineTimer = setInterval(updatePresence, 25000);
+    if (typeof alwaysOnlineTimer.unref === 'function') alwaysOnlineTimer.unref();
+}
+
+async function alwaysOnlineCommand(sock, chatId, message, userMessage) {
+    const action = userMessage.trim().split(/\\s+/)[1]?.toLowerCase();
+    const enabled = readAlwaysOnlineState();
+
+    if (action === 'on' || action === 'enable' || action === 'start') {
+        writeAlwaysOnlineState(true);
+        startAlwaysOnline(sock);
+        await sock.sendMessage(chatId, { text: '🟢 Always Online is now enabled. The bot will keep sending online presence updates while connected.' }, { quoted: message });
+        return;
+    }
+
+    if (action === 'off' || action === 'disable' || action === 'stop') {
+        writeAlwaysOnlineState(false);
+        stopAlwaysOnline(sock);
+        await sock.sendMessage(chatId, { text: '⚪ Always Online is now disabled.' }, { quoted: message });
+        return;
+    }
+
+    if (action === 'status') {
+        await sock.sendMessage(chatId, { text: `Always Online: ${enabled ? '🟢 ON' : '⚪ OFF'}\\nUse .alwaysonline on or .alwaysonline off.` }, { quoted: message });
+        return;
+    }
+
+    writeAlwaysOnlineState(!enabled);
+    if (!enabled) startAlwaysOnline(sock);
+    else stopAlwaysOnline(sock);
+    await sock.sendMessage(chatId, { text: `Always Online ${!enabled ? '🟢 enabled' : '⚪ disabled'}.` }, { quoted: message });
+}
+
+function resumeAlwaysOnline(sock) {
+    if (readAlwaysOnlineState()) startAlwaysOnline(sock);
+}
+
+
 
 async function handleMessages(sock, messageUpdate, printLog) {
     try {
@@ -351,7 +423,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
         const isAdminCommand = adminCommands.some(cmd => userMessage.startsWith(cmd));
 
         // List of owner commands
-        const ownerCommands = ['.automation', '.autolist', '.autoreply', '.autoreact', '.schedule', '.mode', '.autostatus', '.statusview', '.viewstatus', '.savestatus', '.savesm', '.savest', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.autotyping', '.autoread', '.pmblocker'];
+        const ownerCommands = ['.automation', '.autolist', '.autoreply', '.autoreact', '.schedule', '.mode', '.autostatus', '.statusview', '.viewstatus', '.savestatus', '.savesm', '.savest', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.autotyping', '.autoread', '.pmblocker', '.alwaysonline'];
         const isOwnerCommand = ownerCommands.some(cmd => userMessage.startsWith(cmd));
 
         let isSenderAdmin = false;
@@ -1044,6 +1116,10 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await automationCommand(sock, chatId, message, rawText);
                 commandExecuted = true;
                 break;
+            case userMessage.startsWith('.alwaysonline'):
+                await alwaysOnlineCommand(sock, chatId, message, userMessage);
+                commandExecuted = true;
+                break;
             case userMessage.startsWith('.autotyping'):
                 await autotypingCommand(sock, chatId, message);
                 commandExecuted = true;
@@ -1333,6 +1409,7 @@ async function handleGroupParticipantUpdate(sock, update) {
 module.exports = {
     handleMessages,
     handleGroupParticipantUpdate,
+    resumeAlwaysOnline,
     handleStatus: async (sock, status) => {
         await handleStatusUpdate(sock, status);
         try {
