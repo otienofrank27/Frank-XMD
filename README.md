@@ -123,7 +123,7 @@ To show a scan-to-pay image here, add your official Pochi La Biashara QR image t
 
 ---
 
-## 📄 License
+## License
 
 This repository retains the original project's licensing and attribution requirements. See the source project's license terms and preserve all applicable copyright notices when redistributing or modifying the code.
 
