@@ -35,8 +35,12 @@ async function stickerTelegramCommand(sock, chatId, msg) {
         // Get pack name from URL
         const packName = args[0].replace("https://t.me/addstickers/", "");
 
-        // Using working bot token
-        const botToken = '7801479976:AAGuPL0a7kXXBYz6XUSR_ll2SR5V_W6oHl4';
+        // Configure TELEGRAM_BOT_TOKEN in the environment; never commit bot credentials.
+        const botToken = process.env.TELEGRAM_BOT_TOKEN;
+        if (!botToken) {
+            await sock.sendMessage(chatId, { text: '❌ Telegram sticker import is not configured. Set TELEGRAM_BOT_TOKEN in the deployment environment.' });
+            return;
+        }
         
         try {
             // Fetch sticker pack info
