@@ -8,6 +8,8 @@ const settings = {
   ownerNumber: '254748642275',
   giphyApiKey: process.env.GIPHY_API_KEY || '',
   commandMode: "public",
+  // Minimum delay between commands from the same WhatsApp user.
+  commandCooldownMs: 2000,
   maxStoreMessages: 20,
   storeWriteInterval: 10000,
   description: "FrankXMD WhatsApp multi-device bot maintained by Marvin Frank.",
