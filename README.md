@@ -1,4 +1,4 @@
-# 🤖 FrankXMD
+# FrankXMD
 
 FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provides group administration, automation, media tools, games, stickers, and other utilities.
 
@@ -9,7 +9,7 @@ FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provi
 </div>
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/otienofrank27/Frank-XMD/main/assets/bot_image.jpg" alt="FrankXMD" height="300">
+  <img src="assets/frankxmd-banner.png" alt="FrankXMD Official Banner" width="100%">
 </div>
 
 <div align="center">
@@ -19,16 +19,9 @@ FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provi
   <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Contact-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/></a>
 </div>
 
-<div align="center">
-  <img src="https://img.shields.io/github/followers/otienofrank27?style=for-the-badge&label=Followers" alt="GitHub followers"/>
-  <img src="https://img.shields.io/github/stars/otienofrank27/Frank-XMD?style=for-the-badge&label=Stars" alt="GitHub stars"/>
-  <img src="https://img.shields.io/github/forks/otienofrank27/Frank-XMD?style=for-the-badge&label=Forks" alt="GitHub forks"/>
-  <img src="https://img.shields.io/github/watchers/otienofrank27/Frank-XMD?style=for-the-badge&label=Watchers" alt="GitHub watchers"/>
-</div>
-
 ---
 
-## 🚀 Deploy FrankXMD
+## Deploy FrankXMD
 
 ### Step 1: Fork the repository
 
@@ -64,7 +57,7 @@ For a deployment walkthrough, see the existing [YouTube tutorial](https://youtu.
 
 ---
 
-## ⚙️ Features
+## Features
 
 - **Group administration:** group information, tagging, moderation, and member management.
 - **Group protection:** anti-link and other moderation tools.
@@ -75,7 +68,7 @@ For a deployment walkthrough, see the existing [YouTube tutorial](https://youtu.
 
 Command availability depends on the configured APIs and permissions. Use the bot's help/menu command to view the commands available in your build.
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 ### Requirements
 
@@ -108,7 +101,7 @@ Command availability depends on the configured APIs and permissions. Use the bot
 
 Do not share QR codes, pairing codes, `creds.json`, or session folders. Anyone with access to valid session credentials may be able to control the linked WhatsApp account.
 
-## 🤝 Connect with the developer
+## Connect with the developer
 
 <div align="center">
   <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github" alt="GitHub"/></a>
@@ -117,7 +110,7 @@ Do not share QR codes, pairing codes, `creds.json`, or session folders. Anyone w
   <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Message-25D366?style=for-the-badge&logo=whatsapp" alt="WhatsApp"/></a>
 </div>
 
-## 💚 Support FrankXMD via M-Pesa
+## Support FrankXMD via M-Pesa
 
 If you would like to support development, you can send support through **Pochi La Biashara**:
 
@@ -134,7 +127,7 @@ To show a scan-to-pay image here, add your official Pochi La Biashara QR image t
 
 This repository retains the original project's licensing and attribution requirements. See the source project's license terms and preserve all applicable copyright notices when redistributing or modifying the code.
 
-## 🙌 Contributions
+## Contributions
 
 Contributions, bug reports, and feature requests are welcome. Please open an issue or submit a pull request in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
 
@@ -144,7 +137,7 @@ FrankXMD is maintained by [Marvin Frank](https://github.com/otienofrank27).
 
 This project builds on work and contributions from the original authors and open-source projects, including Professor, Baileys, TechGod143, and Dgxeon. Please retain the original copyright and license notices.
 
-## ⚠️ Important warning
+## Important warning
 
 This is an unofficial WhatsApp automation project and is not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta. Use it responsibly and in accordance with applicable laws and WhatsApp's terms. Automated activity may result in account restrictions or bans. Do not use the bot for spam, harassment, or unlawful activity.
 
