@@ -49,6 +49,8 @@ const { demoteCommand } = require('./commands/demote');
 const muteCommand = require('./commands/mute');
 const unmuteCommand = require('./commands/unmute');
 const stickerCommand = require('./commands/sticker');
+const pairCommand = require('./commands/pair');
+const gifCommand = require('./commands/gif');
 const isAdmin = require('./lib/isAdmin');
 const warnCommand = require('./commands/warn');
 const warningsCommand = require('./commands/warnings');
@@ -526,6 +528,10 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 }
                 commandExecuted = true;
                 break;
+            case userMessage.startsWith('.pair'):
+                await pairCommand(sock, chatId, message, rawText.trim().split(/\\s+/).slice(1).join(' '));
+                commandExecuted = true;
+                break;
             case userMessage === '.owner':
                 await ownerCommand(sock, chatId);
                 break;
@@ -583,6 +589,9 @@ async function handleMessages(sock, messageUpdate, printLog) {
                     return;
                 }
                 await handleAntitagCommand(sock, chatId, userMessage, senderId, isSenderAdmin, message);
+                break;
+            case userMessage.startsWith('.gif'):
+                await gifCommand(sock, chatId, rawText.trim().split(/\\s+/).slice(1).join(' '));
                 break;
             case userMessage === '.meme':
                 await memeCommand(sock, chatId, message);
