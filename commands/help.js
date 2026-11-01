@@ -161,7 +161,8 @@ async function helpCommand(sock, chatId, message) {
     const helpMessage = lines.join('\n');
 
     try {
-        const imagePath = path.join(__dirname, '../assets/bot_image.jpg');
+        // Use the same banner displayed at the top of the GitHub README.
+        const imagePath = path.join(__dirname, '../assets/frankxmd-banner.png.png');
         const contextInfo = {
             forwardingScore: 1,
             isForwarded: true,
@@ -173,17 +174,29 @@ async function helpCommand(sock, chatId, message) {
         };
 
         if (fs.existsSync(imagePath)) {
+            // Send the branded image separately so the full command menu is not
+            // truncated by WhatsApp's image-caption length limit.
             await sock.sendMessage(chatId, {
                 image: fs.readFileSync(imagePath),
-                caption: helpMessage,
+                caption: '✨ *' + botName.toUpperCase() + '*\\n_WhatsApp Multi-Device Assistant_',
+                contextInfo
+            }, { quoted: message });
+
+            await sock.sendMessage(chatId, {
+                text: helpMessage,
                 contextInfo
             }, { quoted: message });
         } else {
-            await sock.sendMessage(chatId, { text: helpMessage, contextInfo }, { quoted: message });
+            console.error('FrankXMD menu banner not found:', imagePath);
+            await sock.sendMessage(chatId, {
+                text: helpMessage
+            }, { quoted: message });
         }
     } catch (error) {
         console.error('Error in help command:', error);
-        await sock.sendMessage(chatId, { text: helpMessage }, { quoted: message });
+        await sock.sendMessage(chatId, {
+            text: helpMessage
+        }, { quoted: message });
     }
 }
 
