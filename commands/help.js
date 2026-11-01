@@ -5,7 +5,7 @@ const sharp = require('sharp');
 
 async function helpCommand(sock, chatId, message) {
     const botName = settings.botName || 'FRANKXMD';
-    const version = settings.version || '3.0.8';
+    const version = settings.version || '3.0.9';
     const owner = settings.botOwner || 'Marvin Frank';
     const mode = (settings.commandMode || 'public').toUpperCase();
     const prefix = '.';
