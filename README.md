@@ -18,7 +18,7 @@
   <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js 18 or later"></a>
   <a href="https://github.com/WhiskeySockets/Baileys"><img src="https://img.shields.io/badge/WhatsApp-Baileys-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
   <a href="https://github.com/otienofrank27/Frank-XMD/commits/main"><img src="https://img.shields.io/github/last-commit/otienofrank27/Frank-XMD?style=for-the-badge" alt="Last commit"></a>
-  <br><br>
+  <br>
   <a href="https://github.com/otienofrank27/Frank-XMD/fork"><img src="https://img.shields.io/badge/FORK%20PROJECT-Create%20your%20copy-2F80ED?style=for-the-badge&logo=github" alt="Fork FrankXMD"></a>
   <a href="https://youtu.be/-oz_u1iMgf8"><img src="https://img.shields.io/badge/SETUP%20GUIDE-Watch%20tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Setup tutorial"></a>
 
