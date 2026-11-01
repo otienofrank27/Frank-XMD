@@ -9,16 +9,15 @@ async function helpCommand(sock, chatId, message) {
     const prefix = '.';
 
     const sections = [
-        { title: 'GENERAL', commands: ['help/menu', 'ping', 'alive', 'owner', 'botinfo/info', 'speed', 'time', 'date', 'joke', 'quote', 'fact', 'weather', 'news', 'tts', 'attp', 'lyrics', '8ball', 'groupinfo', 'members', 'membercount', 'staff', 'jid', 'url'] },
-        { title: 'AI', commands: ['ai', 'gpt', 'gemini', 'ask', 'deepseek', 'claude', 'aiexplain', 'aicode', 'aiprompt', 'imagine', 'sora'] },
-        { title: 'GROUP ADMIN', commands: ['ban', 'kick', 'promote', 'demote', 'mute', 'unmute', 'delete/del', 'warn', 'warnings', 'tag', 'tagall', 'tagnotadmin', 'hidetag', 'clear', 'resetlink', 'groupstatus', 'setgname', 'setgdesc', 'setgpp'] },
-        { title: 'GROUP SECURITY', commands: ['antilink', 'antibadword', 'antibot', 'antitag', 'welcome', 'goodbye', 'chatbot'] },
-        { title: 'DOWNLOADS', commands: ['play', 'song', 'music', 'video', 'ytv', 'spotify', 'tiktok', 'instagram', 'facebook', 'twitter', 'ss', 'tourl'] },
-        { title: 'STICKERS & IMAGES', commands: ['sticker', 'simage', 'take', 'emojimix', 'removebg', 'remini', 'blur', 'crop', 'tgsticker', 'gif', 'meme'] },
-        { title: 'FUN & GAMES', commands: ['truth', 'dare', 'trivia', 'answer', 'hangman', 'guess', 'tictactoe', 'compliment', 'insult', 'flirt', 'ship', 'simp', 'character', 'wasted', 'goodnight', 'roseday', 'shayari'] },
-        { title: 'CREATIVE TEXT', commands: ['metallic', 'ice', 'snow', 'neon', 'matrix', 'fire', 'glitch', 'hacker', 'thunder', 'purple', 'blackpink', 'impressive'] },
-        { title: 'UTILITIES', commands: ['vv/viewonce', 'vv2', 'trt', 'translate', 'github', 'repo/script', 'country', 'currency', 'define', 'wikipedia', 'google', 'unit', 'ip'] },
-        { title: 'OWNER SETTINGS', commands: ['mode', 'settings', 'update', 'clearsession', 'cleartmp', 'antidelete', 'autoread', 'autoreact', 'autotyping', 'autostatus', 'savestatus', 'anticall', 'pmblocker', 'setpp', 'sudo', 'mention'] }
+        { title: 'GENERAL & BOT', commands: ['help', 'menu', 'bot', 'list', 'ping', 'alive', 'owner', 'info', 'botinfo', 'about', 'version', 'status', 'speed', 'runtime', 'uptime', 'time', 'date', 'jid', 'github', 'git', 'sc', 'script', 'repo', 'support', 'feedback', 'report'] },
+        { title: 'AI & IMAGE GENERATION', commands: ['ai', 'gpt', 'gemini', 'ask', 'aichat', 'chatgpt', 'deepseek', 'claude', 'aiexplain', 'aicode', 'aiprompt', 'aifast', 'imagine', 'flux', 'dalle', 'sora'] },
+        { title: 'GROUP MANAGEMENT', commands: ['groupinfo', 'infogp', 'infogrupo', 'staff', 'admins', 'listadmin', 'members', 'groupmembers', 'membercount', 'groupcount', 'topmembers', 'kick', 'ban', 'unban', 'promote', 'demote', 'mute', 'unmute', 'warn', 'warnings', 'clear', 'delete', 'del', 'tag', 'tagall', 'tagnotadmin', 'hidetag', 'resetlink', 'revoke', 'setgname', 'setgdesc', 'setgpp', 'groupstatus', 'togstatus', 'swgc', 'gstatus', 'gs'] },
+        { title: 'GROUP SECURITY & AUTOMATION', commands: ['antilink', 'antitag', 'antibot', 'nobot', 'antibadword', 'welcome', 'goodbye', 'chatbot', 'mention', 'setmention', 'automation', 'autolist', 'autoreply', 'schedule'] },
+        { title: 'DOWNLOADS & MEDIA', commands: ['play', 'mp3', 'ytmp3', 'song', 'music', 'video', 'ytmp4', 'ytv', 'ytvid', 'spotify', 'tiktok', 'tt', 'instagram', 'insta', 'ig', 'igs', 'igsc', 'facebook', 'fb', 'twitter', 'x', 'xdl', 'twdl', 'ss', 'ssweb', 'screenshot', 'tourl', 'url'] },
+        { title: 'STICKERS, IMAGES & EFFECTS', commands: ['sticker', 's', 'simage', 'take', 'steal', 'attp', 'emojimix', 'emix', 'tg', 'tgsticker', 'stickertelegram', 'telesticker', 'gif', 'meme', 'blur', 'metallic', 'ice', 'snow', 'impressive', 'matrix', 'light', 'neon', 'devil', 'purple', 'thunder', 'leaves', '1917', 'arena', 'hacker', 'sand', 'blackpink', 'glitch', 'fire', 'removebg', 'remini', 'crop'] },
+        { title: 'FUN, ANIME & GAMES', commands: ['joke', 'quote', 'fact', 'weather', 'news', 'lyrics', '8ball', 'truth', 'dare', 'trivia', 'answer', 'hangman', 'guess', 'ttt', 'tictactoe', 'move', 'surrender', 'compliment', 'insult', 'flirt', 'ship', 'simp', 'stupid', 'itssostupid', 'iss', 'character', 'waste', 'goodnight', 'lovenight', 'gn', 'shayari', 'shayri', 'roseday', 'animu', 'nom', 'poke', 'cry', 'kiss', 'pat', 'hug', 'wink', 'facepalm', 'face-palm', 'animuquote', 'loli', 'heart', 'horny', 'circle', 'lgbt', 'lolice', 'simpcard', 'tonikawa', 'its-so-stupid', 'namecard', 'oogway', 'oogway2', 'tweet', 'ytcomment', 'comrade', 'gay', 'glass', 'jail', 'passed', 'triggered'] },
+        { title: 'UTILITIES', commands: ['tts', 'translate', 'trt', 'calc', 'calculate', 'qr', 'qrcode', 'b64e', 'base64encode', 'b64d', 'base64decode', 'reverse', 'upper', 'lower', 'poll', 'pollhelp', 'grouplink', 'link', 'getpp', 'profilepic', 'define', 'dictionary', 'wikipedia', 'google', 'search', 'currency', 'country', 'ip', 'unit', 'vv', 'sendvo', 'vv2'] },
+        { title: 'OWNER & BOT SETTINGS', commands: ['mode', 'settings', 'update', 'clearsession', 'clearsesi', 'cleartmp', 'antidelete', 'autoread', 'autoreact', 'autoreaction', 'areact', 'autotyping', 'autostatus', 'statusview', 'viewstatus', 'savestatus', 'savesm', 'savest', 'anticall', 'pmblocker', 'setpp', 'sudo', 'pair'] }
     ];
 
     const fullMenu = [
@@ -43,36 +42,24 @@ async function helpCommand(sock, chatId, message) {
 
     fullMenu.push('Use .help to reopen this menu.', 'Reply to media when a command requests it.');
 
-    // WhatsApp image captions have a strict length limit. Keep the complete
-    // command list compact enough to appear directly underneath the banner
-    // in the same message bubble.
-    const captionLines = [
-        '✨ *' + botName.toUpperCase() + '*  |  v' + version,
-        '_WhatsApp Multi-Device Assistant_',
-        'Owner: ' + owner + '  •  Prefix: ' + prefix,
-        ''
-    ];
+    // Keep the existing banner unchanged, then send the complete command
+    // directory as the menu text directly underneath it. WhatsApp image captions
+    // are limited to 1,024 characters, while text messages allow a much longer menu.
+    const bannerCaption = '✨ *' + botName.toUpperCase() + '*  |  v' + version;
 
-    for (const section of sections) {
-        captionLines.push('*' + section.title + '*');
-        captionLines.push(section.commands.map(command => prefix + command).join('  '));
-    }
-
-    captionLines.push('', 'Use .help to reopen • Replace command arguments as needed.');
-    let caption = captionLines.join('\n');
-    if (caption.length > 1024) {
-        // Preserve every category and as many commands as possible if branding
-        // details or future command additions push the caption over the limit.
-        caption = caption.slice(0, 1000).replace(/\s+\S*$/, '') + '\n…';
-    }
 
     try {
         const imagePath = path.join(__dirname, '../assets/frankxmd-banner.png.png');
         if (fs.existsSync(imagePath)) {
+            // Preserve the current banner artwork and styling exactly as-is.
             await sock.sendMessage(chatId, {
                 image: fs.readFileSync(imagePath),
-                caption
+                caption: bannerCaption
             }, { quoted: message });
+            // List every command in a readable, categorized text menu below it.
+            await sock.sendMessage(chatId, {
+                text: fullMenu.join('\n')
+            });
         } else {
             console.error('FrankXMD menu banner not found:', imagePath);
             await sock.sendMessage(chatId, {
