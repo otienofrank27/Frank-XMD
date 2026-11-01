@@ -23,8 +23,6 @@ async function helpCommand(sock, chatId, message) {
         { title: ' SETTINGS & OWNER', commands: ['mode', 'settings', 'update', 'clearsession', 'clearcache', 'cleartmp', 'antidelete', 'autoread', 'autoreact', 'autoreaction', 'areact', 'autotyping', 'autostatus', 'statusview', 'viewstatus', 'savestatus', 'savesm', 'savest', 'anticall', 'pmblocker', 'setpp', 'sudo', 'pair'] }
     ];
 
-    const imagePath = path.join(__dirname, '../assets/frankxmd-banner.png.png');
-
     const menuLines = [
         botName.toUpperCase() + ' BOT',
         'Version: ' + version,
@@ -44,24 +42,8 @@ async function helpCommand(sock, chatId, message) {
 
     menuLines.push('Use ' + prefix + 'help or ' + prefix + 'menu to display this menu.');
 
-    try {
-        if (!fs.existsSync(imagePath)) {
-            throw new Error('Menu banner image not found: ' + imagePath);
-        }
-
-        // Send the banner as a standalone image. The command menu remains plain text.
-        await sock.sendMessage(
-            chatId,
-            { image: fs.readFileSync(imagePath), mimetype: 'image/png' },
-            { quoted: message }
-        );
-
-        await sock.sendMessage(chatId, { text: menuLines.join('\\n') }, { quoted: message });
-    } catch (error) {
-        console.error('Error sending FrankXMD menu:', error);
-        // If the banner cannot be sent, still deliver the complete text menu.
-        await sock.sendMessage(chatId, { text: menuLines.join('\\n') }, { quoted: message });
-    }
+    // Send the complete command menu as one plain-text WhatsApp message.
+    await sock.sendMessage(chatId, { text: menuLines.join('\\n') }, { quoted: message });
 }
 
 module.exports = helpCommand;
