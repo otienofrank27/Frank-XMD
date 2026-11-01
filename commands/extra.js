@@ -20,8 +20,8 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
   const reply = (text) => sock.sendMessage(chatId, { text }, { quoted: message });
   switch (command) {
     case 'calc': case 'calculate':
-      try { return reply(`🧮 *Result:* ${calculate(args)}`); }
-      catch (e) { return reply(`❌ ${e.message}\nExample: .calc (25 + 5) * 2`); }
+      try { return reply(` *Result:* ${calculate(args)}`); }
+      catch (e) { return reply(` ${e.message}\nExample: .calc (25 + 5) * 2`); }
     case 'qr': case 'qrcode': {
       if (!args) return reply('Usage: .qr <text or link>');
       const QRCode = require('qrcode');
@@ -47,12 +47,12 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
       if (!isGroup) return reply('This command only works in groups.');
       const meta = await sock.groupMetadata(chatId);
       const admins = meta.participants.filter(p => p.admin).length;
-      return reply(`👥 *${meta.subject || 'Group'}*\nID: ${chatId}\nMembers: ${meta.participants.length}\nAdmins: ${admins}\nCreated: ${meta.creation ? new Date(meta.creation * 1000).toLocaleString() : 'Unavailable'}\nDescription: ${meta.desc || 'None'}`);
+      return reply(` *${meta.subject || 'Group'}*\nID: ${chatId}\nMembers: ${meta.participants.length}\nAdmins: ${admins}\nCreated: ${meta.creation ? new Date(meta.creation * 1000).toLocaleString() : 'Unavailable'}\nDescription: ${meta.desc || 'None'}`);
     }
     case 'grouplink': case 'link': {
       if (!isGroup) return reply('This command only works in groups.');
       const code = await sock.groupInviteCode(chatId);
-      return reply(`🔗 Group invite link:\nhttps://chat.whatsapp.com/${code}`);
+      return reply(` Group invite link:\nhttps://chat.whatsapp.com/${code}`);
     }
     case 'getpp': case 'profilepic': {
       try { const url = await sock.profilePictureUrl(target, 'image'); return sock.sendMessage(chatId, { image: { url }, caption: `Profile picture for @${target.split('@')[0]}`, mentions: [target] }, { quoted: message }); }
@@ -61,14 +61,14 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
     case 'runtime': case 'uptime': {
       const sec = Math.floor(process.uptime());
       const d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
-      return reply(`⏱️ FrankXMD uptime: ${d}d ${h}h ${m}m ${s}s`);
+      return reply(` FrankXMD uptime: ${d}d ${h}h ${m}m ${s}s`);
     }
     case 'pollhelp': return reply('Create a WhatsApp poll with: .poll Question | Option 1 | Option 2');
 
     case 'info': case 'botinfo': case 'about': case 'version': case 'script': case 'repo': case 'status': {
       const settings = require('../settings');
       const mem = process.memoryUsage();
-      return reply(`🤖 *${settings.botName || 'FrankXMD'}*
+      return reply(` *${settings.botName || 'FrankXMD'}*
 Version: ${settings.version || 'Unknown'}
 Owner: ${settings.botOwner || 'Bot owner'}
 Mode: ${settings.commandMode || 'public'}
@@ -78,12 +78,12 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
     }
     case 'speed': {
       const start = Date.now();
-      await reply('🏓 Checking response speed...');
-      return reply(`⚡ Response: ${Date.now() - start} ms`);
+      await reply(' Checking response speed...');
+      return reply(` Response: ${Date.now() - start} ms`);
     }
     case 'time': case 'date': {
       const now = new Date();
-      return reply(`🕒 ${now.toLocaleString('en-KE', { timeZone: 'Africa/Nairobi', dateStyle: 'full', timeStyle: 'long' })}`);
+      return reply(` ${now.toLocaleString('en-KE', { timeZone: 'Africa/Nairobi', dateStyle: 'full', timeStyle: 'long' })}`);
     }
     case 'define': case 'dictionary': {
       if (!args) return reply('Usage: .define <word>');
@@ -92,7 +92,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(args)}`, { timeout: 12000 });
         const entry = data[0], meanings = (entry.meanings || []).slice(0, 3);
         const lines = meanings.map(m => `• *${m.partOfSpeech}*: ${m.definitions?.[0]?.definition || 'No definition'}`);
-        return reply(`📖 *${entry.word}*\n${lines.join('\n') || 'No definition found.'}`);
+        return reply(` *${entry.word}*\n${lines.join('\n') || 'No definition found.'}`);
       } catch { return reply('No definition found for that word.'); }
     }
     case 'wikipedia': {
@@ -100,12 +100,12 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       try {
         const axios = require('axios');
         const { data } = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(args.replace(/ /g, '_'))}`, { timeout: 12000 });
-        return reply(`📚 *${data.title}*\n\n${data.extract || 'No summary available.'}\n\n${data.content_urls?.desktop?.page || ''}`);
+        return reply(` *${data.title}*\n\n${data.extract || 'No summary available.'}\n\n${data.content_urls?.desktop?.page || ''}`);
       } catch { return reply('Could not find that Wikipedia article.'); }
     }
     case 'google': case 'search': {
       if (!args) return reply('Usage: .google <search terms>');
-      return reply(`🔎 Search Google: https://www.google.com/search?q=${encodeURIComponent(args)}`);
+      return reply(` Search Google: https://www.google.com/search?q=${encodeURIComponent(args)}`);
     }
     case 'currency': {
       const m = args.match(/^([0-9]+(?:\\.[0-9]+)?)\\s+([A-Za-z]{3})\\s+(?:to\\s+)?([A-Za-z]{3})$/i);
@@ -115,7 +115,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         const { data } = await axios.get(`https://api.frankfurter.app/latest?amount=${m[1]}&from=${m[2].toUpperCase()}&to=${m[3].toUpperCase()}`, { timeout: 12000 });
         const value = data.rates?.[m[3].toUpperCase()];
         if (value == null) throw new Error('Unsupported currency');
-        return reply(`💱 ${m[1]} ${m[2].toUpperCase()} = ${value} ${m[3].toUpperCase()}\nRate date: ${data.date}`);
+        return reply(` ${m[1]} ${m[2].toUpperCase()} = ${value} ${m[3].toUpperCase()}\nRate date: ${data.date}`);
       } catch { return reply('Currency conversion failed. Check the currency codes and try again.'); }
     }
     case 'country': {
@@ -124,7 +124,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         const axios = require('axios');
         const { data } = await axios.get(`https://restcountries.com/v3.1/name/${encodeURIComponent(args)}`, { timeout: 12000 });
         const c = data[0];
-        return reply(`🌍 *${c.name?.common}*\nCapital: ${c.capital?.join(', ') || 'N/A'}\nRegion: ${c.region || 'N/A'}\nPopulation: ${Number(c.population || 0).toLocaleString()}\nCurrencies: ${Object.values(c.currencies || {}).map(x => x.name).join(', ') || 'N/A'}`);
+        return reply(` *${c.name?.common}*\nCapital: ${c.capital?.join(', ') || 'N/A'}\nRegion: ${c.region || 'N/A'}\nPopulation: ${Number(c.population || 0).toLocaleString()}\nCurrencies: ${Object.values(c.currencies || {}).map(x => x.name).join(', ') || 'N/A'}`);
       } catch { return reply('Country not found.'); }
     }
     case 'ip': {
@@ -133,7 +133,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         const axios = require('axios');
         const { data } = await axios.get(`https://ipapi.co/${args}/json/`, { timeout: 12000 });
         if (data.error) throw new Error('Lookup failed');
-        return reply(`🌐 IP: ${data.ip}\nCity: ${data.city || 'N/A'}\nRegion: ${data.region || 'N/A'}\nCountry: ${data.country_name || 'N/A'}\nISP: ${data.org || 'N/A'}`);
+        return reply(` IP: ${data.ip}\nCity: ${data.city || 'N/A'}\nRegion: ${data.region || 'N/A'}\nCountry: ${data.country_name || 'N/A'}\nISP: ${data.org || 'N/A'}`);
       } catch { return reply('IP lookup failed.'); }
     }
     case 'unit': {
@@ -147,7 +147,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       else if (from === 'c' && to === 'f') result = n * 9 / 5 + 32;
       else if (from === 'f' && to === 'c') result = (n - 32) * 5 / 9;
       else return reply('Those units cannot be converted by this command.');
-      return reply(`📐 ${n} ${from} = ${Number(result.toFixed(6))} ${to}`);
+      return reply(` ${n} ${from} = ${Number(result.toFixed(6))} ${to}`);
     }
 
     case 'membercount': case 'groupcount': {
@@ -155,7 +155,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       const meta = await sock.groupMetadata(chatId);
       const members = meta.participants || [];
       const admins = members.filter(p => p.admin === 'admin' || p.admin === 'superadmin').length;
-      return reply(`👥 *Group member count*\\nGroup: ${meta.subject || 'Group'}\\nTotal members: ${members.length}\\nAdmins: ${admins}\\nRegular members: ${members.length - admins}`);
+      return reply(` *Group member count*\\nGroup: ${meta.subject || 'Group'}\\nTotal members: ${members.length}\\nAdmins: ${admins}\\nRegular members: ${members.length - admins}`);
     }
     case 'members': case 'groupmembers': {
       if (!isGroup) return reply('This command only works in groups.');
@@ -168,7 +168,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         return `${i + 1}. @${jid.split('@')[0].split(':')[0]}${role}`;
       }).filter(Boolean);
       const extra = members.length > 80 ? `\\n\\nShowing 80 of ${members.length} members.` : '';
-      return sock.sendMessage(chatId, { text: `👥 *${meta.subject || 'Group'} — Members*\\n\\n${lines.join('\\n')}${extra}`, mentions: members.slice(0, 80).map(p => p.id || p.phoneNumber).filter(Boolean) }, { quoted: message });
+      return sock.sendMessage(chatId, { text: ` *${meta.subject || 'Group'} — Members*\\n\\n${lines.join('\\n')}${extra}`, mentions: members.slice(0, 80).map(p => p.id || p.phoneNumber).filter(Boolean) }, { quoted: message });
     }
 
     case 'support': return reply('For support, contact the bot owner or open an issue: https://github.com/otienofrank27/Frank-XMD/issues');
@@ -177,8 +177,8 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       const settings = require('../settings');
       const ownerJid = `${String(settings.ownerNumber || '').replace(/\\D/g, '')}@s.whatsapp.net`;
       if (!String(settings.ownerNumber || '').replace(/\\D/g, '')) return reply('Owner contact is not configured.');
-      await sock.sendMessage(ownerJid, { text: `📩 *FrankXMD ${command.toUpperCase()}*\nFrom: ${message.key.participant || chatId}\nChat: ${chatId}\n\n${args}` });
-      return reply('✅ Your message has been forwarded to the bot owner.');
+      await sock.sendMessage(ownerJid, { text: ` *FrankXMD ${command.toUpperCase()}*\nFrom: ${message.key.participant || chatId}\nChat: ${chatId}\n\n${args}` });
+      return reply(' Your message has been forwarded to the bot owner.');
     }
     default: return false;
   }
