@@ -9,7 +9,7 @@ FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provi
 </div>
 
 <div align="center">
-  <img src="assets/frankxmd-banner.png" alt="FrankXMD Official Banner" width="100%">
+  <img src="assets/frankxmd-banner.png.png" alt="FrankXMD Official Banner" width="100%">
 </div>
 
 <div align="center">
