@@ -11,7 +11,7 @@ const settings = {
   maxStoreMessages: 20,
   storeWriteInterval: 10000,
   description: "FrankXMD WhatsApp multi-device bot maintained by Marvin Frank.",
-  version: "3.0.8",
+  version: "3.0.9",
   // Set UPDATE_ZIP_URL to your own FrankXMD repository ZIP before using .update.
   updateZipUrl: process.env.UPDATE_ZIP_URL || "",
   // Media API integrations (song, video, cards, etc.)
