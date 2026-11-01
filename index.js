@@ -164,16 +164,7 @@ async function startXeonBotInc() {
                 // Only try to send error message if we have a valid chatId
                 if (mek.key && mek.key.remoteJid) {
                     await XeonBotInc.sendMessage(mek.key.remoteJid, {
-                        text: '❌ An error occurred while processing your message.',
-                        contextInfo: {
-                            forwardingScore: 1,
-                            isForwarded: true,
-                            forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363161513685998@newsletter',
-                                newsletterName: 'FrankXMD',
-                                serverMessageId: -1
-                            }
-                        }
+                        text: '❌ An error occurred while processing your message.'
                     }).catch(console.error);
                 }
             }
@@ -273,16 +264,7 @@ async function startXeonBotInc() {
             try {
                 const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
                 await XeonBotInc.sendMessage(botNumber, {
-                    text: `🤖 Bot Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!\n\n✅Make sure to join below channel`,
-                    contextInfo: {
-                        forwardingScore: 1,
-                        isForwarded: true,
-                        forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363161513685998@newsletter',
-                            newsletterName: 'FrankXMD',
-                            serverMessageId: -1
-                        }
-                    }
+                    text: `🤖 Bot Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!`
                 });
             } catch (error) {
                 console.error('Error sending connection message:', error.message)
