@@ -980,7 +980,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.tiktok') || userMessage.startsWith('.tt'):
                 await tiktokCommand(sock, chatId, message);
                 break;
-            case userMessage === '.ai' || userMessage.startsWith('.ai ') || userMessage.startsWith('.gpt') || userMessage.startsWith('.gemini'):
+            case /^\\.(ai|gpt|gemini|ask|aichat|chatgpt|deepseek|claude|aiexplain|aicode|aiprompt|aifast)(?:\\s|$)/.test(userMessage):
                 await aiCommand(sock, chatId, message);
                 break;
             case userMessage.startsWith('.translate') || userMessage.startsWith('.trt'):
