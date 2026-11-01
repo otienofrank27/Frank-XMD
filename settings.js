@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const settings = {
   packname: 'FrankXMD',
-  author: '‎',
+  author: 'Marvin Frank',
   botName: "FrankXMD",
   botOwner: 'Marvin Frank',
   ownerNumber: '254748642275',
