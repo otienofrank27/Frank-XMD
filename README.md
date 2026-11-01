@@ -1,148 +1,271 @@
-# FrankXMD
+<div align="center">
 
-FrankXMD is a WhatsApp multi-device bot built with the Baileys library. It provides group administration, automation, media tools, games, stickers, and other utilities.
+  <img src="assets/frankxmd-banner.png.png" alt="FrankXMD Official Banner" width="100%">
+
+  <h1>FrankXMD</h1>
+  <p><strong>A powerful, feature-rich WhatsApp Multi-Device automation bot.</strong></p>
+  <p>Group management · Media tools · AI assistance · Stickers · Utilities · Entertainment</p>
+
+  <a href="https://github.com/otienofrank27/Frank-XMD"><img src="https://img.shields.io/badge/Repository-Frank--XMD-181717?style=for-the-badge&logo=github" alt="GitHub repository"></a>
+  <a href="https://github.com/otienofrank27/Frank-XMD/stargazers"><img src="https://img.shields.io/github/stars/otienofrank27/Frank-XMD?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars"></a>
+  <a href="https://github.com/otienofrank27/Frank-XMD/network/members"><img src="https://img.shields.io/github/forks/otienofrank27/Frank-XMD?style=for-the-badge&logo=github" alt="GitHub forks"></a>
+  <a href="https://github.com/otienofrank27/Frank-XMD/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-ISC-blue?style=for-the-badge" alt="License"></a>
+  <br>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js 18 or later"></a>
+  <a href="https://github.com/WhiskeySockets/Baileys"><img src="https://img.shields.io/badge/WhatsApp-Baileys-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Baileys"></a>
+  <a href="https://github.com/otienofrank27/Frank-XMD/commits/main"><img src="https://img.shields.io/github/last-commit/otienofrank27/Frank-XMD?style=for-the-badge" alt="Last commit"></a>
+
+  <br><br>
+
+  <a href="https://github.com/otienofrank27/Frank-XMD/fork"><img src="https://img.shields.io/badge/FORK%20PROJECT-Create%20your%20copy-2F80ED?style=for-the-badge&logo=github" alt="Fork FrankXMD"></a>
+  <a href="https://youtu.be/-oz_u1iMgf8"><img src="https://img.shields.io/badge/SETUP%20GUIDE-Watch%20tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Setup tutorial"></a>
+
+</div>
+
+---
+
+## About FrankXMD
+
+**FrankXMD** is a WhatsApp Multi-Device bot built with the [Baileys](https://github.com/WhiskeySockets/Baileys) library and Node.js. It brings together practical automation, group administration, media utilities, entertainment, and productivity tools in one WhatsApp-connected assistant.
+
+The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)** and builds on the work of its upstream authors and open-source contributors.
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=FrankXMD;Multi+Device+WhatsApp+Bot;Maintained+By+Marvin+Frank" alt="FrankXMD typing banner" />
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=28&pause=1000&color=33ff00&center=true&vCenter=true&width=760&height=65&lines=FrankXMD;Multi+Device+WhatsApp+Bot;Maintained+By+Marvin+Frank" alt="FrankXMD typing banner">
   </a>
 </div>
 
-<div align="center">
-  <img src="assets/frankxmd-banner.png.png" alt="FrankXMD Official Banner" width="100%">
-</div>
+## Contents
 
-<div align="center">
-  <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-otienofrank27-181717?style=for-the-badge&logo=github" alt="GitHub profile"/></a>
-  <a href="https://www.youtube.com/@FrankM-12"><img src="https://img.shields.io/badge/YouTube-FrankM--12-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"/></a>
-  <a href="https://www.instagram.com/frankmarvin_1/"><img src="https://img.shields.io/badge/Instagram-frankmarvin__1-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
-  <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Contact-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/></a>
-</div>
+- [Features](#-features)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Start FrankXMD](#-start-frankxmd)
+- [Deployment](#-deployment)
+- [Security](#-security--session-safety)
+- [Support and Contact](#-support-and-contact)
+- [Support the Project](#-support-the-project)
+- [Contributing](#-contributing)
+- [Credits](#-credits)
+- [Disclaimer](#-disclaimer)
 
 ---
 
-## Deploy FrankXMD
+## ✨ Features
 
-### Step 1: Fork the repository
+FrankXMD brings multiple WhatsApp tools together. Feature availability can depend on permissions, external services, and API configuration.
+
+| Category | What it offers |
+|---|---|
+| **Group administration** | Group information, member tools, tagging, and moderation |
+| **Group protection** | Anti-link and other configurable group protections |
+| **AI assistance** | AI-powered chat and assistant commands through the configured backend |
+| **Media tools** | Supported audio/video downloads, stickers, GIFs, and image utilities |
+| **Automation** | Automated responses and status-related tools |
+| **Entertainment** | Games, jokes, and interactive commands |
+| **Utilities** | Translation, text-to-speech, search, and helper commands |
+| **WhatsApp tools** | Additional tools for everyday WhatsApp use |
+
+> **Tip:** Use the bot's menu/help command in WhatsApp to view the commands available in your current build.
+
+## ⚙️ Requirements
+
+Before installing, make sure your environment has:
+
+- **Node.js 18 or later**
+- **npm** (included with Node.js)
+- **Git**
+- **FFmpeg** — required by some sticker and media features
+- A WhatsApp account to link to the bot
+
+Check your installed versions:
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+## 🚀 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/otienofrank27/Frank-XMD.git
+cd Frank-XMD
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+If your hosting environment requires legacy peer dependency resolution, the project also provides:
+
+```bash
+npm run install:panel
+```
+
+### 3. Configure environment variables
+
+Create a local `.env` file from the supplied template:
+
+**Linux / macOS**
+```bash
+cp .env.example .env
+```
+
+**Windows PowerShell**
+```powershell
+Copy-Item .env.example .env
+```
+
+Open `.env` and add the credentials for the optional integrations you intend to use:
+
+```env
+TELEGRAM_BOT_TOKEN=
+GIPHY_API_KEY=
+```
+
+- `TELEGRAM_BOT_TOKEN` — Telegram BotFather token used by Telegram sticker-pack import features.
+- `GIPHY_API_KEY` — Giphy developer API key used by GIF search.
+
+Leave a value empty if you do not use that integration. Never commit your real `.env` file or publish API credentials.
+
+## 🔐 Configuration & WhatsApp pairing
+
+1. Start FrankXMD using the command below.
+2. Follow the authentication instructions printed in your terminal.
+3. Scan the QR code or use the pairing method presented by the running application, if available.
+4. Keep the linked session files private and backed up securely.
+
+The pairing-code service referenced by the project is external to this repository. If you operate your own pairing service, configure the project to use your own trusted endpoint.
+
+## ▶️ Start FrankXMD
+
+Start the bot:
+
+```bash
+npm start
+```
+
+Other available package scripts:
+
+| Command | Purpose |
+|---|---|
+| `npm start` | Start FrankXMD |
+| `npm run start:optimized` | Start with the configured Node.js memory/optimization flags |
+| `npm run cleanup` | Run the project cleanup script |
+| `npm run reset-session` | Run the session reset script |
+| `npm run start:clean` | Run cleanup, then start in optimized mode |
+| `npm run start:fresh` | Reset the session, then start |
+| `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
+| `npm run install:force` | Install dependencies using npm force mode |
+
+**Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
+
+## ☁️ Deployment
+
+You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choose a host that supports persistent Node.js processes, outbound network access, and storage for the WhatsApp session.
 
 <div align="center">
-  <a href="https://github.com/otienofrank27/Frank-XMD/fork">
-    <img src="https://img.shields.io/badge/Fork-FrankXMD-blue?style=for-the-badge&logo=github" alt="Fork FrankXMD"/>
-  </a>
-</div>
 
-### Step 2: Get your WhatsApp session
-
-Start the bot using the setup instructions below and follow the authentication method configured by the project. Keep your WhatsApp session credentials private. Never upload your personal session files to a public repository.
-
-The existing pair-code service is external to this repository. If you operate your own pair-code server, replace the external service URL with your own deployment URL.
-
-### Step 3: Deploy
-
-You can deploy FrankXMD on a VPS or supported Node.js hosting panel.
-
-<div align="center">
   <a href="https://bot-hosting.net/?aff=1068419752923508776">
-    <img src="https://img.shields.io/badge/Deploy%20on-Hosting%20Panel-28a745?style=for-the-badge" alt="Deploy on hosting panel"/>
+    <img src="https://img.shields.io/badge/DEPLOY-Hosting%20Panel-28a745?style=for-the-badge&logo=server&logoColor=white" alt="Deploy on hosting panel">
   </a>
   <a href="https://client.petrosky.io/aff.php?aff=394" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/Deploy%20on-VPS-0078E7?style=for-the-badge" alt="Deploy on VPS"/>
+    <img src="https://img.shields.io/badge/DEPLOY-VPS-0078E7?style=for-the-badge&logo=linux&logoColor=white" alt="Deploy on VPS">
   </a>
   <a href="https://dashboard.katabump.com/auth/login" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/Deploy%20on-Katabump-D6B7D6?style=for-the-badge&logo=server&logoColor=black" alt="Katabump"/>
+    <img src="https://img.shields.io/badge/DEPLOY-Katabump-D6B7D6?style=for-the-badge&logo=server&logoColor=black" alt="Deploy on Katabump">
   </a>
+
 </div>
 
-For a deployment walkthrough, see the existing [YouTube tutorial](https://youtu.be/-oz_u1iMgf8).
+### General hosting steps
 
----
+1. Create a Node.js application or upload/clone the repository on your host.
+2. Select **Node.js 18 or later**.
+3. Install dependencies with `npm install` (or the host-compatible install command).
+4. Add the environment variables from the [configuration section](#-configuration).
+5. Set the startup file/command to `index.js` or `npm start`, according to your host.
+6. Start the application and complete WhatsApp authentication.
+7. Keep the process running and ensure session storage persists between restarts.
 
-## Features
+For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://youtu.be/-oz_u1iMgf8).
 
-- **Group administration:** group information, tagging, moderation, and member management.
-- **Group protection:** anti-link and other moderation tools.
-- **Automation:** configurable automated responses and status-related tools.
-- **Media tools:** stickers, image utilities, and supported media commands.
-- **Entertainment:** games, jokes, and interactive commands.
-- **Utilities:** text-to-speech, translation, and other helper commands.
+## 🛡️ Security & session safety
 
-Command availability depends on the configured APIs and permissions. Use the bot's help/menu command to view the commands available in your build.
+Your WhatsApp session is sensitive. Treat it like a password.
 
-## Setup & Installation
+- Never share QR codes, pairing codes, `creds.json`, or session folders.
+- Never commit `.env`, API keys, or personal session files to GitHub.
+- Use private environment variables in your hosting dashboard.
+- Only install the bot from source you trust.
+- Restrict access to the server and its stored session files.
+- Rotate any API token that may have been exposed.
+- Use group moderation features responsibly and obtain appropriate consent.
 
-### Requirements
+Anyone who obtains valid WhatsApp session credentials may be able to access and control the linked account.
 
-- Node.js 18 or later
-- Git
-- FFmpeg (required by some media features)
-
-### Install
-
-1. Clone your repository:
-
-   ```bash
-   git clone https://github.com/otienofrank27/Frank-XMD.git
-   cd Frank-XMD
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Start the bot:
-
-   ```bash
-   npm start
-   ```
-
-4. Follow the authentication prompt in the terminal and link the WhatsApp account you intend to use.
-
-Do not share QR codes, pairing codes, `creds.json`, or session folders. Anyone with access to valid session credentials may be able to control the linked WhatsApp account.
-
-## Connect with the developer
+## 💬 Support and contact
 
 <div align="center">
-  <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github" alt="GitHub"/></a>
-  <a href="https://www.youtube.com/@FrankM-12"><img src="https://img.shields.io/badge/YouTube-Subscribe-FF0000?style=for-the-badge&logo=youtube" alt="YouTube"/></a>
-  <a href="https://www.instagram.com/frankmarvin_1/"><img src="https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram" alt="Instagram"/></a>
-  <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Message-25D366?style=for-the-badge&logo=whatsapp" alt="WhatsApp"/></a>
+
+  <a href="https://github.com/otienofrank27"><img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github" alt="GitHub"></a>
+  <a href="https://www.youtube.com/@FrankM-12"><img src="https://img.shields.io/badge/YouTube-Subscribe-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
+  <a href="https://www.instagram.com/frankmarvin_1/"><img src="https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"></a>
+  <a href="https://wa.me/254748642275"><img src="https://img.shields.io/badge/WhatsApp-Contact-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"></a>
+
+  <p><strong>Developer:</strong> Marvin Frank</p>
+
 </div>
 
-## Support FrankXMD via M-Pesa
+For bugs, questions, or feature requests, open an issue in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
 
-If you would like to support development, you can send support through **Pochi La Biashara**:
+## 💚 Support the project
+
+If FrankXMD is useful to you and you would like to support its continued development, you can contribute through **Pochi La Biashara**:
 
 <div align="center">
-  <img src="https://img.shields.io/badge/POCHI%20LA%20BIASHARA-254748642275-00A650?style=for-the-badge&logo=safaricom&logoColor=white" alt="Pochi La Biashara M-Pesa"/>
+  <img src="https://img.shields.io/badge/POCHI%20LA%20BIASHARA-254748642275-00A650?style=for-the-badge&logo=safaricom&logoColor=white" alt="Pochi La Biashara M-Pesa">
   <p><strong>M-Pesa Pochi La Biashara: +254 748 642 275</strong></p>
 </div>
 
-To show a scan-to-pay image here, add your official Pochi La Biashara QR image to the repository at `assets/mpesa_qr.png`. The old Buy Me a Coffee QR image has not been relabelled as an M-Pesa QR.
+To display a scan-to-pay image, add your official Pochi La Biashara QR image to the repository at `assets/mpesa_qr.png`. The previous Buy Me a Coffee QR image has not been relabelled as an M-Pesa QR.
 
----
+## 🤝 Contributing
 
-## License
+Contributions, bug reports, and feature requests are welcome.
 
-This repository retains the original project's licensing and attribution requirements. See the source project's license terms and preserve all applicable copyright notices when redistributing or modifying the code.
+1. Fork the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
+2. Create a branch for your change.
+3. Make focused changes and test them in your own environment.
+4. Submit a pull request with a clear description.
 
-## Contributions
+Please preserve existing attribution and licensing notices.
 
-Contributions, bug reports, and feature requests are welcome. Please open an issue or submit a pull request in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
+## 🙌 Credits
 
-## Credits
+FrankXMD is maintained by **[Marvin Frank](https://github.com/otienofrank27)**.
 
-FrankXMD is maintained by [Marvin Frank](https://github.com/otienofrank27).
+This project builds on work and contributions from the original authors and open-source projects, including **Professor, Baileys, TechGod143, and Dgxeon**. All applicable original copyright notices and license requirements must be retained.
 
-This project builds on work and contributions from the original authors and open-source projects, including Professor, Baileys, TechGod143, and Dgxeon. Please retain the original copyright and license notices.
+## ⚠️ Disclaimer
 
-## Important warning
+FrankXMD is an unofficial WhatsApp automation project. It is **not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta**.
 
-This is an unofficial WhatsApp automation project and is not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta. Use it responsibly and in accordance with applicable laws and WhatsApp's terms. Automated activity may result in account restrictions or bans. Do not use the bot for spam, harassment, or unlawful activity.
+Use this software responsibly and in accordance with applicable laws and WhatsApp's terms. Automated activity may result in account restrictions or bans. Do not use this project for spam, harassment, privacy violations, or unlawful activity.
 
 ---
 
 <div align="center">
-  <strong>FrankXMD — Built and maintained by Marvin Frank.</strong>
+
+  <h3>FrankXMD</h3>
+  <p><strong>Built with passion. Maintained by Marvin Frank.</strong></p>
+  <a href="https://github.com/otienofrank27/Frank-XMD">Explore the repository</a>
+
 </div>
