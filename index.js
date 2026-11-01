@@ -58,7 +58,7 @@ setInterval(() => store.writeToFile(), settings.storeWriteInterval || 10000)
 setInterval(() => {
     if (global.gc) {
         global.gc()
-        console.log('🧹 Garbage collection completed')
+        console.log(' Garbage collection completed')
     }
 }, 60_000) // every 1 minute
 
@@ -66,7 +66,7 @@ setInterval(() => {
 setInterval(() => {
     const used = process.memoryUsage().rss / 1024 / 1024
     if (used > 400) {
-        console.log('⚠️ RAM too high (>400MB), restarting bot...')
+        console.log(' RAM too high (>400MB), restarting bot...')
         process.exit(1) // Panel will auto-restart
     }
 }, 30_000) // check every 30 seconds
@@ -164,7 +164,7 @@ async function startXeonBotInc() {
                 // Only try to send error message if we have a valid chatId
                 if (mek.key && mek.key.remoteJid) {
                     await XeonBotInc.sendMessage(mek.key.remoteJid, {
-                        text: '❌ An error occurred while processing your message.'
+                        text: ' An error occurred while processing your message.'
                     }).catch(console.error);
                 }
             }
@@ -219,7 +219,7 @@ async function startXeonBotInc() {
         if (!!global.phoneNumber) {
             phoneNumber = global.phoneNumber
         } else {
-            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFormat: 6281376552730 (without + or spaces) : `)))
+            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number \nFormat: 6281376552730 (without + or spaces) : `)))
         }
 
         // Clean the phone number - remove any non-digit characters
@@ -250,21 +250,21 @@ async function startXeonBotInc() {
         const { connection, lastDisconnect, qr } = s
         
         if (qr) {
-            console.log(chalk.yellow('📱 QR Code generated. Please scan with WhatsApp.'))
+            console.log(chalk.yellow(' QR Code generated. Please scan with WhatsApp.'))
         }
         
         if (connection === 'connecting') {
-            console.log(chalk.yellow('🔄 Connecting to WhatsApp...'))
+            console.log(chalk.yellow(' Connecting to WhatsApp...'))
         }
         
         if (connection == "open") {
             console.log(chalk.magenta(` `))
-            console.log(chalk.yellow(`🌿Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2)))
+            console.log(chalk.yellow(`Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2)))
 
             try {
                 const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
                 await XeonBotInc.sendMessage(botNumber, {
-                    text: `🤖 FRANK-XMD Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!\n\n📢 WhatsApp Channel: https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D\n\nFollow the official channel for updates and announcements.`
+                    text: ` FRANK-XMD Connected Successfully!\n\n Time: ${new Date().toLocaleString()}\n Status: Online and Ready!\n\n WhatsApp Channel: https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D\n\nFollow the official channel for updates and announcements.`
                 });
             } catch (error) {
                 console.error('Error sending connection message:', error.message)
@@ -277,7 +277,7 @@ async function startXeonBotInc() {
             console.log(chalk.magenta(`${global.themeemoji || '•'} GITHUB: otienofrank27`))
             console.log(chalk.magenta(`${global.themeemoji || '•'} WA NUMBER: ${owner}`))
             console.log(chalk.magenta(`${global.themeemoji || '•'} CREDIT: MARVIN FRANK`))
-            console.log(chalk.green(`${global.themeemoji || '•'} 🤖 Bot Connected Successfully! ✅`))
+            console.log(chalk.green(`${global.themeemoji || '•'}  Bot Connected Successfully! `))
             console.log(chalk.blue(`Bot Version: ${settings.version}`))
         }
         
@@ -295,7 +295,7 @@ async function startXeonBotInc() {
 
             if (isConflict) {
                 // Another WhatsApp Web / bot instance took the session — do NOT wipe auth
-                console.log(chalk.yellow('⚠️ Session conflict: another device/instance connected.'))
+                console.log(chalk.yellow(' Session conflict: another device/instance connected.'))
                 console.log(chalk.yellow('   Stop other `node .` / WhatsApp Web linked sessions, then start the bot once.'))
                 return
             }
@@ -345,7 +345,7 @@ async function startXeonBotInc() {
                     if (!antiCallNotified.has(callerJid)) {
                         antiCallNotified.add(callerJid);
                         setTimeout(() => antiCallNotified.delete(callerJid), 60000);
-                        await XeonBotInc.sendMessage(callerJid, { text: '📵 Anticall is enabled. Your call was rejected and you will be blocked.' });
+                        await XeonBotInc.sendMessage(callerJid, { text: ' Anticall is enabled. Your call was rejected and you will be blocked.' });
                     }
                 } catch {}
                 // Then: block after a short delay to ensure rejection and message are processed
