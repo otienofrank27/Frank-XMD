@@ -3,281 +3,187 @@ const fs = require('fs');
 const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
-    const helpMessage = `
-╔═══════════════════╗
-   *🤖 ${settings.botName || 'FrankXMD'}*  
-   Version: *${settings.version || '3.0.0'}*
-   by ${settings.botOwner || 'Mr Unique Hacker'}
-   YT : ${global.ytch}
-╚═══════════════════╝
+    const botName = settings.botName || 'FrankXMD';
+    const version = settings.version || '3.0.0';
+    const owner = settings.botOwner || 'Marvin Frank';
+    const prefix = '.';
 
-*Available Commands:*
+    const sections = [
+        {
+            title: 'GENERAL',
+            icon: '✦',
+            commands: [
+                'help / menu', 'ping', 'alive', 'owner', 'botinfo / info',
+                'speed', 'time', 'date', 'joke', 'quote', 'fact',
+                'weather <city>', 'news', 'tts <text>', 'attp <text>',
+                'lyrics <song>', '8ball <question>', 'groupinfo',
+                'members', 'membercount', 'staff', 'jid', 'url'
+            ]
+        },
+        {
+            title: 'ARTIFICIAL INTELLIGENCE',
+            icon: '✧',
+            commands: [
+                'ai <question>', 'gpt <question>', 'gemini <question>',
+                'ask <question>', 'deepseek <question>', 'claude <question>',
+                'aiexplain <topic>', 'aicode <task>', 'aiprompt <idea>',
+                'imagine <prompt>', 'sora <prompt>'
+            ]
+        },
+        {
+            title: 'GROUP ADMINISTRATION',
+            icon: '◈',
+            commands: [
+                'ban @user', 'kick @user', 'promote @user', 'demote @user',
+                'mute <minutes>', 'unmute', 'delete / del', 'warn @user',
+                'warnings @user', 'tag <message>', 'tagall', 'tagnotadmin',
+                'hidetag <message>', 'clear', 'resetlink', 'groupstatus <text>',
+                'setgname <name>', 'setgdesc <description>', 'setgpp (reply image)'
+            ]
+        },
+        {
+            title: 'GROUP SECURITY',
+            icon: '◉',
+            commands: [
+                'antilink <on/off>', 'antibadword <on/off>',
+                'antibot <on/off/set/get>', 'antitag <on/off>',
+                'welcome <on/off>', 'goodbye <on/off>', 'chatbot <on/off>'
+            ]
+        },
+        {
+            title: 'DOWNLOADS & MEDIA',
+            icon: '⇩',
+            commands: [
+                'play <song>', 'song <song>', 'music <song>',
+                'video <query>', 'ytv <link>', 'spotify <query>',
+                'tiktok <link>', 'instagram <link>', 'facebook <link>',
+                'twitter <link>', 'ss <link>', 'tourl (reply to media)'
+            ]
+        },
+        {
+            title: 'STICKERS & IMAGES',
+            icon: '▧',
+            commands: [
+                'sticker (reply to image/video)', 'simage (reply to sticker)',
+                'take <packname>', 'emojimix <emoji>+<emoji>',
+                'removebg (reply to image)', 'remini (reply to image)',
+                'blur (reply to image)', 'crop (reply to media)',
+                'tgsticker <pack link>', 'gif <search>', 'meme'
+            ]
+        },
+        {
+            title: 'FUN & GAMES',
+            icon: '◇',
+            commands: [
+                'truth', 'dare', 'trivia', 'answer <answer>',
+                'hangman', 'guess <letter>', 'tictactoe @user',
+                'compliment @user', 'insult @user', 'flirt',
+                'ship @user', 'simp @user', 'character @user',
+                'wasted @user', 'goodnight', 'roseday', 'shayari'
+            ]
+        },
+        {
+            title: 'CREATIVE & TEXT TOOLS',
+            icon: '✎',
+            commands: [
+                'metallic <text>', 'ice <text>', 'snow <text>',
+                'neon <text>', 'matrix <text>', 'fire <text>',
+                'glitch <text>', 'hacker <text>', 'thunder <text>',
+                'purple <text>', 'blackpink <text>', 'impressive <text>'
+            ]
+        },
+        {
+            title: 'WHATSAPP & UTILITIES',
+            icon: '⌘',
+            commands: [
+                'vv / viewonce', 'vv2', 'trt <text> <language>',
+                'translate <text> <language>', 'github <username>',
+                'repo / script', 'country <name>', 'currency <amount>',
+                'define <word>', 'wikipedia <topic>', 'google <query>',
+                'unit <value>', 'ip <address>'
+            ]
+        },
+        {
+            title: 'OWNER & BOT SETTINGS',
+            icon: '⚙',
+            commands: [
+                'mode <public/private>', 'settings', 'update',
+                'clearsession', 'cleartmp', 'antidelete <on/off>',
+                'autoread <on/off>', 'autoreact <on/off>',
+                'autotyping <on/off>', 'autostatus <on/off>',
+                'savestatus <on/off>', 'anticall <on/off>',
+                'pmblocker <on/off/status>', 'setpp (reply to image)',
+                'sudo <number>', 'mention <on/off>'
+            ]
+        }
+    ];
 
-╔═══════════════════╗
-🌐 *General Commands*:
-║ ➤ .help or .menu
-║ ➤ .ping
-║ ➤ .alive
-║ ➤ .tts <text>
-║ ➤ .owner
-║ ➤ .joke
-║ ➤ .quote
-║ ➤ .fact
-║ ➤ .weather <city>
-║ ➤ .news
-║ ➤ .attp <text>
-║ ➤ .lyrics <song_title>
-║ ➤ .8ball <question>
-║ ➤ .groupinfo
-║ ➤ .staff or .admins 
-║ ➤ .vv
-║ ➤ .vv2
-║ ➤ .trt <text> <lang>
-║ ➤ .ss <link>
-║ ➤ .jid
-║ ➤ .calc <expression>
-║ ➤ .qr <text/link>
-║ ➤ .poll Q | option 1 | option 2
-║ ➤ .b64e / .b64d <text>
-║ ➤ .reverse <text>
-║ ➤ .upper / .lower <text>
-║ ➤ .getpp [reply/mention]
-║ ➤ .grouplink
-║ ➤ .runtime
-║ ➤ .url
-╚═══════════════════╝ 
+    const lines = [
+        '╭━━━━━━━━━━━━━━━━━━━━━━╮',
+        '       ✨ *' + botName.toUpperCase() + '*',
+        '       *WHATSAPP ASSISTANT*',
+        '╰━━━━━━━━━━━━━━━━━━━━━━╯',
+        '',
+        '┌  ◦ *BOT OVERVIEW*',
+        '│  Version : ' + version,
+        '│  Owner   : ' + owner,
+        '│  Mode    : ' + (settings.commandMode || 'public').toUpperCase(),
+        '│  Prefix  : ' + prefix,
+        '└──────────────────────',
+        '',
+        'Welcome! Your commands, neatly organised.',
+        'Use the examples below by replacing the values in < >.',
+        ''
+    ];
 
-╔═══════════════════╗
-👮‍♂️ *Admin Commands*:
-║ ➤ .ban @user
-║ ➤ .promote @user
-║ ➤ .demote @user
-║ ➤ .mute <minutes>
-║ ➤ .unmute
-║ ➤ .delete or .del
-║ ➤ .kick @user
-║ ➤ .warnings @user
-║ ➤ .warn @user
-║ ➤ .antilink
-║ ➤ .antibadword
-║ ➤ .clear
-║ ➤ .tag <message>
-║ ➤ .tagall
-║ ➤ .tagnotadmin
-║ ➤ .hidetag <message>
-║ ➤ .chatbot
-║ ➤ .resetlink
-║ ➤ .antitag <on/off>
-║ ➤ .welcome <on/off>
-║ ➤ .goodbye <on/off>
-║ ➤ .antibot <on/off/set/get>
-║ ➤ .setgdesc <description>
-║ ➤ .setgname <new name>
-║ ➤ .setgpp (reply to image)
-║ ➤ .groupstatus [caption/text]
-╚═══════════════════╝
+    for (const section of sections) {
+        lines.push('╭─ ' + section.icon + ' *' + section.title + '*');
+        for (const command of section.commands) {
+            lines.push('│  ' + prefix + command);
+        }
+        lines.push('╰──────────────────────', '');
+    }
 
-╔═══════════════════╗
-🔒 *Owner Commands*:
-║ ➤ .mode <public/private>
-║ ➤ .clearsession
-║ ➤ .antidelete
-║ ➤ .cleartmp
-║ ➤ .update
-║ ➤ .settings
-║ ➤ .setpp <reply to image>
-║ ➤ .autoreact <on/off>
-║ ➤ .autostatus <on/off>
-║ ➤ .statusview <on/off> (alias)
-║ ➤ .viewstatus <on/off> (alias)
-║ ➤ .autostatus react <on/off>
-║ ➤ .savestatus [on/off]
-║ ➤ .autotyping <on/off>
-║ ➤ .autoread <on/off>
-║ ➤ .anticall <on/off>
-║ ➤ .pmblocker <on/off/status>
-║ ➤ .pmblocker setmsg <text>
-║ ➤ .setmention <reply to msg>
-║ ➤ .mention <on/off>
-╚═══════════════════╝
+    lines.push(
+        '╭─ *QUICK TIPS*',
+        '│  • Use ' + prefix + 'help to reopen this menu',
+        '│  • Reply to media when a command requests it',
+        '│  • Admin commands require group admin rights',
+        '│  • Owner commands are restricted to the bot owner',
+        '╰──────────────────────',
+        '',
+        '╭━━━━━━━━━━━━━━━━━━━━━━╮',
+        '   *POWERED BY ' + botName.toUpperCase() + '*',
+        '   _Built for smarter WhatsApp experiences._',
+        '╰━━━━━━━━━━━━━━━━━━━━━━╯'
+    );
 
-╔═══════════════════╗
-🎨 *Image/Sticker Commands*:
-║ ➤ .blur <image>
-║ ➤ .simage <reply to sticker>
-║ ➤ .sticker <reply to image>
-║ ➤ .removebg
-║ ➤ .remini
-║ ➤ .crop (reply sticker/image/video)
-║ ➤ .tgsticker <Link>
-║ ➤ .meme
-║ ➤ .take <packname> 
-║ ➤ .emojimix <emj1>+<emj2>
-║ ➤ .igs <insta link>
-║ ➤ .igsc <insta link>
-╚═══════════════════╝  
-
-╔═══════════════════╗
-🖼️ *Pies Commands*:
-║ ➤ .pies <country>
-║ ➤ .china 
-║ ➤ .indonesia 
-║ ➤ .japan 
-║ ➤ .korea 
-║ ➤ .hijab
-╚═══════════════════╝
-
-╔═══════════════════╗
-🎮 *Game Commands*:
-║ ➤ .tictactoe @user
-║ ➤ .hangman
-║ ➤ .guess <letter>
-║ ➤ .trivia
-║ ➤ .answer <answer>
-║ ➤ .truth
-║ ➤ .dare
-╚═══════════════════╝
-
-╔═══════════════════╗
-🤖 *AI Commands*:
-║ ➤ .ai <question>
-║ ➤ .gpt <question>
-║ ➤ .gemini <question>
-║ ➤ .imagine <prompt>
-║ ➤ .flux <prompt>
-║ ➤ .sora <prompt>
-╚═══════════════════╝
-
-╔═══════════════════╗
-🎯 *Fun Commands*:
-║ ➤ .compliment @user
-║ ➤ .insult @user
-║ ➤ .flirt 
-║ ➤ .shayari
-║ ➤ .goodnight
-║ ➤ .roseday
-║ ➤ .character @user
-║ ➤ .wasted @user
-║ ➤ .ship @user
-║ ➤ .simp @user
-║ ➤ .stupid @user [text]
-╚═══════════════════╝
-
-╔═══════════════════╗
-🔤 *Textmaker*:
-║ ➤ .metallic <text>
-║ ➤ .ice <text>
-║ ➤ .snow <text>
-║ ➤ .impressive <text>
-║ ➤ .matrix <text>
-║ ➤ .light <text>
-║ ➤ .neon <text>
-║ ➤ .devil <text>
-║ ➤ .purple <text>
-║ ➤ .thunder <text>
-║ ➤ .leaves <text>
-║ ➤ .1917 <text>
-║ ➤ .arena <text>
-║ ➤ .hacker <text>
-║ ➤ .sand <text>
-║ ➤ .blackpink <text>
-║ ➤ .glitch <text>
-║ ➤ .fire <text>
-╚═══════════════════╝
-
-╔═══════════════════╗
-📥 *Downloader*:
-║ ➤ .play <song_name>
-║ ➤ .song <song_name>
-║ ➤ .spotify <query>
-║ ➤ .instagram <link>
-║ ➤ .facebook <link>
-║ ➤ .twitter <link>
-║ ➤ .tiktok <link>
-║ ➤ .video <song name>
-║ ➤ .ytmp4 <Link>
-╚═══════════════════╝
-
-╔═══════════════════╗
-🧩 *MISC*:
-║ ➤ .heart
-║ ➤ .horny
-║ ➤ .circle
-║ ➤ .lgbt
-║ ➤ .lolice
-║ ➤ .its-so-stupid
-║ ➤ .namecard 
-║ ➤ .oogway
-║ ➤ .tweet
-║ ➤ .ytcomment 
-║ ➤ .comrade 
-║ ➤ .gay 
-║ ➤ .glass 
-║ ➤ .jail 
-║ ➤ .passed 
-║ ➤ .triggered
-╚═══════════════════╝
-
-╔═══════════════════╗
-🖼️ *ANIME*:
-║ ➤ .nom 
-║ ➤ .poke 
-║ ➤ .cry 
-║ ➤ .kiss 
-║ ➤ .pat 
-║ ➤ .hug 
-║ ➤ .wink 
-║ ➤ .facepalm 
-╚═══════════════════╝
-
-╔═══════════════════╗
-💻 *Github Commands:*
-║ ➤ .git
-║ ➤ .github
-║ ➤ .sc
-║ ➤ .script
-║ ➤ .repo
-╚═══════════════════╝
-
-Join our channel for updates:`;
+    const helpMessage = lines.join('\n');
 
     try {
         const imagePath = path.join(__dirname, '../assets/bot_image.jpg');
-        
+        const contextInfo = {
+            forwardingScore: 1,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363161513685998@newsletter',
+                newsletterName: botName,
+                serverMessageId: -1
+            }
+        };
+
         if (fs.existsSync(imagePath)) {
-            const imageBuffer = fs.readFileSync(imagePath);
-            
             await sock.sendMessage(chatId, {
-                image: imageBuffer,
+                image: fs.readFileSync(imagePath),
                 caption: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'FrankXMD',
-                        serverMessageId: -1
-                    }
-                }
-            },{ quoted: message });
+                contextInfo
+            }, { quoted: message });
         } else {
-            console.error('Bot image not found at:', imagePath);
-            await sock.sendMessage(chatId, { 
-                text: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'FrankXMD by Mr Unique Hacker',
-                        serverMessageId: -1
-                    } 
-                }
-            });
+            await sock.sendMessage(chatId, { text: helpMessage, contextInfo }, { quoted: message });
         }
     } catch (error) {
         console.error('Error in help command:', error);
-        await sock.sendMessage(chatId, { text: helpMessage });
+        await sock.sendMessage(chatId, { text: helpMessage }, { quoted: message });
     }
 }
 
