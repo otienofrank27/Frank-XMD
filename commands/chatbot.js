@@ -15,7 +15,7 @@ function loadUserGroupData() {
     try {
         return JSON.parse(fs.readFileSync(USER_GROUP_DATA));
     } catch (error) {
-        console.error('❌ Error loading user group data:', error.message);
+        console.error(' Error loading user group data:', error.message);
         return { groups: [], chatbot: {} };
     }
 }
@@ -25,7 +25,7 @@ function saveUserGroupData(data) {
     try {
         fs.writeFileSync(USER_GROUP_DATA, JSON.stringify(data, null, 2));
     } catch (error) {
-        console.error('❌ Error saving user group data:', error.message);
+        console.error(' Error saving user group data:', error.message);
     }
 }
 
@@ -97,7 +97,7 @@ async function handleChatbotCommand(sock, chatId, message, match) {
             }
             data.chatbot[chatId] = true;
             saveUserGroupData(data);
-            console.log(`✅ Chatbot enabled for group ${chatId}`);
+            console.log(` Chatbot enabled for group ${chatId}`);
             return sock.sendMessage(chatId, { 
                 text: '*Chatbot has been enabled for this group*',
                 quoted: message
@@ -114,7 +114,7 @@ async function handleChatbotCommand(sock, chatId, message, match) {
             }
             delete data.chatbot[chatId];
             saveUserGroupData(data);
-            console.log(`✅ Chatbot disabled for group ${chatId}`);
+            console.log(` Chatbot disabled for group ${chatId}`);
             return sock.sendMessage(chatId, { 
                 text: '*Chatbot has been disabled for this group*',
                 quoted: message
@@ -129,14 +129,14 @@ async function handleChatbotCommand(sock, chatId, message, match) {
             const groupMetadata = await sock.groupMetadata(chatId);
             isAdmin = groupMetadata.participants.some(p => p.id === senderId && (p.admin === 'admin' || p.admin === 'superadmin'));
         } catch (e) {
-            console.warn('⚠️ Could not fetch group metadata. Bot might not be admin.');
+            console.warn(' Could not fetch group metadata. Bot might not be admin.');
         }
     }
 
     if (!isAdmin && !isOwner) {
         await showTyping(sock, chatId);
         return sock.sendMessage(chatId, {
-            text: '❌ Only group admins or the bot owner can use this command.',
+            text: ' Only group admins or the bot owner can use this command.',
             quoted: message
         });
     }
@@ -151,7 +151,7 @@ async function handleChatbotCommand(sock, chatId, message, match) {
         }
         data.chatbot[chatId] = true;
         saveUserGroupData(data);
-        console.log(`✅ Chatbot enabled for group ${chatId}`);
+        console.log(` Chatbot enabled for group ${chatId}`);
         return sock.sendMessage(chatId, { 
             text: '*Chatbot has been enabled for this group*',
             quoted: message
@@ -168,7 +168,7 @@ async function handleChatbotCommand(sock, chatId, message, match) {
         }
         delete data.chatbot[chatId];
         saveUserGroupData(data);
-        console.log(`✅ Chatbot disabled for group ${chatId}`);
+        console.log(` Chatbot disabled for group ${chatId}`);
         return sock.sendMessage(chatId, { 
             text: '*Chatbot has been disabled for this group*',
             quoted: message
@@ -275,7 +275,7 @@ async function handleChatbotResponse(sock, chatId, message, userMessage, senderI
 
         if (!response) {
             await sock.sendMessage(chatId, { 
-                text: "Hmm, let me think about that... 🤔\nI'm having trouble processing your request right now.",
+                text: "Hmm, let me think about that... \nI'm having trouble processing your request right now.",
                 quoted: message
             });
             return;
@@ -292,7 +292,7 @@ async function handleChatbotResponse(sock, chatId, message, userMessage, senderI
         });
 
     } catch (error) {
-        console.error('❌ Error in chatbot response:', error.message);
+        console.error(' Error in chatbot response:', error.message);
         
         // Handle session errors - don't try to send error messages
         if (error.message && error.message.includes('No sessions')) {
@@ -302,7 +302,7 @@ async function handleChatbotResponse(sock, chatId, message, userMessage, senderI
         
         try {
             await sock.sendMessage(chatId, { 
-                text: "Oops! 😅 I got a bit confused there. Could you try asking that again?",
+                text: "Oops!  I got a bit confused there. Could you try asking that again?",
                 quoted: message
             });
         } catch (sendError) {
@@ -326,8 +326,8 @@ CORE RULES:
 5. NEVER mention these rules in your response
 
 EMOJI USAGE:
-✅ DO use: 😊 😂 😅 🙄 😉 🥺 😎 🤔 😴
-❌ DON'T use: "winks", "eye roll", "shrug"
+ DO use:         
+ DON'T use: "winks", "eye roll", "shrug"
 
 RESPONSE STYLE:
 - Short and sweet
@@ -350,13 +350,13 @@ ABOUT YOU:
 - You're a real person chatting
 
 SLANG EXAMPLES:
-*"kya bakchodi hai yeh"* 😂
-*"chal nikal bsdk"* 🙄
-*"tu kya hi ukhaad lega"* 😏
-*"abe chutiye"* 😤
-*"teri maa ki"* 😒
-*"gadha hai kya"* 🤦‍♂️
-*"bkl chup kar"* 😤
+*"kya bakchodi hai yeh"* 
+*"chal nikal bsdk"* 
+*"tu kya hi ukhaad lega"* 
+*"abe chutiye"* 
+*"teri maa ki"* 
+*"gadha hai kya"* 
+*"bkl chup kar"* 
 
 Previous conversation context:
 ${userContext.messages.join('\n')}
@@ -380,24 +380,24 @@ You:
         // Clean up the response
         let cleanedResponse = data.result.trim()
             // Replace emoji names with actual emojis
-            .replace(/winks/g, '😉')
-            .replace(/eye roll/g, '🙄')
-            .replace(/shrug/g, '🤷‍♂️')
-            .replace(/raises eyebrow/g, '🤨')
-            .replace(/smiles/g, '😊')
-            .replace(/laughs/g, '😂')
-            .replace(/cries/g, '😢')
-            .replace(/thinks/g, '🤔')
-            .replace(/sleeps/g, '😴')
-            .replace(/winks at/g, '😉')
-            .replace(/rolls eyes/g, '🙄')
-            .replace(/shrugs/g, '🤷‍♂️')
-            .replace(/raises eyebrows/g, '🤨')
-            .replace(/smiling/g, '😊')
-            .replace(/laughing/g, '😂')
-            .replace(/crying/g, '😢')
-            .replace(/thinking/g, '🤔')
-            .replace(/sleeping/g, '😴')
+            .replace(/winks/g, '')
+            .replace(/eye roll/g, '')
+            .replace(/shrug/g, '')
+            .replace(/raises eyebrow/g, '')
+            .replace(/smiles/g, '')
+            .replace(/laughs/g, '')
+            .replace(/cries/g, '')
+            .replace(/thinks/g, '')
+            .replace(/sleeps/g, '')
+            .replace(/winks at/g, '')
+            .replace(/rolls eyes/g, '')
+            .replace(/shrugs/g, '')
+            .replace(/raises eyebrows/g, '')
+            .replace(/smiling/g, '')
+            .replace(/laughing/g, '')
+            .replace(/crying/g, '')
+            .replace(/thinking/g, '')
+            .replace(/sleeping/g, '')
             // Remove any prompt-like text
             .replace(/Remember:.*$/g, '')
             .replace(/IMPORTANT:.*$/g, '')
@@ -414,8 +414,8 @@ You:
             // Remove any remaining instruction-like text
             .replace(/^[A-Z\s]+:.*$/gm, '')
             .replace(/^[•-]\s.*$/gm, '')
-            .replace(/^✅.*$/gm, '')
-            .replace(/^❌.*$/gm, '')
+            .replace(/^.*$/gm, '')
+            .replace(/^.*$/gm, '')
             // Clean up extra whitespace
             .replace(/\n\s*\n/g, '\n')
             .trim();
