@@ -1,6 +1,6 @@
 {
   "name": "frankxmd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FrankXMD WhatsApp Multi-Device Bot",
   "main": "index.js",
   "scripts": {
