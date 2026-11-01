@@ -64,6 +64,100 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
       return reply(`⏱️ FrankXMD uptime: ${d}d ${h}h ${m}m ${s}s`);
     }
     case 'pollhelp': return reply('Create a WhatsApp poll with: .poll Question | Option 1 | Option 2');
+
+    case 'info': case 'botinfo': case 'about': case 'version': case 'script': case 'repo': case 'status': {
+      const settings = require('../settings');
+      const mem = process.memoryUsage();
+      return reply(`🤖 *${settings.botName || 'FrankXMD'}*
+Version: ${settings.version || 'Unknown'}
+Owner: ${settings.botOwner || 'Bot owner'}
+Mode: ${settings.commandMode || 'public'}
+Uptime: ${Math.floor(process.uptime())} seconds
+Memory: ${(mem.rss / 1024 / 1024).toFixed(1)} MB
+Repository: https://github.com/otienofrank27/Frank-XMD`);
+    }
+    case 'speed': {
+      const start = Date.now();
+      await reply('🏓 Checking response speed...');
+      return reply(`⚡ Response: ${Date.now() - start} ms`);
+    }
+    case 'time': case 'date': {
+      const now = new Date();
+      return reply(`🕒 ${now.toLocaleString('en-KE', { timeZone: 'Africa/Nairobi', dateStyle: 'full', timeStyle: 'long' })}`);
+    }
+    case 'define': case 'dictionary': {
+      if (!args) return reply('Usage: .define <word>');
+      try {
+        const axios = require('axios');
+        const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(args)}`, { timeout: 12000 });
+        const entry = data[0], meanings = (entry.meanings || []).slice(0, 3);
+        const lines = meanings.map(m => `• *${m.partOfSpeech}*: ${m.definitions?.[0]?.definition || 'No definition'}`);
+        return reply(`📖 *${entry.word}*\n${lines.join('\n') || 'No definition found.'}`);
+      } catch { return reply('No definition found for that word.'); }
+    }
+    case 'wikipedia': {
+      if (!args) return reply('Usage: .wikipedia <topic>');
+      try {
+        const axios = require('axios');
+        const { data } = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(args.replace(/ /g, '_'))}`, { timeout: 12000 });
+        return reply(`📚 *${data.title}*\n\n${data.extract || 'No summary available.'}\n\n${data.content_urls?.desktop?.page || ''}`);
+      } catch { return reply('Could not find that Wikipedia article.'); }
+    }
+    case 'google': case 'search': {
+      if (!args) return reply('Usage: .google <search terms>');
+      return reply(`🔎 Search Google: https://www.google.com/search?q=${encodeURIComponent(args)}`);
+    }
+    case 'currency': {
+      const m = args.match(/^([0-9]+(?:\\.[0-9]+)?)\\s+([A-Za-z]{3})\\s+(?:to\\s+)?([A-Za-z]{3})$/i);
+      if (!m) return reply('Usage: .currency <amount> <FROM> to <TO>\nExample: .currency 100 USD to KES');
+      try {
+        const axios = require('axios');
+        const { data } = await axios.get(`https://api.frankfurter.app/latest?amount=${m[1]}&from=${m[2].toUpperCase()}&to=${m[3].toUpperCase()}`, { timeout: 12000 });
+        const value = data.rates?.[m[3].toUpperCase()];
+        if (value == null) throw new Error('Unsupported currency');
+        return reply(`💱 ${m[1]} ${m[2].toUpperCase()} = ${value} ${m[3].toUpperCase()}\nRate date: ${data.date}`);
+      } catch { return reply('Currency conversion failed. Check the currency codes and try again.'); }
+    }
+    case 'country': {
+      if (!args) return reply('Usage: .country <country name>');
+      try {
+        const axios = require('axios');
+        const { data } = await axios.get(`https://restcountries.com/v3.1/name/${encodeURIComponent(args)}`, { timeout: 12000 });
+        const c = data[0];
+        return reply(`🌍 *${c.name?.common}*\nCapital: ${c.capital?.join(', ') || 'N/A'}\nRegion: ${c.region || 'N/A'}\nPopulation: ${Number(c.population || 0).toLocaleString()}\nCurrencies: ${Object.values(c.currencies || {}).map(x => x.name).join(', ') || 'N/A'}`);
+      } catch { return reply('Country not found.'); }
+    }
+    case 'ip': {
+      if (!args || !/^(?:\\d{1,3}\\.){3}\\d{1,3}$/.test(args)) return reply('Usage: .ip <IPv4 address>');
+      try {
+        const axios = require('axios');
+        const { data } = await axios.get(`https://ipapi.co/${args}/json/`, { timeout: 12000 });
+        if (data.error) throw new Error('Lookup failed');
+        return reply(`🌐 IP: ${data.ip}\nCity: ${data.city || 'N/A'}\nRegion: ${data.region || 'N/A'}\nCountry: ${data.country_name || 'N/A'}\nISP: ${data.org || 'N/A'}`);
+      } catch { return reply('IP lookup failed.'); }
+    }
+    case 'unit': {
+      const m = args.match(/^(-?\\d+(?:\\.\\d+)?)\\s*(km|mi|m|ft|cm|kg|lb|c|f)\\s+(?:to\\s+)?(km|mi|m|ft|cm|kg|lb|c|f)$/i);
+      if (!m) return reply('Usage: .unit <value> <unit> to <unit>\nExample: .unit 10 km to mi');
+      const n = Number(m[1]), from = m[2].toLowerCase(), to = m[3].toLowerCase();
+      const groups = { length: { km:1000, mi:1609.344, m:1, ft:0.3048, cm:0.01 }, mass: { kg:1, lb:0.45359237 } };
+      let result;
+      if (groups.length[from] && groups.length[to]) result = n * groups.length[from] / groups.length[to];
+      else if (groups.mass[from] && groups.mass[to]) result = n * groups.mass[from] / groups.mass[to];
+      else if (from === 'c' && to === 'f') result = n * 9 / 5 + 32;
+      else if (from === 'f' && to === 'c') result = (n - 32) * 5 / 9;
+      else return reply('Those units cannot be converted by this command.');
+      return reply(`📐 ${n} ${from} = ${Number(result.toFixed(6))} ${to}`);
+    }
+    case 'support': return reply('For support, contact the bot owner or open an issue: https://github.com/otienofrank27/Frank-XMD/issues');
+    case 'feedback': case 'report': {
+      if (!args) return reply(`Usage: .${command} <message>`);
+      const settings = require('../settings');
+      const ownerJid = `${String(settings.ownerNumber || '').replace(/\\D/g, '')}@s.whatsapp.net`;
+      if (!String(settings.ownerNumber || '').replace(/\\D/g, '')) return reply('Owner contact is not configured.');
+      await sock.sendMessage(ownerJid, { text: `📩 *FrankXMD ${command.toUpperCase()}*\nFrom: ${message.key.participant || chatId}\nChat: ${chatId}\n\n${args}` });
+      return reply('✅ Your message has been forwarded to the bot owner.');
+    }
     default: return false;
   }
 }
