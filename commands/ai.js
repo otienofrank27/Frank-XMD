@@ -4,7 +4,7 @@ async function aiCommand(sock, chatId, message) {
   try {
     const text =
       message.message?.conversation || message.message?.extendedTextMessage?.text || '';
-    const query = text.replace(/^\.(?:ai|gpt|gemini)\s*/i, '').trim();
+    const query = text.replace(/^\.(?:ai|gpt|gemini|ask|aichat|chatgpt|deepseek|claude|aiexplain|aicode|aiprompt|aifast)\s*/i, '').trim();
 
     if (!query) {
       return sock.sendMessage(
