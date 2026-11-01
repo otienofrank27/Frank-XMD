@@ -63,16 +63,16 @@ async function antibotCommand(sock, chatId, message, senderId) {
   const reply = (text) => sock.sendMessage(chatId, { text }, { quoted: message });
 
   if (!chatId.endsWith('@g.us')) {
-    return reply('👥 This command can only be used in groups.');
+    return reply(' This command can only be used in groups.');
   }
 
   const owner = message.key.fromMe || (await isOwnerOrSudo(senderId, sock, chatId));
   const adminStatus = await isAdmin(sock, chatId, senderId);
   if (!adminStatus.isBotAdmin) {
-    return reply('❌ Please make the bot an admin first.');
+    return reply(' Please make the bot an admin first.');
   }
   if (!owner && !adminStatus.isSenderAdmin) {
-    return reply('❌ Only group admins can use this command.');
+    return reply(' Only group admins can use this command.');
   }
 
   const text =
@@ -83,7 +83,7 @@ async function antibotCommand(sock, chatId, message, senderId) {
 
   if (!opt) {
     return reply(
-      `🤖 *Antibot Status*\n\n` +
+      ` *Antibot Status*\n\n` +
         `Status: *${cfg.enabled ? 'ON' : 'OFF'}*\n` +
         `Action: *${cfg.action}*\n\n` +
         `Admins, owner, and this bot are exempt.\n` +
@@ -195,13 +195,13 @@ async function handleAntibotDetection(sock, message) {
       try {
         await sock.groupParticipantsUpdate(chatId, [kickJid], 'remove');
         await sock.sendMessage(chatId, {
-          text: `🤖 *@${tag}* was kicked — other bots are not allowed here.`,
+          text: ` *@${tag}* was kicked — other bots are not allowed here.`,
           mentions,
         });
       } catch (e) {
         console.error('[antibot] kick:', e?.message || e);
         await sock.sendMessage(chatId, {
-          text: `🤖 Bot activity detected from *@${tag}* (kick failed — check bot admin rights).`,
+          text: ` Bot activity detected from *@${tag}* (kick failed — check bot admin rights).`,
           mentions,
         });
       }
@@ -215,7 +215,7 @@ async function handleAntibotDetection(sock, message) {
         await sock.groupParticipantsUpdate(chatId, [kickJid], 'remove');
         await resetWarningCount(chatId, kickJid);
         await sock.sendMessage(chatId, {
-          text: `🤖 *@${tag}* kicked after 3 antibot warnings.`,
+          text: ` *@${tag}* kicked after 3 antibot warnings.`,
           mentions,
         });
       } catch (e) {
@@ -223,7 +223,7 @@ async function handleAntibotDetection(sock, message) {
       }
     } else {
       await sock.sendMessage(chatId, {
-        text: `🤖 *@${tag}* warning ${warningCount}/3 — other bots are not allowed.`,
+        text: ` *@${tag}* warning ${warningCount}/3 — other bots are not allowed.`,
         mentions,
       });
     }
