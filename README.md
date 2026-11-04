@@ -2,13 +2,13 @@
 
   <img src="assets/frankxmd-banner.png.png" alt="FrankXMD Official Banner" width="100%">
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
   <h1>FrankXMD</h1>
   <p><strong>A powerful, feature-rich WhatsApp Multi-Device automation bot.</strong></p>
   <p>Group management · Media tools · AI assistance · Stickers · Utilities · Entertainment</p>
 
-  <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+  
 
   <a href="https://github.com/otienofrank27/Frank-XMD"><img src="https://img.shields.io/badge/Repository-Frank--XMD-181717?style=for-the-badge&logo=github" alt="GitHub repository"></a>
   <a href="https://github.com/otienofrank27/Frank-XMD/stargazers"><img src="https://img.shields.io/github/stars/otienofrank27/Frank-XMD?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars"></a>
@@ -24,7 +24,19 @@
 
 </div>
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
+
+## Documentation
+
+- [Overview and features](#about-frankxmd)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration and WhatsApp pairing](#configuration--whatsapp-pairing)
+- [Commands](#commands)
+- [Deployment](#deployment)
+- [Security and session safety](#security--session-safety)
+- [Support and contact](#support-and-contact)
+- [Contributing](#contributing)
 
 # About FrankXMD
 
@@ -34,11 +46,11 @@ The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)*
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=28&pause=1000&color=33ff00&center=true&vCenter=true&width=760&height=65&lines=FrankXMD;Multi+Device+WhatsApp+Bot;Maintained+By+Marvin+Frank" alt="FrankXMD typing banner">
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=28&pause=1000&color=58A6FF&center=true&vCenter=true&width=760&height=65&lines=FrankXMD;Multi+Device+WhatsApp+Bot;Maintained+By+Marvin+Frank" alt="FrankXMD typing banner">
   </a>
 </div>
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Requirements
 
@@ -58,7 +70,7 @@ npm --version
 git --version
 ```
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Installation
 
@@ -107,7 +119,7 @@ GIPHY_API_KEY=
 
 Leave a value empty if you do not use that integration. Never commit your real `.env` file or publish API credentials.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Configuration & WhatsApp pairing
 
@@ -118,7 +130,7 @@ Leave a value empty if you do not use that integration. Never commit your real `
 
 The pairing-code service referenced by the project is external to this repository. If you operate your own pairing service, configure the project to use your own trusted endpoint.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Start FrankXMD
 
@@ -128,7 +140,7 @@ Start the bot:
 npm start
 ```
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Other available package scripts:
 
@@ -145,7 +157,7 @@ npm start
 
 **Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Deployment
 
@@ -165,7 +177,7 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 </div>
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # General hosting steps
 
@@ -179,7 +191,7 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://youtu.be/-oz_u1iMgf8).
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Security & session safety
 
@@ -195,7 +207,7 @@ Your WhatsApp session is sensitive. Treat it like a password.
 
 Anyone who obtains valid WhatsApp session credentials may be able to access and control the linked account.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Support and contact
 
@@ -212,7 +224,7 @@ Anyone who obtains valid WhatsApp session credentials may be able to access and 
 
 For bugs, questions, or feature requests, open an issue in the [FrankXMD repository](https://github.com/otienofrank27/Frank-XMD).
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Support the project
 
@@ -223,7 +235,7 @@ If FrankXMD is useful to you and you would like to support its continued develop
   <p><strong>M-Pesa Pochi La Biashara: +254 748 642 275</strong></p>
 </div>
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Contributing
 
@@ -236,7 +248,7 @@ Contributions, bug reports, and feature requests are welcome.
 
 Please preserve existing attribution and licensing notices.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Credits
 
@@ -244,7 +256,7 @@ FrankXMD is maintained by **[Marvin Frank](https://github.com/otienofrank27)**.
 
 This project builds on work and contributions from the original authors and open-source projects, including **Frank and Baileys**. All applicable original copyright notices and license requirements must be retained.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 # Disclaimer
 
@@ -252,7 +264,7 @@ FrankXMD is an unofficial WhatsApp automation project. It is **not affiliated wi
 
 Use this software responsibly and in accordance with applicable laws and WhatsApp's terms. Automated activity may result in account restrictions or bans. Do not use this project for spam, harassment, privacy violations, or unlawful activity.
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
 
 <div align="center">
 
