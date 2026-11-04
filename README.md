@@ -6,7 +6,7 @@
 
   <h1>FrankXMD</h1>
   <p><strong>A powerful, feature-rich WhatsApp Multi-Device automation bot.</strong></p>
-  <p>Group management · Media tools · AI assistance · Stickers · Utilities · Entertainment</p>
+  <p>Group management · Media utilities · AI integrations · Stickers · Productivity · Entertainment</p>
 
   
 
@@ -28,19 +28,21 @@
 
 ## Documentation
 
+Use this guide to install, configure, run, and deploy FrankXMD.
+
 - [Overview and features](#about-frankxmd)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration and WhatsApp pairing](#configuration--whatsapp-pairing)
-- [Commands](#commands)
+- [Startup and package scripts](#start-frankxmd)
 - [Deployment](#deployment)
 - [Security and session safety](#security--session-safety)
 - [Support and contact](#support-and-contact)
 - [Contributing](#contributing)
 
-# About FrankXMD
+## About FrankXMD
 
-**FrankXMD** is a WhatsApp Multi-Device bot built with the [Baileys](https://github.com/WhiskeySockets/Baileys) library and Node.js. It brings together practical automation, group administration, media utilities, entertainment, and productivity tools in one WhatsApp-connected assistant.
+**FrankXMD** is a Node.js WhatsApp automation project built with the [Baileys](https://github.com/WhiskeySockets/Baileys) library. It brings together group administration, media utilities, entertainment, and productivity features in one WhatsApp-connected assistant.
 
 The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)** and builds on the work of its upstream authors and open-source contributors.
 
@@ -52,11 +54,11 @@ The project is maintained by **[Marvin Frank](https://github.com/otienofrank27)*
 
 
 
-# Requirements
+## Requirements
 
 Before installing, make sure your environment has:
 
-- **Node.js 18 or later**
+- **Node.js 18 or later** (matches the version range declared in `package.json`)
 - **npm** (included with Node.js)
 - **Git**
 - **FFmpeg** — required by some sticker and media features
@@ -72,7 +74,7 @@ git --version
 
 
 
-# Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -121,7 +123,7 @@ Leave a value empty if you do not use that integration. Never commit your real `
 
 
 
-# Configuration & WhatsApp pairing
+## Configuration & WhatsApp pairing
 
 1. Start FrankXMD using the command below.
 2. Follow the authentication instructions printed in your terminal.
@@ -132,7 +134,7 @@ The pairing-code service referenced by the project is external to this repositor
 
 
 
-# Start FrankXMD
+## Start FrankXMD
 
 Start the bot:
 
@@ -142,7 +144,7 @@ npm start
 
 
 
-# Other available package scripts:
+### Available package scripts
 
 | Command | Purpose |
 |---|---|
@@ -159,7 +161,7 @@ npm start
 
 
 
-# Deployment
+## Deployment
 
 You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choose a host that supports persistent Node.js processes, outbound network access, and storage for the WhatsApp session.
 
@@ -179,7 +181,7 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 
 
-# General hosting steps
+### General hosting steps
 
 1. Create a Node.js application or upload/clone the repository on your host.
 2. Select **Node.js 18 or later**.
@@ -193,7 +195,7 @@ For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://yout
 
 
 
-# Security & session safety
+## Security & session safety
 
 Your WhatsApp session is sensitive. Treat it like a password.
 
@@ -209,7 +211,7 @@ Anyone who obtains valid WhatsApp session credentials may be able to access and 
 
 
 
-# Support and contact
+## Support and contact
 
 <div align="center">
 
@@ -226,7 +228,7 @@ For bugs, questions, or feature requests, open an issue in the [FrankXMD reposit
 
 
 
-# Support the project
+## Support the project
 
 If FrankXMD is useful to you and you would like to support its continued development, you can contribute through **Pochi La Biashara**:
 
@@ -237,7 +239,7 @@ If FrankXMD is useful to you and you would like to support its continued develop
 
 
 
-# Contributing
+## Contributing
 
 Contributions, bug reports, and feature requests are welcome.
 
@@ -250,7 +252,7 @@ Please preserve existing attribution and licensing notices.
 
 
 
-# Credits
+## Credits
 
 FrankXMD is maintained by **[Marvin Frank](https://github.com/otienofrank27)**.
 
@@ -258,7 +260,7 @@ This project builds on work and contributions from the original authors and open
 
 
 
-# Disclaimer
+## Disclaimer
 
 FrankXMD is an unofficial WhatsApp automation project. It is **not affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp or Meta**.
 
