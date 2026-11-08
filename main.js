@@ -536,10 +536,17 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 const mentionedJidListWarn = message.message.extendedTextMessage?.contextInfo?.mentionedJid || [];
                 await warnCommand(sock, chatId, senderId, mentionedJidListWarn, message);
                 break;
-            case /^\.(?:tts|say)(?:\s|$)/i.test(userMessage):
-                const text = userMessage.replace(/^\.(?:tts|say)\s*/i, '').trim();
-                await ttsCommand(sock, chatId, text, message);
+            case /^\.(?:tts|say)(?:\s|$)/i.test(userMessage): {
+                const commandText = rawText.trim();
+                const match = commandText.match(/^\.(?:tts|say)\s*(.*)$/i);
+                const args = (match?.[1] || '').trim();
+                const languageMatch = args.match(/^(en|english|sw|swahili|kiswahili|kikuyu|ki|kikamba|kamba|kam|luo)\s+([\s\S]+)$/i);
+                const language = languageMatch ? languageMatch[1].toLowerCase() : 'english';
+                const speechText = languageMatch ? languageMatch[2].trim() : args;
+                await ttsCommand(sock, chatId, speechText, message, language);
+                commandExecuted = true;
                 break;
+            }
             case userMessage.startsWith('.delete'): 
                 await deleteCommand(sock, chatId, message, senderId);
                 break;
