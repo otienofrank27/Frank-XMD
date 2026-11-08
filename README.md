@@ -6,7 +6,7 @@
 
   <h1>FrankXMD</h1>
   <p><strong>A powerful, feature-rich WhatsApp Multi-Device automation bot.</strong></p>
-  <p>Group management · Media utilities · AI integrations · Stickers · Productivity · Entertainment</p>
+  <p>Group management · Media utilities · AI integrations · Stickers · Persistent reminders · Group insights · Entertainment</p>
 
   
 
@@ -142,6 +142,32 @@ Start the bot:
 ```bash
 npm start
 ```
+
+## Personal reminders and group insights
+
+FrankXMD includes a persistent reminder scheduler and extra group information commands.
+
+### Personal reminders
+
+```text
+.remind 10m Drink water       Create a reminder in 10 minutes
+.remind 2h Check the oven     Create a reminder in 2 hours
+.remind 1d Submit assignment  Create a reminder in 1 day
+.reminders                   List your reminders in this chat
+.cancelreminder ABC12        Cancel one of your reminders by ID
+```
+
+Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The minimum delay is 10 seconds and the maximum is 30 days. Pending reminders are stored in `data/reminders.json` and are resumed when the WhatsApp connection returns. Each user can list or cancel only their own reminders in the chat where they created them. Keep the host's persistent storage enabled so reminder data survives redeployments.
+
+### Group insights
+
+```text
+.groupstats   Show group name, member/admin counts, owner and available settings
+.userinfo     Show information about yourself, a mentioned member, or a replied-to member
+```
+
+Use `.userinfo` while replying to a member's message or mention that member in the command. These commands display information already available to the linked WhatsApp account; they do not bypass WhatsApp privacy settings.
+
 
 ## Event-driven automatic status viewing
 
