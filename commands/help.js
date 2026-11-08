@@ -16,7 +16,7 @@ async function helpCommand(sock, chatId, message) {
         { title: '*SECURITY & AUTOMATION*', commands: ['antilink', 'antitag', 'antibot', 'antibadword', 'welcome', 'goodbye', 'chatbot', 'mention', 'setmention', 'automation', 'autolist', 'autoreply', 'schedule', 'autostatus', 'savestatus', 'alwaysonline', 'autotyping', 'autoread', 'areact', 'anticall', 'pmblocker'] },
         { title: '*DOWNLOADS & MEDIA*', commands: ['play', 'video', 'spotify', 'tiktok', 'instagram', 'igs', 'igsc', 'facebook', 'twitter', 'ss', 'tourl', 'stickertelegram', 'sticker', 'simage', 'take', 'attp', 'emojimix', 'gif', 'blur', 'removebg', 'remini', 'crop'] },
         { title: '*FUN & GAMES*', commands: ['meme', 'joke', 'quote', 'fact', 'weather', 'news', 'lyrics', '8ball', 'truth', 'dare', 'trivia', 'answer', 'hangman', 'guess', 'ttt', 'move', 'surrender', 'compliment', 'insult', 'flirt', 'ship', 'simp', 'stupid', 'character', 'goodnight', 'shayari', 'roseday', 'animu', 'heart', 'horny', 'circle', 'lgbt', 'police', 'simpcard', 'tonikawa', 'namecard', 'oogway', 'tweet', 'ytcomment', 'comrade', 'gay', 'glass', 'jail', 'passed', 'triggered'] },
-        { title: '*UTILITIES*', commands: ['tts', 'translate', 'calc', 'qr', 'b64e', 'b64d', 'reverse', 'upper', 'lower', 'poll', 'grouplink', 'getpp', 'define', 'wikipedia', 'google', 'currency', 'country', 'ip', 'unit', 'vv', 'vv2'] },
+        { title: '*UTILITIES*', commands: ['say', 'tts', 'translate', 'calc', 'qr', 'b64e', 'b64d', 'reverse', 'upper', 'lower', 'poll', 'grouplink', 'getpp', 'define', 'wikipedia', 'google', 'currency', 'country', 'ip', 'unit', 'vv', 'vv2'] },
         { title: '*OWNER & SESSION*', commands: ['mode', 'update', 'clearsession', 'cleartmp', 'antidelete', 'setpp', 'sudo', 'pair'] }
     ];
 
