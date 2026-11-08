@@ -55,16 +55,21 @@ async function deliverDueReminders() {
         const dueIds = new Set(due.map(item => item.id));
         writeReminders(reminders.filter(item => !dueIds.has(item.id)));
 
+        const retry = [];
         for (const reminder of due) {
             try {
-                await activeSocket.sendMessage(reminder.chatId, {
-                    text: '⏰ REMINDER\n\n' + reminder.text + '\n\nScheduled: ' +
+                // Group reminders are delivered privately to their creator.
+                const destination = reminder.chatId.endsWith('@g.us') ? reminder.senderId : reminder.chatId;
+                await activeSocket.sendMessage(destination, {
+                    text: '⏰ REMINDER\\n\\n' + reminder.text + '\\n\\nScheduled: ' +
                         new Date(reminder.dueAt).toLocaleString()
                 });
             } catch (error) {
                 console.error('[reminders] Delivery failed for ' + reminder.id + ':', error.message);
+                retry.push({ ...reminder, dueAt: Date.now() + 60000 });
             }
         }
+        if (retry.length) writeReminders([...readReminders(), ...retry]);
     } catch (error) {
         console.error('[reminders] Scheduler error:', error.message);
     } finally {
