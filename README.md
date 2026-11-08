@@ -142,6 +142,24 @@ Start the bot:
 npm start
 ```
 
+## Event-driven automatic status viewing
+
+FrankXMD can react to status publications delivered to the linked WhatsApp account through Baileys' live `messages.upsert` event. It does not poll for statuses or add an artificial delay before requesting a read receipt.
+
+Owner commands:
+
+```text
+.autostatus on       Enable automatic status viewing
+.autostatus off      Disable automatic status viewing
+.autostatus stats    Show runtime detection/read-request counters
+.autostatus react on Enable optional status reactions
+.autostatus react off Disable optional status reactions
+```
+
+The viewer processes every status message in an incoming event batch, deduplicates repeated message keys, and requests reads for accessible statuses without downloading their media. Image, video/GIF, and text status payloads are handled through the same status-message event path. WhatsApp privacy settings and the linked account's access determine which statuses can be delivered.
+
+Timing records are appended to `data/status-view-metrics.jsonl` and are kept out of Git by `.gitignore`. They record local event detection and the time the Baileys `readMessages()` request resolves. **A resolved client call is not a server-side view acknowledgement**: Baileys does not expose a reliable per-status server-confirmed view timestamp here. WhatsApp delivery latency and server-side processing are outside FrankXMD's control, so no fixed millisecond guarantee is possible. Keep the process online with a stable connection for the lowest achievable delay.
+
 
 
 ### Available package scripts
