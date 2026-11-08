@@ -14,7 +14,18 @@ const KHAYA_LANGUAGES = Object.freeze({
 });
 const KAMBA_ALIASES = new Set(['kikamba', 'kamba', 'kam']);
 
+function resolveSpeechLanguage(language) {
+    const selected = String(language || 'english').toLowerCase();
+    if (['english', 'en'].includes(selected)) return { provider: 'google', language: 'en' };
+    if (KAMBA_ALIASES.has(selected)) return { provider: 'gemini', language: 'kikamba' };
+    if (KHAYA_LANGUAGES[selected]) return { provider: 'khaya', language: KHAYA_LANGUAGES[selected] };
+    return null;
+}
+
 function pcmToWav(pcm, sampleRate = 24000) {
+    if (!Buffer.isBuffer(pcm) || pcm.length === 0 || pcm.length % 2 !== 0) {
+        throw new Error('Gemini returned invalid 16-bit PCM audio data.');
+    }
     const channels = 1;
     const bitsPerSample = 16;
     const header = Buffer.alloc(44);
@@ -141,6 +152,7 @@ async function sendGeneratedAudio(sock, chatId, message, filePath, extension) {
 
 async function ttsCommand(sock, chatId, text, message, language = 'english', commandName = '.say') {
     const selectedLanguage = String(language || 'english').toLowerCase();
+    const speechRoute = resolveSpeechLanguage(selectedLanguage);
     const speechText = String(text || '').trim();
     if (!speechText) {
         await sock.sendMessage(chatId, {
@@ -151,17 +163,18 @@ async function ttsCommand(sock, chatId, text, message, language = 'english', com
 
     const tempDir = path.join(__dirname, '..', 'temp');
     const fileName = `frankxmd-say-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-    const isEnglish = ['english', 'en'].includes(selectedLanguage);
-    const isKamba = KAMBA_ALIASES.has(selectedLanguage);
-    const khayaLanguage = KHAYA_LANGUAGES[selectedLanguage];
-    const filePath = path.join(tempDir, `${fileName}.${isEnglish ? 'mp3' : 'wav'}`);
+    const filePath = path.join(tempDir, `${fileName}.${speechRoute?.provider === 'google' ? 'mp3' : 'wav'}`);
     let convertedPath = null;
 
     try {
         fs.mkdirSync(tempDir, { recursive: true });
 
         // Keep the legacy .tts command working without requiring a paid API key.
-        if (isEnglish) {
+        if (!speechRoute) {
+            throw new Error('Unsupported language. Use English, Swahili, Kikuyu, Kikamba or Luo.');
+        }
+
+        if (speechRoute.provider === 'google') {
             await generateGoogleEnglish(speechText, filePath);
             await sock.sendMessage(chatId, {
                 audio: { url: filePath },
@@ -171,12 +184,10 @@ async function ttsCommand(sock, chatId, text, message, language = 'english', com
         }
 
         let result;
-        if (isKamba) {
+        if (speechRoute.provider === 'gemini') {
             result = await generateKambaAudio(speechText);
-        } else if (khayaLanguage) {
-            result = await generateKhayaAudio(speechText, khayaLanguage);
         } else {
-            throw new Error('Unsupported language. Use English, Swahili, Kikuyu, Kikamba or Luo.');
+            result = await generateKhayaAudio(speechText, speechRoute.language);
         }
 
         fs.writeFileSync(filePath, result.audio);
@@ -197,3 +208,5 @@ async function ttsCommand(sock, chatId, text, message, language = 'english', com
 }
 
 module.exports = ttsCommand;
+module.exports.resolveSpeechLanguage = resolveSpeechLanguage;
+module.exports.pcmToWav = pcmToWav;
