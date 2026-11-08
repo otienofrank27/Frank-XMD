@@ -189,7 +189,7 @@ KHAYA_API_KEY=
 GEMINI_API_KEY=
 ```
 
-The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. API access, usage limits, and provider availability are controlled by the respective services.
+The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. Run `npm test` to check JavaScript syntax and the local language-routing/audio-packaging tests. API access, usage limits, and provider availability are controlled by the respective services.
 
 ## Event-driven automatic status viewing
 
