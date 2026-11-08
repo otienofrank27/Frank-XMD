@@ -35,6 +35,7 @@ Use this guide to install, configure, run, and deploy FrankXMD.
 - [Installation](#installation)
 - [Configuration and WhatsApp pairing](#configuration--whatsapp-pairing)
 - [Startup and package scripts](#start-frankxmd)
+- [Speech generation](#speech-generation-say-and-tts)
 - [Event-driven automatic status viewing](#event-driven-automatic-status-viewing)
 - [Deployment](#deployment)
 - [Security and session safety](#security--session-safety)
@@ -115,12 +116,16 @@ Open `.env` and add the credentials for the optional integrations you intend to 
 ```env
 TELEGRAM_BOT_TOKEN=
 GIPHY_API_KEY=
+KHAYA_API_KEY=
+GEMINI_API_KEY=
 ```
 
 - `TELEGRAM_BOT_TOKEN` — Telegram BotFather token used by Telegram sticker-pack import features.
-- `GIPHY_API_KEY` — Giphy developer API key used by GIF search.
+- `GIPHY_API_KEY` — Giphy developer API key used for GIF search.
+- `KHAYA_API_KEY` — Khaya TTS API key for Kiswahili, Kikuyu, and Luo speech generation.
+- `GEMINI_API_KEY` — Gemini API key for the Kikamba speech-generation route.
 
-Leave a value empty if you do not use that integration. Never commit your real `.env` file or publish API credentials.
+The speech-generation keys are only needed when using their corresponding languages. Leave unused values empty. Never commit your real `.env` file or publish API credentials.
 
 
 
@@ -223,6 +228,9 @@ Timing records are appended to `data/status-view-metrics.jsonl` and are kept out
 | `npm run start:fresh` | Reset the session, then start |
 | `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
 | `npm run install:force` | Install dependencies using npm force mode |
+| `npm test` | Run the project checks and speech-routing/audio-packaging tests |
+| `npm run check` | Check JavaScript syntax and run the local TTS tests |
+| `npm run docker:build` | Build the FrankXMD Docker image |
 
 **Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
 
