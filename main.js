@@ -423,7 +423,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
         const isAdminCommand = adminCommands.some(cmd => userMessage.startsWith(cmd));
 
         // List of owner commands
-        const ownerCommands = ['.automation', '.autolist', '.autoreply', '.autoreact', '.schedule', '.mode', '.autostatus', '.statusview', '.viewstatus', '.savestatus', '.savesm', '.savest', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.autotyping', '.autoread', '.pmblocker', '.alwaysonline'];
+        const ownerCommands = ['.automation', '.autolist', '.autoreply', '.autoreact', '.schedule', '.mode', '.autostatus', '.savestatus', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autotyping', '.autoread', '.pmblocker', '.alwaysonline'];
         const isOwnerCommand = ownerCommands.some(cmd => userMessage.startsWith(cmd));
 
         let isSenderAdmin = false;
@@ -1056,9 +1056,6 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case userMessage.startsWith('.twitter'): 
                 await twitterCommand(sock, chatId, message);
-                break;
-            case userMessage.startsWith('.music'):
-                await songCommand(sock, chatId, message);
                 break;
             case userMessage.startsWith('.spotify'):
                 await spotifyCommand(sock, chatId, message);
