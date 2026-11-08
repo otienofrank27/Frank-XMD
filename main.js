@@ -1090,7 +1090,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case userMessage.startsWith('.imagine') || userMessage.startsWith('.flux') || userMessage.startsWith('.dalle'): await imagineCommand(sock, chatId, message);
                 break;
-            case /^\\.(calc|qr|b64e|b64d|reverse|upper|lower|poll|pollhelp|grouplink|getpp|runtime|info|speed|time|define|wikipedia|google|currency|country|ip|unit|support|feedback|membercount|members)(?:\\s|$)/.test(userMessage): {
+            case /^\.(calc|qr|b64e|b64d|reverse|upper|lower|poll|pollhelp|grouplink|getpp|runtime|info|speed|time|define|wikipedia|google|currency|country|ip|unit|support|feedback|membercount|members)(?:\s|$)/.test(userMessage): {
                 const [extraName] = userMessage.slice(1).split(/\s+/);
                 const rawParts = rawText.trim().slice(1).split(/\s+/);
                 await extraCommand(sock, chatId, message, extraName, rawParts.slice(1).join(' '), isGroup);
