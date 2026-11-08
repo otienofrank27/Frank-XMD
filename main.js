@@ -1413,10 +1413,11 @@ module.exports = {
     handleStatus: async (sock, status) => {
         await handleStatusUpdate(sock, status);
         try {
-            // Only full status messages (messages.upsert) — never reactions / empty updates
-            const msg = status.messages?.[0];
-            if (msg?.message && msg.key?.remoteJid === 'status@broadcast') {
-                await savestatusAutoSave(sock, msg);
+            // Preserve auto-save for every delivered status in this event batch.
+            for (const msg of (status.messages || [])) {
+                if (msg?.message && msg.key?.remoteJid === 'status@broadcast') {
+                    await savestatusAutoSave(sock, msg);
+                }
             }
         } catch (e) {
             console.error('[savestatus] hook:', e?.message || e);
