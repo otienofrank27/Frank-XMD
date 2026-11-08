@@ -169,6 +169,28 @@ Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The
 Use `.userinfo` while replying to a member's message or mention that member in the command. These commands display information already available to the linked WhatsApp account; they do not bypass WhatsApp privacy settings.
 
 
+## Speech generation (.say and .tts)
+
+FrankXMD can generate spoken audio in English, Kiswahili, Kikuyu, Kikamba, and Luo:
+
+```text
+.say english Hello everyone
+.say swahili Habari za asubuhi
+.say kikuyu Wĩ mwega
+.say kikamba Mwasya atĩa
+.say luo Misawa
+.tts Hello everyone
+```
+
+English speech and the legacy `.tts` command use the existing Google TTS package. Swahili, Kikuyu, and Luo use Khaya's African-language TTS API; Kikamba uses Gemini TTS. Add the following keys to your private `.env` file only when using those languages:
+
+```env
+KHAYA_API_KEY=
+GEMINI_API_KEY=
+```
+
+The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. API access, usage limits, and provider availability are controlled by the respective services.
+
 ## Event-driven automatic status viewing
 
 FrankXMD can react to status publications delivered to the linked WhatsApp account through Baileys' live `messages.upsert` event. It does not poll for statuses or add an artificial delay before requesting a read receipt.
