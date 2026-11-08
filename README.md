@@ -162,6 +162,18 @@ Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The
 Use `.userinfo` while replying to a member's message or mention that member in the command. These commands display information already available to the linked WhatsApp account; they do not bypass WhatsApp privacy settings.
 
 
+## Public and private bot modes
+
+The owner or an authorized sudo user can control who may use FrankXMD:
+
+```text
+.mode public    Allow everyone to use bot commands and chatbot responses
+.mode private   Restrict bot commands and chatbot responses to the owner and sudo users
+.mode           Show the current mode and usage
+```
+
+The selected mode is saved in `data/messageCount.json` and persists across restarts. Group moderation protections continue to run in private mode.
+
 ## Speech generation (.say and .tts)
 
 FrankXMD can generate spoken audio in English, Kiswahili, Kikuyu, Kikamba, and Luo:
