@@ -875,11 +875,9 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 const match = userMessage.slice(8).trim();
                 await handleChatbotCommand(sock, chatId, message, match);
                 break;
-            case userMessage.startsWith('.take'): 
+            case userMessage.startsWith('.take'):
                 {
-                    const isSteal = userMessage.startsWith('.steal');
-                    const sliceLen = isSteal ? 6 : 5; // '.steal' vs '.take'
-                    const takeArgs = rawText.slice(sliceLen).trim().split(' ');
+                    const takeArgs = rawText.slice(5).trim().split(' ');
                     await takeCommand(sock, chatId, message, takeArgs);
                 }
                 break;
@@ -945,10 +943,6 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.autostatus'):
                 const autoStatusArgs = userMessage.split(' ').slice(1);
                 await autoStatusCommand(sock, chatId, message, autoStatusArgs);
-                break;
-            // Duplicate statusview/viewstatus aliases removed; use .autostatus.
-                const statusViewArgs = userMessage.split(' ').slice(1);
-                await autoStatusCommand(sock, chatId, message, statusViewArgs);
                 break;
             case userMessage.startsWith('.savestatus'): 
                 await savestatusCommand(sock, chatId, message, senderId);
@@ -1076,9 +1070,8 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 const commandLength = userMessage.startsWith('.translate') ? 10 : 4;
                 await handleTranslateCommand(sock, chatId, message, userMessage.slice(commandLength));
                 return;
-            case userMessage.startsWith('.ss'): 
-                const ssCommandLength = userMessage.startsWith('.screenshot') ? 11 : (userMessage.startsWith('.ssweb') ? 6 : 3);
-                await handleSsCommand(sock, chatId, message, userMessage.slice(ssCommandLength).trim());
+            case userMessage === '.ss' || userMessage.startsWith('.ss '):
+                await handleSsCommand(sock, chatId, message, userMessage.slice(3).trim());
                 break;
             case userMessage.startsWith('.areact'): 
                 await handleAreactCommand(sock, chatId, message, isOwnerOrSudoCheck);
