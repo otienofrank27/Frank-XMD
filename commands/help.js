@@ -43,6 +43,11 @@ async function helpCommand(sock, chatId, message) {
         menuLines.push('');
     }
 
+    menuLines.push('SPEECH: .say <language> <text>');
+    menuLines.push('Languages: English | Swahili | Kikuyu | Kikamba | Luo');
+    menuLines.push('Legacy English: .tts <text>');
+    menuLines.push('');
+
     menuLines.push('╭─────────────────────────╮');
     menuLines.push('│      *MADE BY MARVIN FRANK*      │');
     menuLines.push('╰─────────────────────────╯');
