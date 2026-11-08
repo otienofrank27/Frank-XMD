@@ -35,6 +35,7 @@ Use this guide to install, configure, run, and deploy FrankXMD.
 - [Installation](#installation)
 - [Configuration and WhatsApp pairing](#configuration--whatsapp-pairing)
 - [Startup and package scripts](#start-frankxmd)
+- [Event-driven automatic status viewing](#event-driven-automatic-status-viewing)
 - [Deployment](#deployment)
 - [Security and session safety](#security--session-safety)
 - [Support and contact](#support-and-contact)
