@@ -96,7 +96,7 @@ async function autoStatusCommand(sock, chatId, msg, args = []) {
         if (action === 'on') {
             config.enabled = true;
             saveConfig();
-            return sock.sendMessage(chatId, { text: 'FRANKXMD instant auto status viewing is ON. New status events will be handled immediately while connected.' });
+            return sock.sendMessage(chatId, { text: '✅ Auto status view has been enabled!\nBot will now automatically view all contact statuses.' });
         }
         if (action === 'off') {
             config.enabled = false;
