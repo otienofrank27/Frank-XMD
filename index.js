@@ -17,6 +17,7 @@ const FileType = require('file-type')
 const path = require('path')
 const axios = require('axios')
 const { handleMessages, handleGroupParticipantUpdate, handleStatus, resumeAlwaysOnline } = require('./main');
+const { resumeReminders } = require('./commands/reminders');
 const { handleAntibotDetection } = require('./commands/antibot');
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
@@ -273,6 +274,7 @@ async function startXeonBotInc() {
         
         if (connection == "open") {
             resumeAlwaysOnline(XeonBotInc);
+            resumeReminders(XeonBotInc);
             console.log(chalk.magenta(` `))
             console.log(chalk.yellow(`Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2)))
 
