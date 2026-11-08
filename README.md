@@ -157,7 +157,7 @@ FrankXMD includes a persistent reminder scheduler and extra group information co
 .cancelreminder ABC12        Cancel one of your reminders by ID
 ```
 
-Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The minimum delay is 10 seconds and the maximum is 30 days. Pending reminders are stored in `data/reminders.json` and are resumed when the WhatsApp connection returns. Each user can list or cancel only their own reminders in the chat where they created them. Keep the host's persistent storage enabled so reminder data survives redeployments.
+Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The minimum delay is 10 seconds and the maximum is 30 days. Pending reminders are stored in `data/reminders.json` and are resumed when the WhatsApp connection returns. Each user can list or cancel only their own reminders in the chat where they created them. Reminders created in groups are delivered privately to the creator; reminders created in private chats are delivered in that chat. Failed deliveries are retried after one minute. Keep the host's persistent storage enabled so reminder data survives redeployments.
 
 ### Group insights
 
