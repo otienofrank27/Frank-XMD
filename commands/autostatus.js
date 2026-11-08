@@ -96,7 +96,7 @@ async function autoStatusCommand(sock, chatId, msg, args = []) {
         if (action === 'on') {
             config.enabled = true;
             saveConfig();
-            return sock.sendMessage(chatId, { text: '✅ Auto status view has been enabled!\nBot will now automatically view all contact statuses.' });
+            return sock.sendMessage(chatId, { text: '✅ Auto status view has been enabled!' });
         }
         if (action === 'off') {
             config.enabled = false;
