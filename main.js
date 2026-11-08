@@ -538,12 +538,13 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case /^\.(?:tts|say)(?:\s|$)/i.test(userMessage): {
                 const commandText = rawText.trim();
-                const match = commandText.match(/^\.(?:tts|say)\s*(.*)$/i);
-                const args = (match?.[1] || '').trim();
+                const match = commandText.match(/^(\.tts|\.say)\s*(.*)$/i);
+                const commandName = (match?.[1] || '.say').toLowerCase();
+                const args = (match?.[2] || '').trim();
                 const languageMatch = args.match(/^(en|english|sw|swahili|kiswahili|kikuyu|ki|kikamba|kamba|kam|luo)\s+([\s\S]+)$/i);
                 const language = languageMatch ? languageMatch[1].toLowerCase() : 'english';
                 const speechText = languageMatch ? languageMatch[2].trim() : args;
-                await ttsCommand(sock, chatId, speechText, message, language);
+                await ttsCommand(sock, chatId, speechText, message, language, commandName);
                 commandExecuted = true;
                 break;
             }
