@@ -31,3 +31,6 @@ data/status-view-metrics.jsonl
  *.njsproj
  *.sln
  *.sw?
+# User-created reminder data (contains private chat identifiers and text)
+data/reminders.json
+data/reminders.json.tmp
