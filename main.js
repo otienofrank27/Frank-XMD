@@ -1060,7 +1060,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.video'): 
                 await videoCommand(sock, chatId, message);
                 break;
-            case userMessage.startsWith('.tiktok') || userMessage.startsWith('.tt'):
+            case userMessage.startsWith('.tiktok'):
                 await tiktokCommand(sock, chatId, message);
                 break;
             case /^\\.ai(?:\\s|$)/.test(userMessage):
@@ -1088,7 +1088,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage === '.roseday':
                 await rosedayCommand(sock, chatId, message);
                 break;
-            case userMessage.startsWith('.imagine') || userMessage.startsWith('.flux') || userMessage.startsWith('.dalle'): await imagineCommand(sock, chatId, message);
+            case userMessage.startsWith('.imagine'): await imagineCommand(sock, chatId, message);
                 break;
             case /^\.(calc|qr|b64e|b64d|reverse|upper|lower|poll|pollhelp|grouplink|getpp|runtime|info|speed|time|define|wikipedia|google|currency|country|ip|unit|support|feedback|membercount|members)(?:\s|$)/.test(userMessage): {
                 const [extraName] = userMessage.slice(1).split(/\s+/);
