@@ -128,13 +128,27 @@ async function startXeonBotInc() {
     // Message handling
     XeonBotInc.ev.on('messages.upsert', async chatUpdate => {
         try {
+            if (!Array.isArray(chatUpdate.messages) || chatUpdate.messages.length === 0) return;
+
+            // Status updates are handled immediately from the live Baileys event.
+            // Process every status in the upsert, not only its first message.
+            const statusMessages = chatUpdate.messages.filter(
+                item => item?.key?.remoteJid === 'status@broadcast'
+            );
+            if (statusMessages.length) {
+                await handleStatus(XeonBotInc, { ...chatUpdate, messages: statusMessages });
+            }
+
+            // Keep normal chat processing intact if an upsert contains mixed messages.
+            const ordinaryMessages = chatUpdate.messages.filter(
+                item => item?.key?.remoteJid !== 'status@broadcast'
+            );
+            if (ordinaryMessages.length === 0) return;
+            chatUpdate = { ...chatUpdate, messages: ordinaryMessages };
+
             const mek = chatUpdate.messages[0]
             if (!mek.message) return
             mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-            if (mek.key && mek.key.remoteJid === 'status@broadcast') {
-                await handleStatus(XeonBotInc, chatUpdate);
-                return;
-            }
             // In private mode, only block non-group messages (allow groups for moderation)
             // Note: XeonBotInc.public is not synced, so we check mode in main.js instead
             // This check is kept for backward compatibility but mainly blocks DMs
