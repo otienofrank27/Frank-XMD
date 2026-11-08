@@ -113,19 +113,7 @@ Copy-Item .env.example .env
 
 Open `.env` and add the credentials for the optional integrations you intend to use:
 
-```env
-TELEGRAM_BOT_TOKEN=
-GIPHY_API_KEY=
-KHAYA_API_KEY=
-GEMINI_API_KEY=
-```
-
-- `TELEGRAM_BOT_TOKEN` — Telegram BotFather token used by Telegram sticker-pack import features.
-- `GIPHY_API_KEY` — Giphy developer API key used for GIF search.
-- `KHAYA_API_KEY` — Khaya TTS API key for Kiswahili, Kikuyu, and Luo speech generation.
-- `GEMINI_API_KEY` — Gemini API key for the Kikamba speech-generation route.
-
-The speech-generation keys are only needed when using their corresponding languages. Leave unused values empty. Never commit your real `.env` file or publish API credentials.
+Configure only the optional integrations you plan to use in your local `.env` file or your hosting provider's private environment-variable settings. Keep all credentials out of documentation, source control, screenshots, and public logs. Never commit your real `.env` file or publish API credentials.
 
 
 
