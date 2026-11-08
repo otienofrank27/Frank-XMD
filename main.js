@@ -39,6 +39,7 @@ const isOwnerOrSudo = require('./lib/isOwner');
 const { autotypingCommand, isAutotypingEnabled, handleAutotypingForMessage, handleAutotypingForCommand, showTypingAfterCommand } = require('./commands/autotyping');
 const { autoreadCommand, isAutoreadEnabled, handleAutoread } = require('./commands/autoread');
 const { automationCommand, handleAutomationMessage } = require('./commands/automation');
+const { reminderCommand } = require('./commands/reminders');
 
 // Command imports
 const tagAllCommand = require('./commands/tagall');
@@ -1100,6 +1101,10 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case userMessage.startsWith('.automation') || userMessage.startsWith('.autolist') || userMessage.startsWith('.autoreply') || userMessage.startsWith('.autoreact') || userMessage.startsWith('.schedule'):
                 await automationCommand(sock, chatId, message, rawText);
+                commandExecuted = true;
+                break;
+            case /^\.(remind|reminders|cancelreminder)(?:\s|$)/.test(userMessage):
+                await reminderCommand(sock, chatId, message, userMessage);
                 commandExecuted = true;
                 break;
             case userMessage.startsWith('.alwaysonline'):
