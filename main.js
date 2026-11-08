@@ -40,6 +40,7 @@ const { autotypingCommand, isAutotypingEnabled, handleAutotypingForMessage, hand
 const { autoreadCommand, isAutoreadEnabled, handleAutoread } = require('./commands/autoread');
 const { automationCommand, handleAutomationMessage } = require('./commands/automation');
 const { reminderCommand } = require('./commands/reminders');
+const { groupStatsCommand, userInfoCommand } = require('./commands/groupinsights');
 
 // Command imports
 const tagAllCommand = require('./commands/tagall');
@@ -1105,6 +1106,14 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 break;
             case /^\.(remind|reminders|cancelreminder)(?:\s|$)/.test(userMessage):
                 await reminderCommand(sock, chatId, message, userMessage);
+                commandExecuted = true;
+                break;
+            case userMessage === '.groupstats':
+                await groupStatsCommand(sock, chatId, message);
+                commandExecuted = true;
+                break;
+            case userMessage === '.userinfo':
+                await userInfoCommand(sock, chatId, message);
                 commandExecuted = true;
                 break;
             case userMessage.startsWith('.alwaysonline'):
