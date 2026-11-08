@@ -1112,7 +1112,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await groupStatsCommand(sock, chatId, message);
                 commandExecuted = true;
                 break;
-            case userMessage === '.userinfo':
+            case userMessage.startsWith('.userinfo'):
                 await userInfoCommand(sock, chatId, message);
                 commandExecuted = true;
                 break;
