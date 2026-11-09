@@ -18,11 +18,11 @@ const settings = {
   updateZipUrl: process.env.UPDATE_ZIP_URL || "",
   // Media API integrations (song, video, cards, etc.)
   knightApiUrl: process.env.KNIGHT_API_URL || 'https://knightbotapi.stream',
-  knightApiKey: process.env.KNIGHT_API_KEY || 'knight',
+  knightApiKey: process.env.KNIGHT_API_KEY || '',
   mediaApiUrl: process.env.MEDIA_API_URL || 'https://knightbotapi.stream',
-  mediaApiKey: process.env.MEDIA_API_KEY || 'knight',
+  mediaApiKey: process.env.MEDIA_API_KEY || '',
   princeApiUrl: process.env.PRINCE_API_URL || 'https://api.princetechn.com',
-  princeApiKey: process.env.PRINCE_API_KEY || 'prince',
+  princeApiKey: process.env.PRINCE_API_KEY || '',
 };
 
 module.exports = settings;
