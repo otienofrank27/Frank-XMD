@@ -22,6 +22,8 @@ const missing = menuCommands.filter(command =>
   !main.includes('.' + command) && !extraRouted.has(command)
 );
 assert.deepStrictEqual(missing, [], 'Every command displayed in .menu must have a dispatch route.');
+assert.ok(main.includes("case /^\\.ai(?:\\s|$)/.test(userMessage):"), 'The .ai command must match a dot-prefixed command with arguments.');
+assert.ok(main.includes("userMessage.trim().split(/\\s+/)[1]"), 'Always-online subcommands must split on whitespace.');
 
 const importPaths = [...main.matchAll(/require\(['"](\.\/(?:commands|lib)\/[^'"]+)['"]\)/g)]
   .map(match => match[1]);
