@@ -175,7 +175,7 @@ The owner or an authorized sudo user can control the bot's WhatsApp presence:
 .alwaysonline         Toggle the setting
 ```
 
-The setting is saved locally and resumes when the WhatsApp connection opens. WhatsApp may still control how presence is displayed to other users.
+The setting is saved locally and resumes when the WhatsApp connection opens. WhatsApp may still control how presence is displayed to other users. The regression suite checks that the `.on`, `.off`, and `.status` arguments are parsed from the command text.
 
 ## Public and private bot modes
 
