@@ -35,6 +35,10 @@ function parseDuration(value) {
     return duration;
 }
 
+function getReminderDestination(reminder) {
+    return reminder.chatId.endsWith('@g.us') ? reminder.senderId : reminder.chatId;
+}
+
 function createId(reminders) {
     let id;
     do {
@@ -52,24 +56,28 @@ async function deliverDueReminders() {
         const due = reminders.filter(item => Number(item.dueAt) <= now);
         if (!due.length) return;
 
-        const dueIds = new Set(due.map(item => item.id));
-        writeReminders(reminders.filter(item => !dueIds.has(item.id)));
-
-        const retry = [];
         for (const reminder of due) {
+            // Re-read before delivery so a reminder cancelled after this batch
+            // was loaded is not intentionally sent.
+            if (!readReminders().some(item => item.id === reminder.id)) continue;
             try {
-                // Group reminders are delivered privately to their creator.
-                const destination = reminder.chatId.endsWith('@g.us') ? reminder.senderId : reminder.chatId;
-                await activeSocket.sendMessage(destination, {
-                    text: '⏰ REMINDER\\n\\n' + reminder.text + '\\n\\nScheduled: ' +
+                await activeSocket.sendMessage(getReminderDestination(reminder), {
+                    text: '⏰ REMINDER\n\n' + reminder.text + '\n\nScheduled: ' +
                         new Date(reminder.dueAt).toLocaleString()
                 });
+                // Remove only after successful delivery. Re-read to preserve
+                // reminders created or cancelled while sendMessage was pending.
+                writeReminders(readReminders().filter(item => item.id !== reminder.id));
             } catch (error) {
                 console.error('[reminders] Delivery failed for ' + reminder.id + ':', error.message);
-                retry.push({ ...reminder, dueAt: Date.now() + 60000 });
+                const current = readReminders();
+                const index = current.findIndex(item => item.id === reminder.id);
+                if (index !== -1) {
+                    current[index] = { ...current[index], dueAt: Date.now() + 60000 };
+                    writeReminders(current);
+                }
             }
         }
-        if (retry.length) writeReminders([...readReminders(), ...retry]);
     } catch (error) {
         console.error('[reminders] Scheduler error:', error.message);
     } finally {
@@ -150,4 +158,4 @@ async function reminderCommand(sock, chatId, message, userMessage) {
     }, { quoted: message });
 }
 
-module.exports = { reminderCommand, resumeReminders };
+module.exports = { reminderCommand, resumeReminders, parseDuration, getReminderDestination };
