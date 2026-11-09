@@ -147,39 +147,43 @@ async function startXeonBotInc() {
             if (ordinaryMessages.length === 0) return;
             chatUpdate = { ...chatUpdate, messages: ordinaryMessages };
 
-            const mek = chatUpdate.messages[0]
-            if (!mek.message) return
-            mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-            // In private mode, only block non-group messages (allow groups for moderation)
-            // Note: XeonBotInc.public is not synced, so we check mode in main.js instead
-            // This check is kept for backward compatibility but mainly blocks DMs
-            if (!XeonBotInc.public && !mek.key.fromMe && chatUpdate.type === 'notify') {
-                const isGroup = mek.key?.remoteJid?.endsWith('@g.us')
-                if (!isGroup) return // Block DMs in private mode, but allow group messages
-            }
-            // Antibot must run before BAE5 drop — those IDs are exactly other Baileys bots
-            if (mek.key?.remoteJid?.endsWith('@g.us') && !mek.key.fromMe) {
-                try {
-                    await handleAntibotDetection(XeonBotInc, mek)
-                } catch (abErr) {
-                    console.error('[antibot] upsert hook:', abErr?.message || abErr)
+            // Process every ordinary message in the upsert. Baileys can batch
+            // multiple notifications; handling only messages[0] silently dropped
+            // commands that arrived later in the same batch.
+            for (const mek of chatUpdate.messages) {
+                if (!mek?.message || !mek?.key?.remoteJid) continue;
+                const messageType = Object.keys(mek.message)[0];
+                if (messageType === 'ephemeralMessage') {
+                    mek.message = mek.message.ephemeralMessage?.message || mek.message;
                 }
-            }
-            if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
 
-            // Clear message retry cache to prevent memory bloat
-            if (XeonBotInc?.msgRetryCounterCache) {
-                XeonBotInc.msgRetryCounterCache.clear()
-            }
+                // In private mode, only block non-group messages (allow groups for moderation).
+                if (!XeonBotInc.public && !mek.key.fromMe && chatUpdate.type === 'notify') {
+                    const isGroup = mek.key.remoteJid.endsWith('@g.us');
+                    if (!isGroup) continue;
+                }
 
-            try {
-                await handleMessages(XeonBotInc, chatUpdate, true)
-            } catch (err) {
-                console.error("Error in handleMessages:", err)
-                // Only try to send error message if we have a valid chatId
-                if (mek.key && mek.key.remoteJid) {
+                // Antibot must run before BAE5 drop — those IDs are exactly other Baileys bots.
+                if (mek.key.remoteJid.endsWith('@g.us') && !mek.key.fromMe) {
+                    try {
+                        await handleAntibotDetection(XeonBotInc, mek);
+                    } catch (abErr) {
+                        console.error('[antibot] upsert hook:', abErr?.message || abErr);
+                    }
+                }
+                if (typeof mek.key.id === 'string' && mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) continue;
+
+                // Clear message retry cache to prevent memory bloat.
+                if (XeonBotInc?.msgRetryCounterCache) {
+                    XeonBotInc.msgRetryCounterCache.clear();
+                }
+
+                try {
+                    await handleMessages(XeonBotInc, { ...chatUpdate, messages: [mek] }, true);
+                } catch (err) {
+                    console.error('Error in handleMessages:', err);
                     await XeonBotInc.sendMessage(mek.key.remoteJid, {
-                        text: ' An error occurred while processing your message.'
+                        text: 'An error occurred while processing your message.'
                     }).catch(console.error);
                 }
             }
