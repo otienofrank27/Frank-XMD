@@ -205,7 +205,7 @@ function startAlwaysOnline(sock) {
 }
 
 async function alwaysOnlineCommand(sock, chatId, message, userMessage) {
-    const action = userMessage.trim().split(/\\s+/)[1]?.toLowerCase();
+    const action = userMessage.trim().split(/\s+/)[1]?.toLowerCase();
     const enabled = readAlwaysOnlineState();
 
     if (action === 'on' || action === 'enable' || action === 'start') {
