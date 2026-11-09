@@ -13,6 +13,21 @@ function calculate(expression) {
   return result;
 }
 
+function parseCurrencyInput(value) {
+  const match = String(value || '').trim().match(/^([0-9]+(?:\.[0-9]+)?)\s+([A-Za-z]{3})\s+(?:to\s+)?([A-Za-z]{3})$/i);
+  return match ? { amount: match[1], from: match[2].toUpperCase(), to: match[3].toUpperCase() } : null;
+}
+
+function isValidIPv4(value) {
+  const parts = String(value || '').trim().split('.');
+  return parts.length === 4 && parts.every(part => /^\d{1,3}$/.test(part) && Number(part) >= 0 && Number(part) <= 255);
+}
+
+function parseUnitInput(value) {
+  const match = String(value || '').trim().match(/^(-?\d+(?:\.\d+)?)\s*(km|mi|m|ft|cm|kg|lb|c|f)\s+(?:to\s+)?(km|mi|m|ft|cm|kg|lb|c|f)$/i);
+  return match ? { value: Number(match[1]), from: match[2].toLowerCase(), to: match[3].toLowerCase() } : null;
+}
+
 async function extraCommand(sock, chatId, message, command, args, isGroup) {
   const quoted = message.message?.extendedTextMessage?.contextInfo;
   const mentions = quoted?.mentionedJid || [];
@@ -65,10 +80,10 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
     }
     case 'pollhelp': return reply('Create a WhatsApp poll with: .poll Question | Option 1 | Option 2');
     case 'support':
-      return reply('FrankXMD Support\\nRepository: https://github.com/otienofrank27/Frank-XMD\\nWhatsApp Channel: https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D\\nOwner: Marvin Frank');
+      return reply('FrankXMD Support\nRepository: https://github.com/otienofrank27/Frank-XMD\nWhatsApp Channel: https://whatsapp.com/channel/0029Vb95NoALNSZvyIJm8U3D\nOwner: Marvin Frank');
     case 'feedback':
     case 'report':
-      return reply('To send feedback or report a bug, include the command used, what you expected, and the error received.\\nGitHub: https://github.com/otienofrank27/Frank-XMD/issues\\nOwner WhatsApp: +254748642275');
+      return reply('To send feedback or report a bug, include the command used, what you expected, and the error received.\nGitHub: https://github.com/otienofrank27/Frank-XMD/issues\nOwner WhatsApp: +254748642275');
 
     case 'info': case 'botinfo': case 'about': case 'version': case 'script': case 'repo': case 'status': {
       const settings = require('../settings');
@@ -113,14 +128,14 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       return reply(` Search Google: https://www.google.com/search?q=${encodeURIComponent(args)}`);
     }
     case 'currency': {
-      const m = args.match(/^([0-9]+(?:\\.[0-9]+)?)\\s+([A-Za-z]{3})\\s+(?:to\\s+)?([A-Za-z]{3})$/i);
+      const m = parseCurrencyInput(args);
       if (!m) return reply('Usage: .currency <amount> <FROM> to <TO>\nExample: .currency 100 USD to KES');
       try {
         const axios = require('axios');
-        const { data } = await axios.get(`https://api.frankfurter.app/latest?amount=${m[1]}&from=${m[2].toUpperCase()}&to=${m[3].toUpperCase()}`, { timeout: 12000 });
-        const value = data.rates?.[m[3].toUpperCase()];
+        const { data } = await axios.get(`https://api.frankfurter.app/latest?amount=${m.amount}&from=${m.from}&to=${m.to}`, { timeout: 12000 });
+        const value = data.rates?.[m.to];
         if (value == null) throw new Error('Unsupported currency');
-        return reply(` ${m[1]} ${m[2].toUpperCase()} = ${value} ${m[3].toUpperCase()}\nRate date: ${data.date}`);
+        return reply(` ${m.amount} ${m.from} = ${value} ${m.to}\nRate date: ${data.date}`);
       } catch { return reply('Currency conversion failed. Check the currency codes and try again.'); }
     }
     case 'country': {
@@ -133,7 +148,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       } catch { return reply('Country not found.'); }
     }
     case 'ip': {
-      if (!args || !/^(?:\\d{1,3}\\.){3}\\d{1,3}$/.test(args)) return reply('Usage: .ip <IPv4 address>');
+      if (!isValidIPv4(args)) return reply('Usage: .ip <IPv4 address>');
       try {
         const axios = require('axios');
         const { data } = await axios.get(`https://ipapi.co/${args}/json/`, { timeout: 12000 });
@@ -142,9 +157,9 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       } catch { return reply('IP lookup failed.'); }
     }
     case 'unit': {
-      const m = args.match(/^(-?\\d+(?:\\.\\d+)?)\\s*(km|mi|m|ft|cm|kg|lb|c|f)\\s+(?:to\\s+)?(km|mi|m|ft|cm|kg|lb|c|f)$/i);
+      const m = parseUnitInput(args);
       if (!m) return reply('Usage: .unit <value> <unit> to <unit>\nExample: .unit 10 km to mi');
-      const n = Number(m[1]), from = m[2].toLowerCase(), to = m[3].toLowerCase();
+      const n = m.value, from = m.from, to = m.to;
       const groups = { length: { km:1000, mi:1609.344, m:1, ft:0.3048, cm:0.01 }, mass: { kg:1, lb:0.45359237 } };
       let result;
       if (groups.length[from] && groups.length[to]) result = n * groups.length[from] / groups.length[to];
@@ -160,7 +175,7 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
       const meta = await sock.groupMetadata(chatId);
       const members = meta.participants || [];
       const admins = members.filter(p => p.admin === 'admin' || p.admin === 'superadmin').length;
-      return reply(` *Group member count*\\nGroup: ${meta.subject || 'Group'}\\nTotal members: ${members.length}\\nAdmins: ${admins}\\nRegular members: ${members.length - admins}`);
+      return reply(` *Group member count*\nGroup: ${meta.subject || 'Group'}\nTotal members: ${members.length}\nAdmins: ${admins}\nRegular members: ${members.length - admins}`);
     }
     case 'members': case 'groupmembers': {
       if (!isGroup) return reply('This command only works in groups.');
@@ -172,20 +187,20 @@ Repository: https://github.com/otienofrank27/Frank-XMD`);
         const role = p.admin === 'superadmin' ? ' (owner)' : p.admin === 'admin' ? ' (admin)' : '';
         return `${i + 1}. @${jid.split('@')[0].split(':')[0]}${role}`;
       }).filter(Boolean);
-      const extra = members.length > 80 ? `\\n\\nShowing 80 of ${members.length} members.` : '';
-      return sock.sendMessage(chatId, { text: ` *${meta.subject || 'Group'} — Members*\\n\\n${lines.join('\\n')}${extra}`, mentions: members.slice(0, 80).map(p => p.id || p.phoneNumber).filter(Boolean) }, { quoted: message });
+      const extra = members.length > 80 ? `\n\nShowing 80 of ${members.length} members.` : '';
+      return sock.sendMessage(chatId, { text: ` *${meta.subject || 'Group'} — Members*\n\n${lines.join('\n')}${extra}`, mentions: members.slice(0, 80).map(p => p.id || p.phoneNumber).filter(Boolean) }, { quoted: message });
     }
 
     case 'support': return reply('For support, contact the bot owner or open an issue: https://github.com/otienofrank27/Frank-XMD/issues');
     case 'feedback': case 'report': {
       if (!args) return reply(`Usage: .${command} <message>`);
       const settings = require('../settings');
-      const ownerJid = `${String(settings.ownerNumber || '').replace(/\\D/g, '')}@s.whatsapp.net`;
-      if (!String(settings.ownerNumber || '').replace(/\\D/g, '')) return reply('Owner contact is not configured.');
+      const ownerJid = `${String(settings.ownerNumber || '').replace(/\D/g, '')}@s.whatsapp.net`;
+      if (!String(settings.ownerNumber || '').replace(/\D/g, '')) return reply('Owner contact is not configured.');
       await sock.sendMessage(ownerJid, { text: ` *FrankXMD ${command.toUpperCase()}*\nFrom: ${message.key.participant || chatId}\nChat: ${chatId}\n\n${args}` });
       return reply(' Your message has been forwarded to the bot owner.');
     }
     default: return false;
   }
 }
-module.exports = { extraCommand };
+module.exports = { extraCommand, parseCurrencyInput, isValidIPv4, parseUnitInput };
