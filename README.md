@@ -35,6 +35,8 @@ Use this guide to install, configure, run, and deploy FrankXMD.
 - [Installation](#installation)
 - [Configuration and WhatsApp pairing](#configuration--whatsapp-pairing)
 - [Startup and package scripts](#start-frankxmd)
+- [Personal reminders and group insights](#personal-reminders-and-group-insights)
+- [Public and private bot modes](#public-and-private-bot-modes)
 - [Speech generation](#speech-generation-say-and-tts)
 - [Event-driven automatic status viewing](#event-driven-automatic-status-viewing)
 - [Deployment](#deployment)
@@ -187,14 +189,9 @@ FrankXMD can generate spoken audio in English, Kiswahili, Kikuyu, Kikamba, and L
 .tts Hello everyone
 ```
 
-English speech and the legacy `.tts` command use the existing Google TTS package. Swahili, Kikuyu, and Luo use Khaya's African-language TTS API; Kikamba uses Gemini TTS. Add the following keys to your private `.env` file only when using those languages:
+English speech and the legacy `.tts` command use the existing Google TTS package. Swahili, Kikuyu, and Luo use Khaya's African-language TTS service; Kikamba uses Gemini TTS. Configure any required provider credentials privately in your local `.env` file or hosting environment settings. Do not put credential names or values in public documentation.
 
-```env
-KHAYA_API_KEY=
-GEMINI_API_KEY=
-```
-
-The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. Run `npm test` to check JavaScript syntax and the local language-routing/audio-packaging tests. API access, usage limits, and provider availability are controlled by the respective services.
+The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. Run `npm test` to check JavaScript syntax, reminder validation and routing, group-insight behavior, and local speech-language/audio packaging. API access, usage limits, and provider availability are controlled by the respective services.
 
 ## Event-driven automatic status viewing
 
@@ -228,7 +225,7 @@ Timing records are appended to `data/status-view-metrics.jsonl` and are kept out
 | `npm run start:fresh` | Reset the session, then start |
 | `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
 | `npm run install:force` | Install dependencies using npm force mode |
-| `npm test` | Run the project checks and speech-routing/audio-packaging tests |
+| `npm test` | Run syntax checks and reminder, group-insight, and speech unit tests |
 | `npm run check` | Check JavaScript syntax and run the local TTS tests |
 | `npm run docker:build` | Build the FrankXMD Docker image |
 
@@ -256,12 +253,32 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
 
 
 
+### Docker deployment
+
+The repository includes a Docker image definition with FFmpeg for media conversion. Build the image:
+
+```bash
+docker build -t frankxmd .
+```
+
+Run it with persistent storage for the WhatsApp session and application data:
+
+```bash
+docker run -d --name frankxmd --restart unless-stopped \
+  --env-file .env \
+  -v frankxmd-session:/app/session \
+  -v frankxmd-data:/app/data \
+  frankxmd
+```
+
+View runtime logs with `docker logs -f frankxmd`. Keep the session and data volumes private. Supply credentials using a private environment file or your container platform's secret/environment settings; never bake them into the image.
+
 ### General hosting steps
 
 1. Create a Node.js application or upload/clone the repository on your host.
 2. Select **Node.js 18 or later**.
 3. Install dependencies with `npm install` (or the host-compatible install command).
-4. Add the environment variables from the [configuration section](#-configuration).
+4. Add any required credentials through your host's private environment-variable settings.
 5. Set the startup file/command to `index.js` or `npm start`, according to your host.
 6. Start the application and complete WhatsApp authentication.
 7. Keep the process running and ensure session storage persists between restarts.
