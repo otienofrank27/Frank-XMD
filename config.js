@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+// Public API base URLs only. Credentials are loaded exclusively from private
+// environment variables; never commit provider keys to this repository.
 global.APIs = {
     xteam: 'https://api.xteam.xyz',
     dzx: 'https://api.dhamzxploit.my.id',
@@ -14,14 +16,7 @@ global.APIs = {
     fgmods: 'https://api-fgmods.ddns.net'
 };
 
-global.APIKeys = {
-    'https://api.xteam.xyz': 'd90a9e986e18778b',
-    'https://api.lolhuman.xyz': '85faf717d0545d14074659ad',
-    'https://api.neoxr.my.id': 'yourkey',
-    'https://violetics.pw': 'beta',
-    'https://zenzapis.xyz': 'yourkey',
-    'https://api-fgmods.ddns.net': 'fg-dylux'
-};
+global.APIKeys = {};
 
 module.exports = {
     WARN_COUNT: 3,
