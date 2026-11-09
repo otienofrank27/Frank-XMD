@@ -121,9 +121,9 @@ Configure only the optional integrations you plan to use in your local `.env` fi
 
 ## Configuration & WhatsApp pairing
 
-1. Start FrankXMD using the command below.
-2. Follow the authentication instructions printed in your terminal.
-3. Scan the QR code or use the pairing method presented by the running application, if available.
+1. Start FrankXMD using `npm start`.
+2. By default, the terminal displays a WhatsApp QR code. Scan it from **WhatsApp → Linked Devices → Link a Device**.
+3. To explicitly request a pairing code instead, start the process with `node index.js --pairing-code` and follow the terminal prompts.
 4. Keep the linked session files private and backed up securely.
 
 The pairing-code service referenced by the project is external to this repository. If you operate your own pairing service, configure the project to use your own trusted endpoint.
@@ -254,9 +254,9 @@ Timing records are appended to `data/status-view-metrics.jsonl` and are kept out
 | `npm run start:fresh` | Reset the session, then start |
 | `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
 | `npm run install:force` | Install dependencies using npm force mode |
-| `npm test` | Run syntax checks, menu-routing checks, and reminder, group-insight, utility-input, and speech unit tests |
+| `npm test` | Syntax-check every JavaScript file, verify local imports and package scripts, and run menu-routing, reminder, group-insight, utility-input, and speech tests |
 
-GitHub Actions installs the project dependencies before running this validation suite on Node.js 20.
+GitHub Actions installs project dependencies and runs the validation suite on Node.js 20 and 22. These automated checks cover static routing and local behavior; commands that depend on a live WhatsApp connection or third-party provider still require runtime verification.
 | `npm run check` | Check JavaScript syntax, verify actual menu dispatch cases and command import paths, and run local command unit tests |
 | `npm run docker:build` | Build the FrankXMD Docker image |
 
