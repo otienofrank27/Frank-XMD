@@ -86,12 +86,15 @@ async function extraCommand(sock, chatId, message, command, args, isGroup) {
       return reply('To send feedback or report a bug, include the command used, what you expected, and the error received.\nGitHub: https://github.com/otienofrank27/Frank-XMD/issues\nOwner WhatsApp: +254748642275');
 
     case 'info': case 'botinfo': case 'about': case 'version': case 'script': case 'repo': case 'status': {
+      const fs = require('fs');
       const settings = require('../settings');
       const mem = process.memoryUsage();
+      let mode = 'public';
+      try { mode = JSON.parse(fs.readFileSync(require('path').join(__dirname, '..', 'data', 'messageCount.json'), 'utf8')).isPublic === false ? 'private' : 'public'; } catch {}
       return reply(` *${settings.botName || 'FrankXMD'}*
 Version: ${settings.version || 'Unknown'}
 Owner: ${settings.botOwner || 'Bot owner'}
-Mode: ${settings.commandMode || 'public'}
+Mode: ${mode}
 Uptime: ${Math.floor(process.uptime())} seconds
 Memory: ${(mem.rss / 1024 / 1024).toFixed(1)} MB
 Repository: https://github.com/otienofrank27/Frank-XMD`);
