@@ -164,6 +164,19 @@ Durations support seconds (`s`), minutes (`m`), hours (`h`), and days (`d`). The
 Use `.userinfo` while replying to a member's message or mention that member in the command. These commands display information already available to the linked WhatsApp account; they do not bypass WhatsApp privacy settings.
 
 
+## Always-online presence
+
+The owner or an authorized sudo user can control the bot's WhatsApp presence:
+
+```text
+.alwaysonline on       Keep the linked account's presence online while connected
+.alwaysonline off      Stop periodic online presence updates
+.alwaysonline status   Show the current setting
+.alwaysonline         Toggle the setting
+```
+
+The setting is saved locally and resumes when the WhatsApp connection opens. WhatsApp may still control how presence is displayed to other users.
+
 ## Public and private bot modes
 
 The owner or an authorized sudo user can control who may use FrankXMD:
@@ -175,6 +188,22 @@ The owner or an authorized sudo user can control who may use FrankXMD:
 ```
 
 The selected mode is saved in `data/messageCount.json` and persists across restarts. Group moderation protections continue to run in private mode.
+
+## Utility commands
+
+```text
+.calc (25 + 5) * 2       Safely calculate an expression
+.qr https://example.com  Generate a QR code
+.currency 100 USD to KES Convert currencies using current rates
+.ip 8.8.8.8              Look up public IP information
+.unit 10 km to mi        Convert supported units
+.google search terms     Open a Google search link
+.define word             Look up an English definition
+.wikipedia topic         Get a Wikipedia summary
+.time                    Show the current Nairobi date and time
+```
+
+Other text utilities include `.b64e`, `.b64d`, `.reverse`, `.upper`, `.lower`, and `.poll`. Group utilities include `.grouplink`, `.getpp`, `.membercount`, and `.members`.
 
 ## Speech generation (.say and .tts)
 
@@ -225,8 +254,8 @@ Timing records are appended to `data/status-view-metrics.jsonl` and are kept out
 | `npm run start:fresh` | Reset the session, then start |
 | `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
 | `npm run install:force` | Install dependencies using npm force mode |
-| `npm test` | Run syntax checks and reminder, group-insight, and speech unit tests |
-| `npm run check` | Check JavaScript syntax and run the local TTS tests |
+| `npm test` | Run syntax checks and reminder, group-insight, utility-input, and speech unit tests |
+| `npm run check` | Check JavaScript syntax and run local command unit tests |
 | `npm run docker:build` | Build the FrankXMD Docker image |
 
 **Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
@@ -244,9 +273,6 @@ You can run FrankXMD on a Linux VPS or a compatible Node.js hosting panel. Choos
   </a>
   <a href="https://client.petrosky.io/aff.php?aff=394" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/badge/DEPLOY-VPS-0078E7?style=for-the-badge&logo=linux&logoColor=white" alt="Deploy on VPS">
-  </a>
-  <a href="https://dashboard.katabump.com/auth/login" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/DEPLOY-Katabump-D6B7D6?style=for-the-badge&logo=server&logoColor=black" alt="Deploy on Katabump">
   </a>
 
 </div>
