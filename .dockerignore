@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+session
+temp
+tmp
+.env
+.env.*
+!.env.example
+*.log
+data/reminders.json
+data/reminders.json.tmp
+data/status-view-metrics.jsonl
