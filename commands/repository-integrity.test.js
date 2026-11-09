@@ -41,6 +41,22 @@ for (const [name, command] of Object.entries(packageJson.scripts || {})) {
 }
 assert.deepStrictEqual(missingScriptFiles, [], 'Every package script must reference an existing file.');
 
+
+const entrypoint = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
+assert(entrypoint.includes('const pairingCode = process.argv.includes("--pairing-code")'),
+  'QR login must remain the default; pairing-code mode must be explicitly requested.');
+assert(entrypoint.includes('for (const mek of chatUpdate.messages)') &&
+  entrypoint.includes('messages: [mek]'),
+  'Every message in a WhatsApp upsert batch must be processed individually.');
+
+const dispatcher = fs.readFileSync(path.join(root, 'main.js'), 'utf8');
+assert(/ownerCommands\s*=\s*\[[^\]]*'\.pair'/.test(dispatcher),
+  'Pairing-code requests must be restricted to owner/sudo users.');
+
+const menu = fs.readFileSync(path.join(root, 'commands', 'help.js'), 'utf8');
+assert(menu.includes('data.isPublic === false'),
+  'The menu must display the persisted public/private mode.');
+
 const config = fs.readFileSync(path.join(root, 'config.js'), 'utf8');
 const settings = fs.readFileSync(path.join(root, 'settings.js'), 'utf8');
 assert(!/global\.APIKeys\s*=\s*\{[\s\S]*?['"][^'"]+['"]\s*:\s*['"][^'"]+['"]/.test(config),
