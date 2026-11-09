@@ -1,10 +1,20 @@
+const fs = require('fs');
 const settings = require('../settings');
+
+function getCurrentMode() {
+    try {
+        const data = JSON.parse(fs.readFileSync(require('path').join(__dirname, '..', 'data', 'messageCount.json'), 'utf8'));
+        return data.isPublic === false ? 'PRIVATE' : 'PUBLIC';
+    } catch {
+        return (settings.commandMode || 'public').toUpperCase();
+    }
+}
 
 async function helpCommand(sock, chatId, message) {
     const botName = settings.botName || 'FRANKXMD';
     const version = settings.version || '3.0.9';
     const owner = settings.botOwner || 'Marvin Frank';
-    const mode = (settings.commandMode || 'public').toUpperCase();
+    const mode = getCurrentMode();
     const prefix = settings.prefix || '.';
 
     // One canonical command per feature. Synonyms that called the same
