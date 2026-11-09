@@ -255,7 +255,7 @@ Timing records are appended to `data/status-view-metrics.jsonl` and are kept out
 | `npm run install:panel` | Install dependencies using legacy peer dependency resolution |
 | `npm run install:force` | Install dependencies using npm force mode |
 | `npm test` | Run syntax checks, menu-routing checks, and reminder, group-insight, utility-input, and speech unit tests |
-| `npm run check` | Check JavaScript syntax, verify menu command routing/import paths, and run local command unit tests |
+| `npm run check` | Check JavaScript syntax, verify actual menu dispatch cases and command import paths, and run local command unit tests |
 | `npm run docker:build` | Build the FrankXMD Docker image |
 
 **Use session reset commands carefully:** resetting or removing session data may require you to link WhatsApp again.
