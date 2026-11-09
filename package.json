@@ -14,7 +14,7 @@
     "install:force": "npm install --force",
     "test": "npm run check",
     "docker:build": "docker build -t frankxmd .",
-    "check": "node scripts/check.js && node commands/reminders.test.js && node commands/groupinsights.test.js && node commands/menu-routing.test.js && node commands/extra.test.js && node commands/tts.test.js"
+    "check": "node scripts/check.js && node commands/reminders.test.js && node commands/groupinsights.test.js && node commands/menu-routing.test.js && node commands/extra.test.js && node commands/tts.test.js && node commands/repository-integrity.test.js"
   },
   "keywords": [
     "whatsapp-bot"
