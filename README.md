@@ -220,7 +220,7 @@ FrankXMD can generate spoken audio in English, Kiswahili, Kikuyu, Kikamba, and L
 
 English speech and the legacy `.tts` command use the existing Google TTS package. Swahili, Kikuyu, and Luo use Khaya's African-language TTS service; Kikamba uses Gemini TTS. Configure any required provider credentials privately in your local `.env` file or hosting environment settings. Do not put credential names or values in public documentation.
 
-The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. Run `npm test` to check JavaScript syntax, reminder validation and routing, group-insight behavior, and local speech-language/audio packaging. API access, usage limits, and provider availability are controlled by the respective services.
+The bot sends generated audio as a WhatsApp audio attachment. WAV responses are converted to MP3 when FFmpeg is available; otherwise the WAV audio is sent directly. Run `npm test` to syntax-check all JavaScript files, validate local imports and package scripts, verify menu routing, and run reminder, group-insight, utility-input, and speech tests. API access, usage limits, and provider availability are controlled by the respective services.
 
 ## Event-driven automatic status viewing
 
@@ -322,6 +322,9 @@ Your WhatsApp session is sensitive. Treat it like a password.
 - Never share QR codes, pairing codes, `creds.json`, or session folders.
 - Never commit `.env`, API keys, or personal session files to GitHub.
 - Use private environment variables in your hosting dashboard.
+- The `.clearsession` owner command logs out through Baileys; restart the bot and link it again afterward. For a manual reset, stop the process first and run `npm run reset-session`.
+- The default startup path uses QR login. Pairing-code mode is opt-in with `node index.js --pairing-code`.
+- Provider credentials belong only in private environment settings. Credentials previously committed to Git history should be revoked and replaced with new values.
 - Only install the bot from source you trust.
 - Restrict access to the server and its stored session files.
 - Rotate any API token that may have been exposed.
