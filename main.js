@@ -223,7 +223,7 @@ async function alwaysOnlineCommand(sock, chatId, message, userMessage) {
     }
 
     if (action === 'status') {
-        await sock.sendMessage(chatId, { text: `Always Online: ${enabled ? '🟢 ON' : '⚪ OFF'}\\nUse .alwaysonline on or .alwaysonline off.` }, { quoted: message });
+        await sock.sendMessage(chatId, { text: `Always Online: ${enabled ? '🟢 ON' : '⚪ OFF'}\nUse .alwaysonline on or .alwaysonline off.` }, { quoted: message });
         return;
     }
 
@@ -1073,7 +1073,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.tiktok'):
                 await tiktokCommand(sock, chatId, message);
                 break;
-            case /^\\.ai(?:\\s|$)/.test(userMessage):
+            case /^\.ai(?:\s|$)/.test(userMessage):
                 await aiCommand(sock, chatId, message);
                 break;
             case userMessage.startsWith('.translate'): 
