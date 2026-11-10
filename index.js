@@ -101,7 +101,9 @@ async function startXeonBotInc() {
         const XeonBotInc = makeWASocket({
             version,
             logger: pino({ level: 'silent' }),
-            printQRInTerminal: !pairingCode,
+            // Render QR explicitly in the connection event below. Baileys v7
+            // no longer reliably prints it through printQRInTerminal.
+            printQRInTerminal: false,
             browser: ["Ubuntu", "Chrome", "20.0.04"],
             auth: {
                 creds: state.creds,
@@ -269,7 +271,9 @@ async function startXeonBotInc() {
         const { connection, lastDisconnect, qr } = s
         
         if (qr) {
-            console.log(chalk.yellow(' QR Code generated. Please scan with WhatsApp.'))
+            console.log(chalk.yellow('\\nScan this QR code with WhatsApp → Linked Devices → Link a Device:\\n'));
+            qrcode.generate(qr, { small: true });
+            console.log(chalk.yellow('\\nKeep this terminal open while linking your WhatsApp account.'));
         }
         
         if (connection === 'connecting') {
