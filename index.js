@@ -77,7 +77,8 @@ let owner = JSON.parse(fs.readFileSync('./data/owner.json'))
 
 global.botname = "FRANKXMD"
 global.themeemoji = "•"
-const pairingCode = process.argv.includes("--pairing-code")
+// Pairing-code authentication is the default. Pass --qr-login only if QR login is explicitly needed.
+const pairingCode = !process.argv.includes("--qr-login")
 const useMobile = process.argv.includes("--mobile")
 
 // Only create readline interface if we're in an interactive environment
@@ -268,13 +269,7 @@ async function startXeonBotInc() {
 
     // Connection handling
     XeonBotInc.ev.on('connection.update', async (s) => {
-        const { connection, lastDisconnect, qr } = s
-        
-        if (qr) {
-            console.log(chalk.yellow('\\nScan this QR code with WhatsApp → Linked Devices → Link a Device:\\n'));
-            qrcode.generate(qr, { small: true });
-            console.log(chalk.yellow('\\nKeep this terminal open while linking your WhatsApp account.'));
-        }
+        const { connection, lastDisconnect } = s
         
         if (connection === 'connecting') {
             console.log(chalk.yellow(' Connecting to WhatsApp...'))
