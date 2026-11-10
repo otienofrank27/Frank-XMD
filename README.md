@@ -316,6 +316,12 @@ For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://yout
 
 
 
+## Command handling and troubleshooting
+
+FrankXMD normalizes common WhatsApp message wrappers before dispatching commands, including ephemeral, view-once, and caption-bearing messages. Command matching is case-insensitive while user-provided arguments retain their original casing (important for translation and text-processing commands). Unknown commands now receive a direct reply with a pointer to `.menu` instead of being silently ignored.
+
+A command can still depend on WhatsApp permissions, message context (for example, replying to a sticker), media availability, or an external provider. If one of those services is unavailable, check the bot process logs for the underlying error. Do not put provider credentials in this README or commit them to the repository; configure any required credentials privately in your runtime environment.
+
 ## Command troubleshooting
 
 If a command fails, check the process logs for the full error stack. FrankXMD now keeps the active chat ID available to its error-recovery handler and attempts to return the underlying error message in WhatsApp instead of allowing the recovery path to fail silently. This improves diagnosis; it does not replace live testing of commands that depend on WhatsApp group permissions, external APIs, or private provider credentials.
