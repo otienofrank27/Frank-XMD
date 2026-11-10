@@ -240,6 +240,7 @@ function resumeAlwaysOnline(sock) {
 
 
 async function handleMessages(sock, messageUpdate, printLog) {
+    let chatId = null;
     try {
         const { messages, type } = messageUpdate;
         const message = messages[0];
@@ -260,7 +261,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             return;
         }
 
-        const chatId = message.key.remoteJid;
+        chatId = message.key.remoteJid;
         const senderId = message.key.participant || message.key.remoteJid;
         const isGroup = chatId.endsWith('@g.us');
         const senderIsSudo = await isSudo(senderId);
@@ -1358,13 +1359,17 @@ async function handleMessages(sock, messageUpdate, printLog) {
             await addCommandReaction(sock, message);
         }
     } catch (error) {
-        console.error(' Error in message handler:', error.message);
-        // Only try to send error message if we have a valid chatId
-        if (chatId) {
-            await sock.sendMessage(chatId, {
-                text: ' Failed to process command!',
-                ...channelInfo
-            });
+        console.error(' Error in message handler:', error?.stack || error);
+        // Keep the chat identifier available to the recovery path even when a handler throws.
+        if (chatId && sock && typeof sock.sendMessage === 'function') {
+            try {
+                await sock.sendMessage(chatId, {
+                    text: `Failed to process this command: ${error?.message || 'Unknown error'}`,
+                    ...channelInfo
+                });
+            } catch (sendError) {
+                console.error(' Could not send command error notice:', sendError?.message || sendError);
+            }
         }
     }
 }
