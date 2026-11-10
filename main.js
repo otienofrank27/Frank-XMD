@@ -1351,7 +1351,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 // Unknown commands should never fail silently (especially in
                 // private chats where the group chatbot is not available).
                 await sock.sendMessage(chatId, {
-                    text: `Unknown command: *${rawText.split(/\\s+/)[0] || 'command'}*\nUse *.menu* to see the available FrankXMD commands.`
+                    text: `Unknown command: *${rawText.split(' ')[0] || 'command'}*\nUse *.menu* to see the available FrankXMD commands.`
                 }, { quoted: message });
                 commandExecuted = true;
                 break;
