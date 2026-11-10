@@ -239,13 +239,52 @@ function resumeAlwaysOnline(sock) {
 
 
 
+function unwrapMessageContent(content) {
+    let current = content;
+    // WhatsApp can wrap the actual message in multiple layers.
+    for (let depth = 0; depth < 6; depth++) {
+        const wrapped =
+            current?.ephemeralMessage?.message ||
+            current?.viewOnceMessage?.message ||
+            current?.viewOnceMessageV2?.message ||
+            current?.viewOnceMessageV2Extension?.message ||
+            current?.documentWithCaptionMessage?.message ||
+            current?.editedMessage?.message;
+        if (!wrapped || wrapped === current) break;
+        current = wrapped;
+    }
+    return current || {};
+}
+
+function extractMessageText(content) {
+    const message = unwrapMessageContent(content);
+    return (
+        message?.conversation?.trim() ||
+        message?.extendedTextMessage?.text?.trim() ||
+        message?.imageMessage?.caption?.trim() ||
+        message?.videoMessage?.caption?.trim() ||
+        message?.documentMessage?.caption?.trim() ||
+        message?.buttonsResponseMessage?.selectedButtonId?.trim() ||
+        message?.listResponseMessage?.singleSelectReply?.selectedRowId?.trim() ||
+        message?.templateButtonReplyMessage?.selectedId?.trim() ||
+        ''
+    );
+}
+
 async function handleMessages(sock, messageUpdate, printLog) {
     let chatId = null;
     try {
         const { messages, type } = messageUpdate;
-        const message = messages[0];
-        if (!message?.message) return;
+        const incomingMessage = messages[0];
+        if (!incomingMessage?.message) return;
         if (type !== 'notify') return;
+
+        // Normalize wrapped WhatsApp messages so every command handler sees the
+        // actual text/caption (ephemeral, view-once, document-caption, etc.).
+        const message = {
+            ...incomingMessage,
+            message: unwrapMessageContent(incomingMessage.message)
+        };
 
         // Handle autoread functionality
         await handleAutoread(sock, message);
@@ -289,24 +328,14 @@ async function handleMessages(sock, messageUpdate, printLog) {
             }
         }
 
-        const userMessage = (
-            message.message?.conversation?.trim() ||
-            message.message?.extendedTextMessage?.text?.trim() ||
-            message.message?.imageMessage?.caption?.trim() ||
-            message.message?.videoMessage?.caption?.trim() ||
-            message.message?.buttonsResponseMessage?.selectedButtonId?.trim() ||
-            ''
-        ).toLowerCase().replace(/\.\s+/g, '.').trim();
+        // Keep original casing for command arguments while normalizing only
+        // the command-matching copy. This prevents .translate/.say and similar
+        // handlers from receiving lowercased user content.
+        const rawText = extractMessageText(message.message);
+        const userMessage = rawText.toLowerCase().replace(/\.\s+/g, '.').trim();
 
         // Run saved auto-replies, keyword reactions and due scheduled messages
         await handleAutomationMessage(sock, message, chatId, userMessage);
-
-        // Preserve raw message for commands like .tag that need original casing
-        const rawText = message.message?.conversation?.trim() ||
-            message.message?.extendedTextMessage?.text?.trim() ||
-            message.message?.imageMessage?.caption?.trim() ||
-            message.message?.videoMessage?.caption?.trim() ||
-            '';
 
         // Only log command usage
         if (userMessage.startsWith('.')) {
@@ -702,7 +731,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await factCommand(sock, chatId, message, message);
                 break;
             case userMessage.startsWith('.weather'):
-                const city = userMessage.slice(9).trim();
+                const city = rawText.slice('.weather'.length).trim();
                 if (city) {
                     await weatherCommand(sock, chatId, message, city);
                 } else {
@@ -1078,8 +1107,8 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await aiCommand(sock, chatId, message);
                 break;
             case userMessage.startsWith('.translate'): 
-                const commandLength = userMessage.startsWith('.translate') ? 10 : 4;
-                await handleTranslateCommand(sock, chatId, message, userMessage.slice(commandLength));
+                const commandLength = '.translate'.length;
+                await handleTranslateCommand(sock, chatId, message, rawText.slice(commandLength).trim());
                 return;
             case userMessage === '.ss' || userMessage.startsWith('.ss '):
                 await handleSsCommand(sock, chatId, message, userMessage.slice(3).trim());
@@ -1319,15 +1348,12 @@ async function handleMessages(sock, messageUpdate, printLog) {
                 await soraCommand(sock, chatId, message);
                 break;
             default:
-                if (isGroup) {
-                    // Handle non-command group messages
-                    if (userMessage) {  // Make sure there's a message
-                        await handleChatbotResponse(sock, chatId, message, userMessage, senderId);
-                    }
-                    await handleTagDetection(sock, chatId, message, senderId);
-                    await handleMentionDetection(sock, chatId, message);
-                }
-                commandExecuted = false;
+                // Unknown commands should never fail silently (especially in
+                // private chats where the group chatbot is not available).
+                await sock.sendMessage(chatId, {
+                    text: `Unknown command: *${rawText.split(/\\s+/)[0] || 'command'}*\\nUse *.menu* to see the available FrankXMD commands.`
+                }, { quoted: message });
+                commandExecuted = true;
                 break;
         }
 
