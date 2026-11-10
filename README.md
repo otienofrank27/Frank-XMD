@@ -325,6 +325,7 @@ Your WhatsApp session is sensitive. Treat it like a password.
 - Use private environment variables in your hosting dashboard.
 - The `.clearsession` owner command logs out through Baileys; restart the bot and link it again afterward. For a manual reset, stop the process first and run `npm run reset-session`.
 - The default startup path uses WhatsApp pairing-code login. Set the correct international phone number in `settings.js` (or enter it at the interactive prompt). Never share a pairing code.
+- The repository integrity test checks that pairing-code login remains the default and QR login is only enabled with `--qr-login`.
 - Provider credentials belong only in private environment settings. Credentials previously committed to Git history should be revoked and replaced with new values.
 - Only install the bot from source you trust.
 - Restrict access to the server and its stored session files.
