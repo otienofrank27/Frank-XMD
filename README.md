@@ -122,9 +122,10 @@ Configure only the optional integrations you plan to use in your local `.env` fi
 ## Configuration & WhatsApp pairing
 
 1. Start FrankXMD using `npm start`.
-2. By default, FrankXMD explicitly renders the WhatsApp QR code in the terminal. Scan it from **WhatsApp → Linked Devices → Link a Device**. Keep the terminal open and use a terminal/log viewer that preserves text characters; if your hosting panel hides terminal QR output, use `node index.js --pairing-code` from an interactive terminal instead.
-3. To explicitly request a pairing code instead, start the process with `node index.js --pairing-code` and follow the terminal prompts.
-4. Keep the linked session files private and backed up securely.
+2. By default, FrankXMD requests a WhatsApp **pairing code** instead of generating a QR code. It uses the owner phone number configured as `ownerNumber` in `settings.js`. Enter the full international number with country code, digits only (for example, Kenya: `2547XXXXXXXX`).
+3. When the pairing code appears in the terminal logs, open WhatsApp on that phone → **Linked Devices** → **Link a Device** → **Link with phone number instead**, then enter the code.
+4. If running interactively, you can enter a different phone number when prompted. Keep the terminal/log viewer open until linking completes.
+5. Keep the linked session files private and backed up securely.
 
 The pairing-code service referenced by the project is external to this repository. If you operate your own pairing service, configure the project to use your own trusted endpoint.
 
@@ -323,7 +324,7 @@ Your WhatsApp session is sensitive. Treat it like a password.
 - Never commit `.env`, API keys, or personal session files to GitHub.
 - Use private environment variables in your hosting dashboard.
 - The `.clearsession` owner command logs out through Baileys; restart the bot and link it again afterward. For a manual reset, stop the process first and run `npm run reset-session`.
-- The default startup path uses QR login. Pairing-code mode is opt-in with `node index.js --pairing-code`.
+- The default startup path uses WhatsApp pairing-code login. Set the correct international phone number in `settings.js` (or enter it at the interactive prompt). Never share a pairing code.
 - Provider credentials belong only in private environment settings. Credentials previously committed to Git history should be revoked and replaced with new values.
 - Only install the bot from source you trust.
 - Restrict access to the server and its stored session files.
