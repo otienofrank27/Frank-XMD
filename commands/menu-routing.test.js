@@ -69,5 +69,12 @@ assert.deepStrictEqual(
   'Every statically imported command/library module must exist.'
 );
 
+assert(main.includes('function unwrapMessageContent(content)'),
+  'The dispatcher must unwrap common WhatsApp message wrappers.');
+assert(main.includes('rawText.slice(commandLength).trim()'),
+  'Translate commands must preserve the original casing of user text.');
+assert(main.includes('Unknown command:'),
+  'Unknown commands must return a helpful reply instead of failing silently.');
+
 console.log('Menu routing tests passed for ' + new Set(menuCommands).size + ' commands.');
 console.log('Static command and library imports resolved: ' + new Set(importPaths).size + '.');
