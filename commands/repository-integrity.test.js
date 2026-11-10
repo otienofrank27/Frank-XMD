@@ -43,8 +43,8 @@ assert.deepStrictEqual(missingScriptFiles, [], 'Every package script must refere
 
 
 const entrypoint = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
-assert(entrypoint.includes('const pairingCode = process.argv.includes("--pairing-code")'),
-  'QR login must remain the default; pairing-code mode must be explicitly requested.');
+assert(entrypoint.includes('const pairingCode = !process.argv.includes("--qr-login")'),
+  'Pairing-code login must be the default; QR login must require the explicit --qr-login flag.');
 assert(entrypoint.includes('for (const mek of chatUpdate.messages)') &&
   entrypoint.includes('messages: [mek]'),
   'Every message in a WhatsApp upsert batch must be processed individually.');
