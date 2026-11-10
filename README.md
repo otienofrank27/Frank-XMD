@@ -316,6 +316,10 @@ For a deployment walkthrough, watch the [FrankXMD YouTube tutorial](https://yout
 
 
 
+## Command troubleshooting
+
+If a command fails, check the process logs for the full error stack. FrankXMD now keeps the active chat ID available to its error-recovery handler and attempts to return the underlying error message in WhatsApp instead of allowing the recovery path to fail silently. This improves diagnosis; it does not replace live testing of commands that depend on WhatsApp group permissions, external APIs, or private provider credentials.
+
 ## Security & session safety
 
 Your WhatsApp session is sensitive. Treat it like a password.
