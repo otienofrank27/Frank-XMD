@@ -122,7 +122,7 @@ Configure only the optional integrations you plan to use in your local `.env` fi
 ## Configuration & WhatsApp pairing
 
 1. Start FrankXMD using `npm start`.
-2. By default, the terminal displays a WhatsApp QR code. Scan it from **WhatsApp → Linked Devices → Link a Device**.
+2. By default, FrankXMD explicitly renders the WhatsApp QR code in the terminal. Scan it from **WhatsApp → Linked Devices → Link a Device**. Keep the terminal open and use a terminal/log viewer that preserves text characters; if your hosting panel hides terminal QR output, use `node index.js --pairing-code` from an interactive terminal instead.
 3. To explicitly request a pairing code instead, start the process with `node index.js --pairing-code` and follow the terminal prompts.
 4. Keep the linked session files private and backed up securely.
 
